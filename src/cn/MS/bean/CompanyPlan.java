@@ -1,23 +1,28 @@
 package cn.MS.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
+/**
+ * 县分公司走访计划
+ * @author Administrator
+ *
+ */
 public class CompanyPlan {
-	int id;
-	String planName;
-	Date planDateStart;
-	Date planDateEnd;
-	Date designDate;
-	String designer;
-	String webType;
-	String season;
-	int personTimes;
-	int totalTimes;
-	int personCollections;
-	String remark;
-	int userId;
-	int userDepartmentId;
-	int userRoleId;
+	int id;  //id
+	String planName;  //计划名
+	Date planDateStart;  //计划开始时间
+	Date planDateEnd;  //计划结束时间
+	Date designDate;  //编制日期
+	String designer;  //编制人姓名
+	String webType;  //网点类型
+	String season;  //季节
+	int personTimes;  //每人每月最少走访次数
+	int totalTimes;  //合计最少次数
+	int personCollections;  //每人每月最少收集的信息数
+	String remark;  //备注
+	User user;  //编制人
+	Department department;  //编制人所属部门
+	Role role;  //编制人角色（职务）
 	public int getId() {
 		return id;
 	}
@@ -90,23 +95,23 @@ public class CompanyPlan {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getUserDepartmentId() {
-		return userDepartmentId;
+	public Department getDepartment() {
+		return department;
 	}
-	public void setUserDepartmentId(int userDepartmentId) {
-		this.userDepartmentId = userDepartmentId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
-	public int getUserRoleId() {
-		return userRoleId;
+	public Role getRole() {
+		return role;
 	}
-	public void setUserRoleId(int userRoleId) {
-		this.userRoleId = userRoleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

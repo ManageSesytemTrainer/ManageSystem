@@ -1,13 +1,19 @@
 package cn.MS.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
+/**
+ * 网点走访计划编制
+ * @author Administrator
+ *
+ */
 public class WebPlan {
-	int id;
-	String planName;
-	Date designDate;
-	String webType;
-	int userID;
+	int id;  //id
+	String planName;  //计划名称
+	Date designDate;  //计划日期
+	String webType;  //网点类型
+	String designer;  //编制人姓名
+	int userID;  
 	int userDepartmentId;
 	int userRoleId;
 	public int getId() {

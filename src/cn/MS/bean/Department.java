@@ -1,10 +1,14 @@
 package cn.MS.bean;
-
+/**
+ * 部门
+ * @author Administrator
+ *
+ */
 public class Department {
-	int id;
-	String departmentName;
-	String phone;
-	int state;
+	int id;  //id
+	String departmentName;  //部门名称
+	String phone;  //联系电话
+	int state;  //部门状态（是否激活）
 	public int getId() {
 		return id;
 	}

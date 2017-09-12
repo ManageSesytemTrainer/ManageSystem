@@ -1,22 +1,26 @@
 package cn.MS.bean;
 
-import java.sql.Date;
-
+import java.util.Date;
+/**
+ * 各种用户
+ * @author Administrator
+ *
+ */
 public class User {
-	int id;
-	String jobNumber;
-	String loginName;
-	String password;
-	String name;
-	String sex;
-	Date birthday;
-	String phone;
-	String mobilePhone;
-	String email;
-	int state;
-	int departmentId;
-	int roleId;
-	String departmentName;
+	int id;  //id
+	String jobNumber;  //工号
+	String loginName;  //登录名
+	String password;  //密码
+	String name;  //真实姓名
+	String sex;  //性别
+	Date birthday;  //生日
+	String phone;  //电话
+	String mobilePhone;  //手机
+	String email;  //邮箱
+	int state;  //状态（用户是否激活）
+	Department department;  //所属部门
+	Role role;  //所属角色（职务）
+	String departmentName;  //部门名称
 	public int getId() {
 		return id;
 	}
@@ -83,17 +87,17 @@ public class User {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public int getDepartmentId() {
-		return departmentId;
+	public Department getDepartment() {
+		return department;
 	}
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
-	public int getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	public String getDepartmentName() {
 		return departmentName;

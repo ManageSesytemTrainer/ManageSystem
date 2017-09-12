@@ -1,10 +1,14 @@
 package cn.MS.bean;
-
+/**
+ * 系统管理员
+ * @author Administrator
+ *
+ */
 public class Admin {
-	int id;
-	String loginName;
-	String password;
-	String name;
+	int id;  //id
+	String loginName;  //登录名
+	String password;  //密码
+	String name;  //真实姓名
 	public int getId() {
 		return id;
 	}

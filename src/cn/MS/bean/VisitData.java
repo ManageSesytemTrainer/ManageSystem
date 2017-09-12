@@ -1,19 +1,24 @@
 package cn.MS.bean;
 
 import java.sql.*;
-
+/**
+ * 走访数据导入（需求说的要用excel导入数据）
+ * @author Administrator
+ *
+ */
 public class VisitData {
-	int id;
-	Date visitDate;
-	Time visitTime;
-	String address;
-	String visitPerson;
-	String departmentName;
-	String releName;
-	String countPerson;
-	int userId;
-	int userDepartmentId;
-	int userRoleId;
+	int id;  //id
+	Date visitDate;  //走访日期
+	Time visitTime;  //走访时间
+	String address;  //走访地点
+	String visitPerson;  //走访人姓名
+	String departmentName;  //走访人所属部门名称
+	String releName;  //所属角色（职务）名称
+	String countPerson;  //纵享销客账号
+	String details;  //走访内容
+	User user;  //走访人
+	Department department;  //所属部门
+	Role role;  //职务
 	public int getId() {
 		return id;
 	}
@@ -62,22 +67,29 @@ public class VisitData {
 	public void setCountPerson(String countPerson) {
 		this.countPerson = countPerson;
 	}
-	public int getUserId() {
-		return userId;
+	public String getDetails() {
+		return details;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setDetails(String details) {
+		this.details = details;
 	}
-	public int getUserDepartmentId() {
-		return userDepartmentId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserDepartmentId(int userDepartmentId) {
-		this.userDepartmentId = userDepartmentId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getUserRoleId() {
-		return userRoleId;
+	public Department getDepartment() {
+		return department;
 	}
-	public void setUserRoleId(int userRoleId) {
-		this.userRoleId = userRoleId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 }

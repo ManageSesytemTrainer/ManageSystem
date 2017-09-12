@@ -1,11 +1,15 @@
 package cn.MS.bean;
-
+/**
+ * 角色（职务）
+ * @author Administrator
+ *
+ */
 public class Role {
-	int id;
-	String roleName;
-	String description;
-	int state;
-	int roleLimit;
+	int id;  //id
+	String roleName;  //角色名称
+	String description;  //角色描述
+	int state;  //状态（是否激活）
+	int roleLimit;  //角色权限
 	public int getId() {
 		return id;
 	}
