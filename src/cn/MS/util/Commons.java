@@ -1,4 +1,4 @@
-package cn.MS.Util;
+package cn.MS.util;
 /**
  * ³£Á¿
  */
