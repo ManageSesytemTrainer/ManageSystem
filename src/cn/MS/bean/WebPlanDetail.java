@@ -1,21 +1,25 @@
 package cn.MS.bean;
 
-import java.sql.*;
-
+import java.util.*;
+/**
+ * 网点走访计划明细编制
+ * @author Administrator
+ *
+ */
 public class WebPlanDetail {
-	int id;
-	String name;
-	String department;
-	String duty;
-	Date visitDate;
-	Time visitTime;
-	String visitAddress;
-	int collection;
-	int webPlanId;
-	String remark;
-	int userId;
-	int userDepartment;
-	int userRolePlan;
+	int id;  //id
+	String name;  //员工姓名
+	String departmentName;  //所属部门名称
+	String duty;  //职务（角色）名称
+	Date visitDate;  //走访日期
+	Date visitTime;  //走访时间
+	String visitAddress;  //走访地点
+	int collection;  //搜集信息数
+	String remark;  //备注
+	WebPlan webPlan;  //网点计划  
+	User user;  //员工
+	Department department;  //部门
+	Role role;  //角色（职务）
 	public int getId() {
 		return id;
 	}
@@ -29,10 +33,10 @@ public class WebPlanDetail {
 		this.name = name;
 	}
 	public String getDepartment() {
-		return department;
+		return departmentName;
 	}
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDepartment(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public String getDuty() {
 		return duty;
@@ -46,10 +50,10 @@ public class WebPlanDetail {
 	public void setVisitDate(Date visitDate) {
 		this.visitDate = visitDate;
 	}
-	public Time getVisitTime() {
+	public Date getVisitTime() {
 		return visitTime;
 	}
-	public void setVisitTime(Time visitTime) {
+	public void setVisitTime(Date visitTime) {
 		this.visitTime = visitTime;
 	}
 	public String getVisitAddress() {
@@ -64,34 +68,38 @@ public class WebPlanDetail {
 	public void setCollection(int collection) {
 		this.collection = collection;
 	}
-	public int getWebPlanId() {
-		return webPlanId;
-	}
-	public void setWebPlanId(int webPlanId) {
-		this.webPlanId = webPlanId;
-	}
 	public String getRemark() {
 		return remark;
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getUserId() {
-		return userId;
+	public String getDepartmentName() {
+		return departmentName;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
-	public int getUserDepartment() {
-		return userDepartment;
+	public WebPlan getWebPlan() {
+		return webPlan;
 	}
-	public void setUserDepartment(int userDepartment) {
-		this.userDepartment = userDepartment;
+	public void setWebPlan(WebPlan webPlan) {
+		this.webPlan = webPlan;
 	}
-	public int getUserRolePlan() {
-		return userRolePlan;
+	public User getUser() {
+		return user;
 	}
-	public void setUserRolePlan(int userRolePlan) {
-		this.userRolePlan = userRolePlan;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 }

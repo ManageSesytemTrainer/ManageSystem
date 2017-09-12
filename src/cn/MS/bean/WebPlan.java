@@ -10,12 +10,13 @@ import java.util.Date;
 public class WebPlan {
 	int id;  //id
 	String planName;  //计划名称
-	Date designDate;  //计划日期
+	Date planDateStart;  //计划开始时间
+	Date planDateEnd;  //计划结束时间
 	String webType;  //网点类型
 	String designer;  //编制人姓名
-	int userID;  
-	int userDepartmentId;
-	int userRoleId;
+	User user;  //编制人  
+	Department department;  //所属部门
+	Role role;  //职务（角色）
 	public int getId() {
 		return id;
 	}
@@ -28,34 +29,47 @@ public class WebPlan {
 	public void setPlanName(String planName) {
 		this.planName = planName;
 	}
-	public Date getDesignDate() {
-		return designDate;
-	}
-	public void setDesignDate(Date designDate) {
-		this.designDate = designDate;
-	}
 	public String getWebType() {
 		return webType;
 	}
 	public void setWebType(String webType) {
 		this.webType = webType;
 	}
-	public int getUserID() {
-		return userID;
+	public Date getPlanDateStart() {
+		return planDateStart;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setPlanDateStart(Date planDateStart) {
+		this.planDateStart = planDateStart;
 	}
-	public int getUserDepartmentId() {
-		return userDepartmentId;
+	public Date getPlanDateEnd() {
+		return planDateEnd;
 	}
-	public void setUserDepartmentId(int userDepartmentId) {
-		this.userDepartmentId = userDepartmentId;
+	public void setPlanDateEnd(Date planDateEnd) {
+		this.planDateEnd = planDateEnd;
 	}
-	public int getUserRoleId() {
-		return userRoleId;
+	public String getDesigner() {
+		return designer;
 	}
-	public void setUserRoleId(int userRoleId) {
-		this.userRoleId = userRoleId;
+	public void setDesigner(String designer) {
+		this.designer = designer;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 }

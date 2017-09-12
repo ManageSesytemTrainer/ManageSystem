@@ -1,6 +1,6 @@
 package cn.MS.bean;
 
-import java.sql.*;
+import java.util.*;
 /**
  * 走访数据导入（需求说的要用excel导入数据）
  * @author Administrator
@@ -9,7 +9,7 @@ import java.sql.*;
 public class VisitData {
 	int id;  //id
 	Date visitDate;  //走访日期
-	Time visitTime;  //走访时间
+	Date visitTime;  //走访时间
 	String address;  //走访地点
 	String visitPerson;  //走访人姓名
 	String departmentName;  //走访人所属部门名称
@@ -31,10 +31,10 @@ public class VisitData {
 	public void setVisitDate(Date visitDate) {
 		this.visitDate = visitDate;
 	}
-	public Time getVisitTime() {
+	public Date getVisitTime() {
 		return visitTime;
 	}
-	public void setVisitTime(Time visitTime) {
+	public void setVisitTime(Date visitTime) {
 		this.visitTime = visitTime;
 	}
 	public String getAddress() {
