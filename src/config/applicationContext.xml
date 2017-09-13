@@ -9,11 +9,10 @@
            http://www.springframework.org/schema/task
 		   http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
-    <context:component-scan base-package="cn.MS.Util,cn.MS.Service,cn.MS.Dao" />
+    <context:component-scan base-package="cn.MS.util,cn.MS.service,cn.MS.dao" />
 
     <!-- 注册协助普通类获取bean的工具类 -->
-   <!-- <bean id="SpringContextUtil" class="cn.JBlog.util.SpringContextUtil" scope="singleton"></bean>-->
-
+   <bean id="SpringContextUtil" class="cn.MS.util.SpringContextUtil" scope="singleton"></bean>
 
     <!-- 读属性文件，配置数据库 -->
     <context:property-placeholder
@@ -53,11 +52,11 @@
         when you use MapperFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="cn.MS.bean" />
         <property name="mapperLocations" value="classpath:config/mybatis/mappers/*.xml" /> 
-        <property name="typeAliasesPackage" value="cn.JBlog.bean" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.JBlog.dao" />
+        <property name="basePackage" value="cn.MS.dao" />
         <!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
     </bean>
     <!-- <bean id="ArticleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
