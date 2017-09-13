@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.MS.dao.DepartmentMapper">
+  <insert id="addDepartment" parameterType="cn.MS.bean.Department">
+      insert into department (department_name,phone,state) values (#{departmentName},#{phone},#{state})
+  </insert>
+  
+  <select id="selectAll" resultOrdered="true" resultType="cn.MS.bean.Department">
+     select * from department 
+  </select>
+  
+  <delete id="deleteDepartment" parameterType="cn.MS.bean.Department">
+     delete from department where id=#{id}
+  </delete>
+  
+  <update id="updateDepartment" parameterType="cn.MS.bean.Department">
+     update department set department_name=#{departmentName},phone=#{phone},state=#{state} where id=#{id}
+  </update>
+</mapper>
