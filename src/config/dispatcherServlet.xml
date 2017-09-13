@@ -37,5 +37,5 @@
 
 
     <!-- 设置资源文件位置，使dispatcherServlet不拦截资源请求 -->
-    <mvc:resources location="/resources/" mapping="/resources/**" />
+    <mvc:resources location="/resource/" mapping="/resource/**" />
 </beans>
