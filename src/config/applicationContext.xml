@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
            http://www.springframework.org/schema/task
 		   http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
-	<context:component-scan base-package="cn.MS.util,cn.MS.service,cn.MS.dao" />
-
+	<context:component-scan base-package="cn.MS.util,cn.MS.service,cn.MS.dao"></context:component-scan>
 	<!-- 注册协助普通类获取bean的工具类 -->
 	<!-- <bean id="SpringContextUtil" class="cn.MS.util.SpringContextUtil"
 		scope="singleton"></bean> -->
 
 	<!-- 读属性文件，配置数据库 -->
-	<context:property-placeholder
-		location="classpath:config/mybatis/jdbc.properties" />
-
+	<context:property-placeholder location="classpath:config/mybatis/jdbc.properties" />
+	
 	<!-- jdbc方式 -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 		<property name="driverClassName" value="${jdbc.driverClassName}" /> <property 
@@ -71,13 +74,12 @@
 	<!-- 结束 -->
 
 	<!-- 定时器注解驱动 -->
-	<task:annotation-driven executor="executor"
-		scheduler="scheduler" />
+	<!-- <task:annotation-driven executor="executor" scheduler="scheduler" /> -->
 	<!-- 调度器 -->
-	<task:scheduler id="scheduler" pool-size="10" />
+	<!-- <task:scheduler id="scheduler" pool-size="10" /> -->
 	<!-- 执行器 -->
-	<task:executor id="executor" keep-alive="3" pool-size="100-200"
-		queue-capacity="500" rejection-policy="CALLER_RUNS" />
+	<!-- <task:executor id="executor" keep-alive="3" pool-size="100-200"
+		queue-capacity="500" rejection-policy="CALLER_RUNS" /> -->
 
 
 </beans>
