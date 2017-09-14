@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}"
+	scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/MVCTry/pages/style1.css">
+<link rel="stylesheet" type="text/css" href="${path}/resource/style1.css">
 
 <!--以下为使用bootstrap必须引入的三项-->
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="${path}/resource/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="${path}/resource/js/bootstrap.min.js"></script>
 
 
 <title>系统管理员登录</title>
