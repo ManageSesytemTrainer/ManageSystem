@@ -30,7 +30,7 @@
     <!-- 设置返回网页路径 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!-- <property name="prefix" value="/web/views/"/> -->
+        <!--修改 <property name="prefix" value="/web/views/"/> -->
         <property name="prefix" value="/WEB-INFO/views/"/>
         <property name="suffix" value=".jsp"/>
        <!-- <property name="suffix" value=".html"></property>-->
