@@ -7,15 +7,15 @@
       insert into role (role_name,description,state,role_limit) values (#{roleName},#{description},#{state},#{roleLimit})
   </insert>
   
-  <select id="selectAll" resultOrdered="true" resultType="cn.MS.bean.role">
+  <select id="selectAll" resultOrdered="true" resultType="cn.MS.bean.Role">
      select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r
   </select>
   
-   <select id="selectRoleByName" resultType="cn.MS.bean.role" parameterType="String">
+   <select id="selectRoleByName" resultType="cn.MS.bean.Role" parameterType="String">
      select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where roleName=#{roleName}
   </select>
   
-  <select id="selectRoleById" resultType="cn.MS.bean.role" parameterType="_int">
+  <select id="selectRoleById" resultType="cn.MS.bean.Role" parameterType="_int">
      select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where id=#{id}
   </select>
   
