@@ -1,18 +1,26 @@
 package cn.MS.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.MS.bean.Role;
+import cn.MS.bean.User;
 import cn.MS.service.RoleService;
+import cn.MS.service.UserService;
 
 @Controller
 public class RoleController {
 
 	@Autowired
-	RoleService roleService;
+	@Qualifier("roleService")
+	private RoleService roleService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
 	@RequestMapping("/role_addRole")
 	@ResponseBody
@@ -47,6 +55,12 @@ public class RoleController {
 	@ResponseBody
 	public String selectAll() throws Exception {
 		return roleService.selectAll();
+	}
+	
+	@RequestMapping("/role_selectAllActiveRole")
+	@ResponseBody
+	public String selectAllActiveRole() throws Exception {
+		return roleService.selectAllActiveRole();
 	}
 
 	@RequestMapping("/role_selectRoleByName")
@@ -85,5 +99,15 @@ public class RoleController {
 			return "SUCCESS";
 		}
 		return "FAIL";
+	}
+	
+	//为用户设置权限 
+	@RequestMapping("/role_settingPower")
+	@ResponseBody
+	public String settingPower(int roleId,User user) {
+		Role role = roleService.selectRoleById(roleId);
+		user.setRole(role);
+		userService.modifyUser(user);
+		return "SUCCESS";
 	}
 }
