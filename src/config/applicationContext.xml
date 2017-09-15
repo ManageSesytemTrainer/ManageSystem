@@ -65,6 +65,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="classpath:cn.MS.bean" />
 		<property name="mapperLocations" value="classpath:config/mybatis/mappers/*.xml" />
+		<property name="configLocations" value="classpath:config/Mybatis-config.xml"></property>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="cn.MS.dao" />
