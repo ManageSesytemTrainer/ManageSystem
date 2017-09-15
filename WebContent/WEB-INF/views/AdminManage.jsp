@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${path}/resource/style3.css">
+<link rel="stylesheet" type="text/css" href="${path}/resource/css/AdminManage.css">
 
 <!--以下为使用bootstrap必须引入的三项-->
 <link rel="stylesheet"
@@ -44,7 +44,7 @@
 <body>
 	<div class="div1">
 		<div class="div3">
-			<h1 class="head1">罗江邮政分公司系统管理</h1>
+			<h1 class="head1">邮政分公司外勤管理系统</h1>
 		</div>
 	</div>
 	<div class="div1">
@@ -178,6 +178,7 @@
 			<p class="div0">这是系统参数管理</p>
 		</div>
 		<div>
+		  
 			<p class="div0">这是部门管理</p>
 		</div>
 		<div>

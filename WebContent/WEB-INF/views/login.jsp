@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${path}/resource/style1.css">
+<link rel="stylesheet" type="text/css" href="${path}/resource/css/login.css">
 
 <!--以下为使用bootstrap必须引入的三项-->
 <link rel="stylesheet"

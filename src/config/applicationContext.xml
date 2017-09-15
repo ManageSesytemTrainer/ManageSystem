@@ -80,8 +80,8 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
 	<!-- 结束 -->
-
 	<!-- 定时器注解驱动 -->
 	<!-- <task:annotation-driven executor="executor" scheduler="scheduler" /> -->
 	<!-- 调度器 -->
