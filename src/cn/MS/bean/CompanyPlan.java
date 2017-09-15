@@ -21,8 +21,6 @@ public class CompanyPlan {
 	int personCollections;  //每人每月最少收集的信息数
 	String remark;  //备注
 	User user;  //编制人
-	Department department;  //编制人所属部门
-	Role role;  //编制人角色（职务）
 	public int getId() {
 		return id;
 	}
@@ -100,18 +98,6 @@ public class CompanyPlan {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Department getDepartment() {
-		return department;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
 	}
 	
 }

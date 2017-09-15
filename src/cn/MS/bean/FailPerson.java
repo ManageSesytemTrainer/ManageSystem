@@ -12,8 +12,6 @@ public class FailPerson {
 	Date faildate; //通报日期
 	String description;  //描述
 	User user;  //不合格人员
-	Department department;  //所属部门
-	Role role;  //职务（角色）
 	public int getId() {
 		return id;
 	}
@@ -38,17 +36,5 @@ public class FailPerson {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Department getDepartment() {
-		return department;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
+	
 }

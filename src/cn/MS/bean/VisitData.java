@@ -17,8 +17,6 @@ public class VisitData {
 	String countPerson;  //纵享销客账号
 	String details;  //走访内容
 	User user;  //走访人
-	Department department;  //所属部门
-	Role role;  //职务
 	public int getId() {
 		return id;
 	}
@@ -78,18 +76,6 @@ public class VisitData {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Department getDepartment() {
-		return department;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 }
