@@ -11,7 +11,7 @@ import cn.MS.bean.Role;
 import cn.MS.dao.RoleMapper;
 import cn.MS.service.RoleService;
 
-@Service
+@Service("roleService")
 public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleMapper roleMapper;
@@ -60,6 +60,31 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
+	public String selectAllActiveRole() {
+		// TODO Auto-generated method stub
+		List<Role> list = roleMapper.selectAllActiveRole();
+		JSONArray array = new JSONArray();
+		JSONObject jsonObject = new JSONObject();
+		int i = 0;
+		if (list != null) {
+			for (Role role : list) {
+				i++;
+				JSONObject ob = new JSONObject();
+				ob.put("id", role.getId());
+				ob.put("roleName", role.getRoleName());
+				ob.put("description", role.getDescription());
+				ob.put("state", role.getState());
+				ob.put("roleLimit", role.getRoleLimit());
+				array.put(ob);
+			}
+		}
+		jsonObject.put("total", i);
+		jsonObject.put("rows", array);
+
+		return jsonObject.toString();
+	}
+
+	@Override
 	public int cancelRole(Role role) {
 		// TODO Auto-generated method stub
 		return roleMapper.cancelRole(role);
@@ -75,7 +100,7 @@ public class RoleServiceImpl implements RoleService {
 	public String selectRoleByName(String roleName) {
 		// TODO Auto-generated method stub
 		Role role = roleMapper.selectRoleByName(roleName);
-		if(role != null) {
+		if (role != null) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", role.getId());
 			jsonObject.put("roleName", role.getRoleName());

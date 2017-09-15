@@ -11,6 +11,11 @@
      select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r
   </select>
   
+
+  <select id="selectAllActiveRole" resultOrdered="true" resultType="cn.MS.bean.Role">
+     select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where state = 1;
+  </select>
+
    <select id="selectRoleByName" resultType="cn.MS.bean.Role" parameterType="String">
      select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where roleName=#{roleName}
   </select>

@@ -18,8 +18,6 @@ public class WebPlanDetail {
 	String remark;  //备注
 	WebPlan webPlan;  //网点计划  
 	User user;  //员工
-	Department department;  //部门
-	Role role;  //角色（职务）
 	public int getId() {
 		return id;
 	}
@@ -91,15 +89,6 @@ public class WebPlanDetail {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
 	}
 
 }
