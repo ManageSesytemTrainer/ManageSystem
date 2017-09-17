@@ -5,12 +5,12 @@ $(function () {
     $("li:eq(4)").click(function () {
         $.ajax({
             type:"POST",
-            url:"/DepartmentServiceIm.java",
+            url:"${path}/departments",
             dataType:"json",
             success:function (data) {
                 var data=JSON.parse(data);
                 var $table=$('<table class="table table-bordered"></table>');
-                for(var i=0;i<data.length;i++){
+                for(var i=0;i<data.total;i++){
                     var $tr=$('<tr></tr>');
                     var $td1=$('<td>'+data[i].id+'</td>');
                     var $td2=$('<td>'+data[i].departmentName+'</td>');

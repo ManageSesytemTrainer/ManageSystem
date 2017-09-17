@@ -7,12 +7,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.MS.bean.CompanyPlan;
-import cn.MS.dao.CompanyPlanDao;
+import cn.MS.dao.CompanyPlanMapper;
 import cn.MS.service.CompanyPlanService;
 
 public class CompanyPlanServiceIm implements CompanyPlanService{
 	@Autowired
-	CompanyPlanDao cd;
+	CompanyPlanMapper cd;
 	@Override
 	public String select(CompanyPlan cp) {
 		List<CompanyPlan> list= cd.select(cp);

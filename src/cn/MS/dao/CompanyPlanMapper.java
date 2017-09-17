@@ -4,7 +4,7 @@ import java.util.List;
 
 import cn.MS.bean.CompanyPlan;
 
-public interface CompanyPlanDao {
+public interface CompanyPlanMapper {
 	List<CompanyPlan> select(CompanyPlan cp);
 	int insert(CompanyPlan cp);
 }

@@ -3,7 +3,7 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper>
+<mapper namespace="cn.MS.dao.CompanyPlanMapper">
 	<insert id="addCompanyPlan" parameterType="cn.MS.bean.CompanyPlan">
 		insert into
 		company_plan

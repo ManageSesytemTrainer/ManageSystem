@@ -4,8 +4,8 @@
 $(function () {
     $("ul li:last-child").click(function () {
         $.ajax({
-            type:"POST",
-            url:"/ManageSystem/src/cn/MS/service/serviceIm/DepartmentServiceIm.java",
+            type:'POST',
+            url:'${path}/departments',
             dataType:"json",
             success:function (data) {
                 var data=JSON.parse(data);

@@ -1,120 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"
-	scope="request" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%--
+  Created by IntelliJ IDEA.
+  User: lenovo
+  Date: 2017/9/14
+  Time: 15:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${path}/resource/css/login.css">
-
-<!--以下为使用bootstrap必须引入的三项-->
-<link rel="stylesheet"
-	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="${path}/resource/js/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="${path}/resource/js/bootstrap.min.js"></script>
-
-
-<title>系统管理员登录</title>
-
-</style>
+    <meta charset="UTF-8">
+    <title>Custom TextBox - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="css/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 </head>
 <body>
-	<div class="box box-element ui-draggable">
-
-		<div class="view">
-			<div class="page-header">
-				<h1 contenteditable="true" class="head1">
-					登录页 <small class="small">欢迎登录！</small>
-				</h1>
-			</div>
-		</div>
-	</div>
-
-	<div class="divid">
-		<div class="login_div1">
-			<ul class="nav nav-tabs" id="menu">
-				<li class="active"><a href="#panel-1" data-toggle="tab"
-					contenteditable="true">用户登录</a></li>
-				<li class=""><a href="#panel-2" data-toggle="tab"
-					contenteditable="true">系统管理员登录</a></li>
-			</ul>
-
-
-
-			<div class="tab-content">
-				<div class="tab-pane active" id="panel-1">
-					<form class="form-horizontal">
-						<fieldset>
-							<div class="control-group">
-
-								<div class="controls">
-									<label class="control-label">账户名 </label> <input
-										class="input-xlarge" type="text" placeholder="用户名">
-								</div>
-							</div>
-							<div class="middle1"></div>
-
-							<div class="control-group">
-
-								<div class="controls">
-									<label class="control-label">密 码 </label> <input
-										class="input-xlarge" type="password" placeholder="密码">
-								</div>
-
-							</div>
-
-							<div class="middle1"></div>
-
-							<div class="control-group">
-								<div class="controls">
-									<button class="btn btn-success">登录</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-
-
-				<div class="tab-pane" id="panel-2">
-					<form class="form-horizontal">
-						<fieldset>
-							<div class="control-group">
-
-								<div class="controls">
-									<label class="control-label">账户名 </label> <input
-										class="input-xlarge" type="text" placeholder="管理员登录账户名">
-								</div>
-							</div>
-							<div class="middle1"></div>
-
-							<div class="control-group">
-
-								<div class="controls">
-									<label class="control-label">密 码 </label> <input
-										class="input-xlarge" type="password" placeholder="管理员登录密码">
-								</div>
-
-							</div>
-
-							<div class="middle1"></div>
-
-							<div class="control-group">
-								<div class="controls">
-									<button class="btn btn-success">登录</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-
-				</div>
-			</div>
-
-		</div>
-
-	</div>
+<h1 style="color: #69a6ff;border-bottom: 3px solid #69a6ff;padding-bottom: 20px;font-size: 3em; margin: 0 0 24px 0">邮政分公司外勤管理系统</h1>
+<!--<div style="margin:20px 0;"></div>-->
+<div class="easyui-panel" title="登录" style="width:100%;max-width:400px;padding:30px 60px;margin: 0 auto">
+    <div style="margin-bottom:10px">
+        <input class="easyui-textbox" style="width:100%;height:40px;padding:12px" data-options="prompt:'用户名',iconCls:'icon-man',iconWidth:38">
+    </div>
+    <div style="margin-bottom:20px">
+        <input class="easyui-textbox" type="password" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
+    </div>
+    <div>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:40%;">
+            <span style="font-size:14px;">用户登录</span>
+        </a>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:40%;float: right">
+            <span style="font-size:14px;">管理员登录</span>
+        </a>
+        <a href="#"><div style="margin-top:15px "><span>忘记密码?</span></div></a>
+    </div>
+</div>
 </body>
 </html>
