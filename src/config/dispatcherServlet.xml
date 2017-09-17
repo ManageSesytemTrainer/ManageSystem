@@ -16,6 +16,18 @@
     <!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*" /> <bean
         class="cn.JBlog.interceptor.VisitInterceptor"></bean> </mvc:interceptor>
         </mvc:interceptors> -->
+      <mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
     <!-- spring mvc实现上传需添加该操作类 依赖包commons-fileupload-1.2.2.jar commons-io-2.0.1.jar -->
     <bean id="multipartResolver"

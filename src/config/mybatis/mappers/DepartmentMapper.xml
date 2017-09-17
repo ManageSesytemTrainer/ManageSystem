@@ -8,7 +8,7 @@
       insert into department (department_name,phone,state) values (#{departmentName},#{phone},#{state})
   </insert>
   
-  <select id="selectAll" resultOrdered="true" resultType="cn.MS.bean.Department">
+  <select id="selectAll" resultOrdered="true" resultMap="department">
      select * from department 
   </select>
   
@@ -25,4 +25,11 @@
      </set>
      where id=#{id}
   </update>
+  
+  <resultMap type="cn.MS.bean.Department" id="department">
+    <id property="id"  column="id"/>
+    <result property="departmentName" column="department_name"/>
+    <result property="phone" column="phone"/>
+    <result property="state" column="state"/>
+  </resultMap>
 </mapper>
