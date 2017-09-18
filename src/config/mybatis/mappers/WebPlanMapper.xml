@@ -29,7 +29,7 @@
 		select * from web_plan where id = #{id}
 	</select>
 	<select id="getWebPlanByName" resultMap="webplanMap">
-		select * from web_plan where plan_name = #{name}
+		select * from web_plan where plan_name like CONCAT(CONCAT('%', #{name}), '%')
 	</select>
 	<select id="getAllWebPlan" resultMap="webplanMap">
 		select * from web_plan
