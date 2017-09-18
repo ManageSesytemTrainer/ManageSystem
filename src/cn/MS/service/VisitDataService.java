@@ -1,6 +1,8 @@
 package cn.MS.service;
 
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public interface VisitDataService {
@@ -9,10 +11,5 @@ public interface VisitDataService {
 	 */
 	String readExcelFile(MultipartFile file);
 	String getByUsername(String username);
-	/**
-	 * 字符串日期格式 yyyy-mm-dd
-	 * @param date
-	 * @return
-	 */
-	String getByDate(String date);
+	String getByDate(Date date);
 }

@@ -2,6 +2,8 @@ package cn.MS.service.serviceIm;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -56,8 +58,9 @@ public class VisitDataServiceImpl implements VisitDataService {
 	}
 
 	@Override
-	public String getByDate(String date) {
-		return listToJson(visitDataMapper.getVisitDataByVisitDate(date), VisitData.class);
+	public String getByDate(Date date) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		return listToJson(visitDataMapper.getVisitDataByVisitDate(sf.format(date)), VisitData.class);
 	}
 
 	
