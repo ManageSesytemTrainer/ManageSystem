@@ -22,7 +22,7 @@ public class AccountController {
 		User fuser=as.getUser(user);
 		if(fuser==null)
 			return "none";
-		else if(fuser.getPassword()!=user.getPassword())
+		else if(!fuser.getPassword().equals(user.getPassword()))
 			return "wrong";
 		else{
 			HttpSession session=request.getSession();
