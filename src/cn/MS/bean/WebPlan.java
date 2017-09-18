@@ -15,6 +15,7 @@ public class WebPlan {
 	String webType;  //网点类型
 	String designer;  //编制人姓名
 	User user;  //编制人  
+	int state; //状态
 	public int getId() {
 		return id;
 	}
@@ -56,6 +57,12 @@ public class WebPlan {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 
 }
