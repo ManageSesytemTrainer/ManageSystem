@@ -12,6 +12,7 @@ public class WebPlan {
 	String planName;  //计划名称
 	Date planDateStart;  //计划开始时间
 	Date planDateEnd;  //计划结束时间
+	Date designDate;  //计划编制日期
 	String webType;  //网点类型
 	String designer;  //编制人姓名
 	User user;  //编制人  
@@ -64,5 +65,11 @@ public class WebPlan {
 	public void setState(int state) {
 		this.state = state;
 	}
-
+	public Date getDesignDate() {
+		return designDate;
+	}
+	public void setDesignDate(Date designDate) {
+		this.designDate = designDate;
+	}
+	
 }
