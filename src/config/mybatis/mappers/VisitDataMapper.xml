@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.MS.dao.VisitDataMapper">
+  <insert id="addVisitData" parameterType="cn.MS.bean.VisitData">
+      insert into visit_data (visit_date,visit_time,address,visit_person,department_name,role_name,count_person,details,user_id) values (#{visitDate},#{visitTime},#{address},#{visitPerson},#{departmentName},#{releName},#{countPerson},#{details},#{user.id})
+  </insert>
+</mapper>

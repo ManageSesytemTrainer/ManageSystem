@@ -11,6 +11,9 @@
 	<select id="getUserByLoginname" resultMap="user">
 		select * from user where loginname = #{loginName}
 	</select>
+	<select id="getUserByName" resultMap="user">
+		select * from user where name = #{name}
+	</select>
 	<select id="getAllUser" resultMap="user">
 		select * from user
 	</select>
