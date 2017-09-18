@@ -32,7 +32,12 @@ public class WebPlanServiceImpl implements WebPlanService{
 	public String getById(int id) {
 		return objectToJson(wpm.getWebPlanById(id), WebPlan.class);
 	}
-
+	
+	@Override
+	public WebPlan getObjectById(int id) {
+		return wpm.getWebPlanById(id);
+	}
+	
 	@Override
 	public String getAll() {
 		return listToJson(wpm.getAllWebPlan(), WebPlan.class);
@@ -119,4 +124,6 @@ public class WebPlanServiceImpl implements WebPlanService{
 		}
 		return ob;
 	}
+
+
 }

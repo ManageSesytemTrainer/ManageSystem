@@ -9,65 +9,52 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.MS.bean.Department;
-import cn.MS.bean.Role;
-import cn.MS.bean.User;
-import cn.MS.dao.UserMapper;
-import cn.MS.service.UserService;
-@Service("userService")
-public class UserServiceImpl implements UserService{
+import cn.MS.bean.WebPlanDetail;
+import cn.MS.dao.WebPlanDetailMapper;
+import cn.MS.service.WebPlanDetailService;
+
+@Service("webPlanDetailService")
+public class WebPlanDetailServiceImpl implements WebPlanDetailService{
+	
 	@Autowired
-	private UserMapper um;
+	private WebPlanDetailMapper wpdm;
+	
 	@Override
-	public String getDepartmentByUserId(int id) {
-		User u = um.getUserById(id);
-		return objectToJson(u.getDepartment(), Department.class);
+	public int add(WebPlanDetail wpd) {
+		return wpdm.addWebPlanDetail(wpd);
 	}
+
 	@Override
-	public String getRoleByUserId(int id) {
-		User u = um.getUserById(id);
-		return objectToJson(u.getRole(), Role.class);
+	public int update(WebPlanDetail wpd) {
+		return wpdm.updateWebPlanDetail(wpd);
 	}
+
 	@Override
-	public String getUser(int id) {
-		return objectToJson(um.getUserById(id), User.class);
+	public String getById(int id) {
+		return objectToJson(wpdm.getWebPlanDetailById(id), WebPlanDetail.class);
 	}
+
 	@Override
-	public User getUserObject(String name) {
-		return um.getUserByName(name);
+	public String getAll() {
+		return listToJson(wpdm.getAllWebPlanDetail(), WebPlanDetail.class);
 	}
+
 	@Override
-	public String getUser(String loginname) {
-		return objectToJson(um.getUserByLoginname(loginname), User.class);
+	public String getByName(String name) {
+		return listToJson(wpdm.getWebPlanDetailByName(name), WebPlanDetail.class);
 	}
+
 	@Override
-	public String getAllUser() {
-		return listToJson(um.getAllUser(), User.class);
+	public String getReleased() {
+		return listToJson(wpdm.getWebPlanByState(1), WebPlanDetail.class);
 	}
+
 	@Override
-	public String getActiveUser() {
-		return listToJson(um.getAllActiveUser(), User.class);
+	public String getDraft() {
+		return listToJson(wpdm.getWebPlanByState(0), WebPlanDetail.class);
 	}
-	@Override
-	public int modifyUser(User user) {
-		return um.modifyUserByid(user);
-	}
-	@Override
-	public int addUser(User user) {
-		return um.addUser(user);
-	}
-	@Override
-	public String getUsersByDepartmentId(int departmentid) {
-		return listToJson(um.getUsersByDepartment(departmentid), User.class);
-	}
-	@Override
-	public String getUsersByRoleId(int roleId) {
-		return listToJson(um.getUsersByRole(roleId), User.class);
-	}
-	@Override
-	public String getWriteoffUser() {
-		return listToJson(um.getAllWriteoffUser(), User.class);
-	}
+	
+	
 	
 	
 	/**
@@ -128,5 +115,4 @@ public class UserServiceImpl implements UserService{
 		}
 		return ob;
 	}
-
 }

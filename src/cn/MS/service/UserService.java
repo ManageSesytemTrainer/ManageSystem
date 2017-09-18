@@ -6,6 +6,7 @@ public interface UserService {
 	String getDepartmentByUserId(int id);
 	String getRoleByUserId(int id);
 	String getUser(int id);
+	User getUserObject(String name);
 	String getUser(String loginname);
 	String getAllUser();
 	String getActiveUser();
