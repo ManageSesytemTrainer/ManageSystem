@@ -30,23 +30,25 @@ public class WebPlanDetailServiceImpl implements WebPlanDetailService {
 	}
 
 	@Override
-	public String getById(int id) {
-		return objectToJson(wpdm.getWebPlanDetailById(id), WebPlanDetail.class);
+	public String getById(int id,int state) {
+		return objectToJson(wpdm.getWebPlanDetailById(id,state), WebPlanDetail.class);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public WebPlanDetail getObjectById(int id) {
-		return wpdm.getWebPlanDetailById(id);
+		Integer state = null;
+		return wpdm.getWebPlanDetailById(id,state);
 	}
 
 	@Override
-	public String getAll() {
-		return listToJson(wpdm.getAllWebPlanDetail(), WebPlanDetail.class);
+	public String getAll(int state) {
+		return listToJson(wpdm.getAllWebPlanDetail(state), WebPlanDetail.class);
 	}
 
 	@Override
-	public String getByName(String name) {
-		return listToJson(wpdm.getWebPlanDetailByName(name), WebPlanDetail.class);
+	public String getByName(String name,int state) {
+		return listToJson(wpdm.getWebPlanDetailByName(name,state), WebPlanDetail.class);
 	}
 
 	@Override
