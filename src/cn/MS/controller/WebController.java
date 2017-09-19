@@ -24,6 +24,7 @@ public class WebController {
    public String departmentmodify(){
 	   return "departmentmodify";
    }
+
    @RequestMapping("/departmentAdd")
    public String departmentAdd(){
 	   return "departmentAdd";
@@ -44,4 +45,5 @@ public class WebController {
    public String WebPlandetailAdd(){
 	   return "WebPlandetailAdd";
    }
+
 }

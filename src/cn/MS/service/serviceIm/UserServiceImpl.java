@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService{
 		return objectToJson(um.getUserById(id), User.class);
 	}
 	@Override
+	public User getUserObject(String name) {
+		return um.getUserByName(name);
+	}
+	@Override
 	public String getUser(String loginname) {
 		return objectToJson(um.getUserByLoginname(loginname), User.class);
 	}
@@ -72,33 +76,29 @@ public class UserServiceImpl implements UserService{
 	 * @return
 	 */
 	private String listToJson(List<?> list, Class<?> c) {
+		if(list == null || list.size() == 0)
+			return null;
 		JSONArray array = new JSONArray();
 		JSONObject jsonObject = new JSONObject();
 		int i=0;
-		if (list != null) {
-			for (Object u : list) {
-				i++;
-				JSONObject ob = objectToJO(u, c);
-				array.put(ob);
-			}
-		}else {
-			return null;
+		for (Object u : list) {
+			i++;
+			JSONObject ob = objectToJO(u, c);
+			array.put(ob);
 		}
 		jsonObject.put("total", i);
 		jsonObject.put("rows", array);
 		return jsonObject.toString();
 	}
 	private String objectToJson(Object u, Class<?> c) {
+		if(u == null)
+			return null;
 		JSONArray array = new JSONArray();
 		JSONObject jsonObject = new JSONObject();
 		int i=0;
-		if (u != null) {
-			i++;
-			JSONObject ob = objectToJO(u, c);
-			array.put(ob);
-		}else {
-			return null;
-		}
+		i++;
+		JSONObject ob = objectToJO(u, c);
+		array.put(ob);
 		jsonObject.put("total", i);
 		jsonObject.put("rows", array);
 
@@ -124,4 +124,5 @@ public class UserServiceImpl implements UserService{
 		}
 		return ob;
 	}
+
 }

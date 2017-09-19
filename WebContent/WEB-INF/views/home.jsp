@@ -365,7 +365,7 @@
 			function(){
 				$('#tableUser').datagrid({
 					fitColumns : true,
-					width : '100%',
+					width : 820,
 					method : 'post',
 					loadMsg : '正在加载数据中......',
 					pagination:true,
@@ -440,7 +440,7 @@
 						function() {
 							$('#tableDe').datagrid({
 												fitColumns : true,
-												width : '100%',
+												width : 820,
 												method : 'post',
 												loadMsg : '正在加载数据中......',
 												pagination:true,
@@ -503,12 +503,12 @@
 		function modifyDe(index) {
 			$('#tableDe').datagrid('selectRow', index);
 			var row = $('#tableDe').datagrid('getSelected');
-			window.location = "${path}/departmentmodify?id=" + row.id;
+			window.location = "${path}/departmentmodify?departmentId=" + row.id;
 		}
 		function deleteDe(index) {
 			$('#tableDe').datagrid('selectRow', index);
 			var row = $('#tableDe').datagrid('getSelected');
-			$.messager.confirm('Confirm', '确认删除' + row.title + '?',
+			$.messager.confirm('Confirm', '确认删除' + row.departmentName + '?',
 					function(r) {
 						if (r) {
 							$.ajax({

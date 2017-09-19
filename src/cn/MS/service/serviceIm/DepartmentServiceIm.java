@@ -21,9 +21,9 @@ public class DepartmentServiceIm implements DepartmentService {
 	}
 
 	@Override
-	public int delete(Department de) {
+	public int delete(int id) {
 
-		return dm.deleteDepartment(de);
+		return dm.deleteDepartment(id);
 	}
 
 	@Override

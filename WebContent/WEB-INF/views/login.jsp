@@ -28,13 +28,13 @@
 <!--<div style="margin:20px 0;"></div>-->
 <div class="easyui-panel" title="登录" style="width:100%;max-width:400px;padding:30px 60px;margin: 0 auto">
     <div style="margin-bottom:10px">
-        <input class="easyui-textbox" style="width:100%;height:40px;padding:12px" data-options="prompt:'用户名',iconCls:'icon-man',iconWidth:38">
+        <input id="loginname" class="easyui-textbox" style="width:100%;height:40px;padding:12px" data-options="prompt:'用户名',iconCls:'icon-man',iconWidth:38">
     </div>
     <div style="margin-bottom:20px">
-        <input class="easyui-textbox" type="password" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
+        <input id="password" class="easyui-textbox" type="password" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
     </div>
     <div>
-        <input onclick="return login(${path})"  type="button" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:40%;font-size:14px;" value="登录">
+        <input onclick="return login('${path}')"  type="button" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:40%;font-size:14px;" value="登录"/>
         <a href="#" style="margin-top:15px ">忘记密码?</a>
     </div>
 </div>

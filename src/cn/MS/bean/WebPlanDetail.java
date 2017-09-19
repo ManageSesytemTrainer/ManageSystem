@@ -18,6 +18,7 @@ public class WebPlanDetail {
 	String remark;  //备注
 	WebPlan webPlan;  //网点计划  
 	User user;  //员工
+	int state; //状态
 	public int getId() {
 		return id;
 	}
@@ -89,6 +90,12 @@ public class WebPlanDetail {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 
 }

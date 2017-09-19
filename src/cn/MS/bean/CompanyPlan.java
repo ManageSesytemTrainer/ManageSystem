@@ -21,6 +21,7 @@ public class CompanyPlan {
 	int personCollections;  //每人每月最少收集的信息数
 	String remark;  //备注
 	User user;  //编制人
+	int state; //状态
 	public int getId() {
 		return id;
 	}
@@ -98,6 +99,12 @@ public class CompanyPlan {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 	
 }

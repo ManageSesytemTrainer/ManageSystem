@@ -13,7 +13,7 @@ public class AcountServiceIm implements AcountService {
 	@Override
 	public User getUser(User user) {
 		
-		return um.getUserById(user.getId());
+		return um.getUserByLoginname(user.getLoginName());
 	}
 
 }
