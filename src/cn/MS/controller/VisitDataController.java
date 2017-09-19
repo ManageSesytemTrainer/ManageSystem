@@ -1,6 +1,7 @@
 package cn.MS.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,6 +54,22 @@ public class VisitDataController {
 		visitData.setUser((User)session.getAttribute("user"));
 		
 		return visitDataService.addVisitData(visitData);
+	}
+	@RequestMapping("/queryVisitDataByUsername")
+	@ResponseBody
+	public String queryRoleByUsername(String username) {
+		String vd = visitDataService.getByUsername(username);
+		if(null == vd)
+			return "ERROR";
+		return vd;
+	}
+	@RequestMapping("/queryVisitDataByDate")
+	@ResponseBody
+	public String queryVisitDataByDate(Date date) {
+		String vd = visitDataService.getByDate(date);
+		if(null == vd)
+			return "ERROR";
+		return vd;
 	}
 
 }
