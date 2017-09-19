@@ -6,6 +6,7 @@ public interface WebPlanDetailService {
 	int add(WebPlanDetail wpd);
 	int update(WebPlanDetail wpd);
 	String getById(int id);
+	WebPlanDetail getObjectById(int id);
 	String getAll();
 	String getByName(String name);
 	String getReleased();

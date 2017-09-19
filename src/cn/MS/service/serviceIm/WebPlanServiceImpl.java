@@ -72,33 +72,29 @@ public class WebPlanServiceImpl implements WebPlanService{
 	 * @return
 	 */
 	private String listToJson(List<?> list, Class<?> c) {
+		if(null == list || 0 == list.size())
+			return null;
 		JSONArray array = new JSONArray();
 		JSONObject jsonObject = new JSONObject();
 		int i=0;
-		if (list != null) {
-			for (Object u : list) {
-				i++;
-				JSONObject ob = objectToJO(u, c);
-				array.put(ob);
-			}
-		}else {
-			return null;
+		for (Object u : list) {
+			i++;
+			JSONObject ob = objectToJO(u, c);
+			array.put(ob);
 		}
 		jsonObject.put("total", i);
 		jsonObject.put("rows", array);
 		return jsonObject.toString();
 	}
 	private String objectToJson(Object u, Class<?> c) {
+		if(null == u)
+			return null;
 		JSONArray array = new JSONArray();
 		JSONObject jsonObject = new JSONObject();
 		int i=0;
-		if (u != null) {
-			i++;
-			JSONObject ob = objectToJO(u, c);
-			array.put(ob);
-		}else {
-			return null;
-		}
+		i++;
+		JSONObject ob = objectToJO(u, c);
+		array.put(ob);
 		jsonObject.put("total", i);
 		jsonObject.put("rows", array);
 
