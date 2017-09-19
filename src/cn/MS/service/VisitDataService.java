@@ -15,4 +15,5 @@ public interface VisitDataService {
 	String addVisitData(VisitData visitData);
 	String getByUsername(String username);
 	String getByDate(Date date);
+	String getAll();
 }

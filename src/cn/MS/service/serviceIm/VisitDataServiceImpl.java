@@ -74,6 +74,10 @@ public class VisitDataServiceImpl implements VisitDataService {
 		return listToJson(visitDataMapper.getVisitDataByVisitDate(sf.format(date)), VisitData.class);
 	}
 
+	@Override
+	public String getAll() {
+		return listToJson(visitDataMapper.getAllVisitData(), VisitData.class);
+	}
 	
 	
 	private String listToJson(List<?> list, Class<?> c) {
@@ -113,6 +117,4 @@ public class VisitDataServiceImpl implements VisitDataService {
 		}
 		return ob;
 	}
-
-
 }

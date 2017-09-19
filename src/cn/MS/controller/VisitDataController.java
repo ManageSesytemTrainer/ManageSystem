@@ -71,5 +71,13 @@ public class VisitDataController {
 			return "ERROR";
 		return vd;
 	}
+	@RequestMapping("/queryAllVisitData")
+	@ResponseBody
+	public String queryAllVisitData() {
+		String vd = visitDataService.getAll();
+		if(null == vd)
+			return "还没有数据";
+		return vd;
+	}
 
 }
