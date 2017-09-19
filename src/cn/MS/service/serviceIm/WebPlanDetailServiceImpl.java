@@ -8,11 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.WebPlanDetail;
 import cn.MS.dao.WebPlanDetailMapper;
 import cn.MS.service.WebPlanDetailService;
 
+@Transactional
 @Service("webPlanDetailService")
 public class WebPlanDetailServiceImpl implements WebPlanDetailService {
 
