@@ -17,15 +17,12 @@ import cn.MS.service.WebPlanService;
 public class WebPlanDetailController {
 
 	@Autowired
-	@Qualifier("webPlanDetailService")
 	private WebPlanDetailService wpds;
 
 	@Autowired
-	@Qualifier("webPlanService")
 	private WebPlanService wps;
 
 	@Autowired
-	@Qualifier("userService")
 	private UserService us;
 
 	@RequestMapping("/webPlanDetail_add")
@@ -82,7 +79,7 @@ public class WebPlanDetailController {
 		return wpds.getAll();
 	}
 
-	@RequestMapping("/webPlanDetail_getAll")
+	@RequestMapping("/webPlanDetail_getByName")
 	@ResponseBody
 	public String getByName(String name) throws Exception {
 		return wpds.getByName(name);
@@ -94,7 +91,7 @@ public class WebPlanDetailController {
 		return wpds.getReleased();
 	}
 
-	@RequestMapping
+	@RequestMapping("/webPlanDetail_getDraft")
 	@ResponseBody
 	public String getDraft() throws Exception {
 		return wpds.getDraft();
