@@ -17,18 +17,21 @@ import cn.MS.service.WebPlanService;
 public class WebPlanDetailController {
 
 	@Autowired
+	@Qualifier("webPlanDetailService")
 	private WebPlanDetailService wpds;
 
 	@Autowired
+	@Qualifier("webPlanService")
 	private WebPlanService wps;
 
 	@Autowired
+	@Qualifier("userService")
 	private UserService us;
 
 	@RequestMapping("/webPlanDetail_add")
 	@ResponseBody
-	public String add(int webPlan_id, WebPlanDetail wpd) throws Exception {
-		WebPlan webPlan = wps.getObjectById(webPlan_id);
+	public String add(int webPlan_id, WebPlanDetail wpd, int state) throws Exception {
+		WebPlan webPlan = wps.getObjectById(webPlan_id, state);
 		if (webPlan == null) {
 			return "所属网点计划不存在！";
 		}
@@ -38,6 +41,7 @@ public class WebPlanDetailController {
 		}
 		wpd.setWebPlan(webPlan);
 		wpd.setUser(user);
+		wpd.setState(0);
 		if (wpds.add(wpd) != 0) {
 			return "添加成功！";
 		} else {
@@ -72,20 +76,20 @@ public class WebPlanDetailController {
 
 	@RequestMapping("/webPlanDetail_getById")
 	@ResponseBody
-	public String getById(int id) throws Exception {
-		return wpds.getById(id);
+	public String getById(int id,int state) throws Exception {
+		return wpds.getById(id,state);
 	}
 
 	@RequestMapping("/webPlanDetail_getAll")
 	@ResponseBody
-	public String getAll() throws Exception {
-		return wpds.getAll();
+	public String getAll(int state) throws Exception {
+		return wpds.getAll(state);
 	}
 
 	@RequestMapping("/webPlanDetail_getByName")
 	@ResponseBody
-	public String getByName(String name) throws Exception {
-		return wpds.getByName(name);
+	public String getByName(String name,int state) throws Exception {
+		return wpds.getByName(name,state);
 	}
 
 	@RequestMapping("/webPlanDetail_getReleased")

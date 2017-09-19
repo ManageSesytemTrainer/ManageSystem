@@ -8,11 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.WebPlan;
 import cn.MS.dao.WebPlanMapper;
 import cn.MS.service.WebPlanService;
 
+@Transactional
 @Service("webPlanService")
 public class WebPlanServiceImpl implements WebPlanService{
 	@Autowired
@@ -29,13 +31,13 @@ public class WebPlanServiceImpl implements WebPlanService{
 	}
 
 	@Override
-	public String getById(int id) {
-		return objectToJson(wpm.getWebPlanById(id), WebPlan.class);
+	public String getById(int id, int state) {
+		return objectToJson(wpm.getWebPlanById(id, state), WebPlan.class);
 	}
 	
 	@Override
-	public WebPlan getObjectById(int id) {
-		return wpm.getWebPlanById(id);
+	public WebPlan getObjectById(int id, int state) {
+		return wpm.getWebPlanById(id, state);
 	}
 	
 	@Override
@@ -44,13 +46,13 @@ public class WebPlanServiceImpl implements WebPlanService{
 	}
 
 	@Override
-	public String getByName(String name) {
-		return listToJson(wpm.getWebPlanByName(name), WebPlan.class);
+	public String getByName(String name, int state) {
+		return listToJson(wpm.getWebPlanByName(name, state), WebPlan.class);
 	}
 
 	@Override
-	public String getByDesigner(String designer) {
-		return listToJson(wpm.getWebPlanByDesigner(designer), WebPlan.class);
+	public String getByDesigner(String designer, int state) {
+		return listToJson(wpm.getWebPlanByDesigner(designer, state), WebPlan.class);
 	}
 
 	@Override

@@ -554,6 +554,7 @@
 														},
 														'-',
 														{
+<<<<<<< HEAD
 															text : '修改',
 															iconCls : 'icon-cut',
 															handler : function() {
@@ -565,6 +566,8 @@
 														},
 														'-',
 														{
+=======
+>>>>>>> refs/remotes/origin/master
 															text : '删除',
 															iconCls : 'icon-cut',
 															handler : function() {

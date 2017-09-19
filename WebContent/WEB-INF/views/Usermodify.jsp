@@ -31,48 +31,49 @@
             </tr>
             <tr>
                 <td>工号</td>
-                <td><input type="text" id="serial" ></td>
+      <td><input type="text" id="serial" name="id"></td>
+
             </tr>
             <tr>
                 <td>姓名</td>
-                <td><input type="text" id="name"></td>
+                <td><input type="text" id="name" name="name"></td>
             </tr>
             <tr>
                 <td>性别</td>
-                <td><input type="text" id="sex"></td>
+                <td><input type="text" id="sex" name="sex"></td>
             </tr>
             <tr>
                 <td>生日</td>
-                <td><input type="text" id="birthday"></td>
+                <td><input type="text" id="birthday" name="birthday"></td>
             </tr>
             <tr>
                 <td>电话</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="mobile"></td>
             </tr>
             <tr>
                 <td>手机</td>
-                <td><input type="text" id="phone"></td>
+                <td><input type="text" id="phone" name="phone"></td>
             </tr>
             <tr>
                 <td>邮箱</td>
-                <td><input type="text" id="email"></td>
+                <td><input type="text" id="email" name="email"></td>
             </tr>
             <tr>
                 <td>状态</td>
-                <td><input type="text" id="state"></td>
+                <td><input type="text" id="state" name="state"></td>
             </tr>
 
             <tr>
                 <td>所属部门</td>
-                <td><input type="text" id="department"></td>
+                <td><input type="text" id="department" name="department"></td>
             </tr>
             <tr>
                 <td>所属角色</td>
-                <td><input type="text" id="role"></td>
+                <td><input type="text" id="role" name="role"></td>
             </tr>
             <tr>
                 <td>部门名称</td>
-                <td><input type="text" id="departmentName"></td>
+                <td><input type="text" id="departmentName" name="departmentName"></td>
             </tr>
 
             <tr>

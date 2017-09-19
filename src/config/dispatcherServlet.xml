@@ -12,7 +12,14 @@
 
     <!-- 以下为添加，扫描注解，定义的位置 -->
     <context:component-scan base-package="cn.MS.controller"></context:component-scan>
-
+    <!-- 自定义参数绑定类 -->
+	<bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="cn.MS.util.StringToDateConverter"></bean>
+			</list>
+		</property>
+	</bean>
     <!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*" /> <bean
         class="cn.JBlog.interceptor.VisitInterceptor"></bean> </mvc:interceptor>
         </mvc:interceptors> -->
@@ -49,4 +56,49 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
     <!-- 设置资源文件位置，使dispatcherServlet不拦截资源请求 -->
     <mvc:resources location="/resource/" mapping="/resource/**" />
+    
+    <!-- 拦截器 -->
+	<mvc:interceptors>    
+        <mvc:interceptor>    
+            <mvc:mapping path="/**"/>  
+            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 --> 
+            <bean class="cn.MS.interceptor.LoginInterceptor"/>      
+        </mvc:interceptor>  
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/companyPlan_*"/>  
+            <mvc:exclude-mapping path="/companyPlan_select"/>
+            <bean class="cn.MS.interceptor.CompanyPlanInterceptor"/>      
+        </mvc:interceptor> 
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/de_*"/>
+            <mvc:exclude-mapping path="/de_departments"/>
+            <bean class="cn.MS.interceptor.DepartmentInterceptor"/>      
+        </mvc:interceptor>   
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/role_*"/>  
+            <bean class="cn.MS.interceptor.RoleInterceptor"/>      
+        </mvc:interceptor> 
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/user_insertUser"/>
+            <bean class="cn.MS.interceptor.UserInterceptor"/>      
+        </mvc:interceptor> 
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/excel_import"/>
+            <bean class="cn.MS.interceptor.UserInterceptor"/>      
+        </mvc:interceptor> 
+        
+        <mvc:interceptor>    
+            <mvc:mapping path="/webPlan_addWebPlan"/>
+            <mvc:mapping path="/webPlan_updateWebPlan"/>
+            <mvc:mapping path="/webPlanDetail_add"/>
+            <mvc:mapping path="/webPlanDetail_update"/>
+            <bean class="cn.MS.interceptor.UserInterceptor"/>      
+        </mvc:interceptor> 
+    </mvc:interceptors> 
 </beans>

@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.MS.bean.User;
@@ -19,6 +20,7 @@ import cn.MS.dao.VisitDataMapper;
 import cn.MS.service.VisitDataService;
 import cn.MS.util.ExcelUtil;
 
+@Transactional
 @Service("visitDataService")
 public class VisitDataServiceImpl implements VisitDataService {
 	
@@ -50,6 +52,15 @@ public class VisitDataServiceImpl implements VisitDataService {
 			result = "上传失败！";
 		}
 		return result;
+	}
+	
+	@Override
+	public String addVisitData(VisitData visitData) {
+		if(visitDataMapper.addVisitData(visitData) != 0){
+			return "添加成功！";
+		}else{
+			return "添加失败！";
+		}
 	}
 
 	@Override
@@ -102,4 +113,6 @@ public class VisitDataServiceImpl implements VisitDataService {
 		}
 		return ob;
 	}
+
+
 }

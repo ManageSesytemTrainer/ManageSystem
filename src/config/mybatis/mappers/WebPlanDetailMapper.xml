@@ -27,13 +27,13 @@
 		where id = #{id}
 	</update>
 	<select id="getWebPlanDetailById" resultMap="webplandetailMap">
-		select * from web_plan_detail where id = #{id}
+		select * from web_plan_detail where id = #{id} <if test="state != null">and state = 1</if>
 	</select>
 	<select id="getWebPlanDetailByName" resultMap="webplandetailMap">
-		select * from web_plan_detail where name like CONCAT(CONCAT('%', #{name}), '%')
+		select * from web_plan_detail where name like CONCAT(CONCAT('%', #{name}), '%') <if test="state != null">and state = 1</if>
 	</select>
 	<select id="getAllWebPlanDetail" resultMap="webplandetailMap">
-		select * from web_plan_detail
+		select * from web_plan_detail <if test="state != null">and state = 1</if>
 	</select>
 	<select id="getWebPlanDetailByState" resultMap="webplandetailMap">
 		select * from web_plan_detail where state = #{state}

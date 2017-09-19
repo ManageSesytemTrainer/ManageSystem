@@ -13,13 +13,13 @@ public class DepartmentController {
 	@Autowired
 	DepartmentService ds;
 
-	@RequestMapping(value = "/departments", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/de_departments", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getDepatments() {
 		return ds.selectAll();
 	}
 
-	@RequestMapping("/updateDe")
+	@RequestMapping("/de_updateDe")
 	@ResponseBody
 	public String updateDepartment(Department de) {
 		int flag = 0;
@@ -33,7 +33,7 @@ public class DepartmentController {
 		return "wrong";
 	}
 
-	@RequestMapping("/deleteDe")
+	@RequestMapping("/de_deleteDe")
 	@ResponseBody
 	public String deleteDepartment(int id) {
 		int flag = ds.delete(id);
