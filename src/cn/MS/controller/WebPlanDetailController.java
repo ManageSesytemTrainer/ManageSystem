@@ -17,12 +17,15 @@ import cn.MS.service.WebPlanService;
 public class WebPlanDetailController {
 
 	@Autowired
+	@Qualifier("webPlanDetailService")
 	private WebPlanDetailService wpds;
 
 	@Autowired
+	@Qualifier("webPlanService")
 	private WebPlanService wps;
 
 	@Autowired
+	@Qualifier("userService")
 	private UserService us;
 
 	@RequestMapping("/webPlanDetail_add")

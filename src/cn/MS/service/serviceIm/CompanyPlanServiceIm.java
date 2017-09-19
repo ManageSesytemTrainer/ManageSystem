@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.CompanyPlan;
@@ -12,6 +13,7 @@ import cn.MS.dao.CompanyPlanMapper;
 import cn.MS.service.CompanyPlanService;
 
 @Transactional
+@Service("companyPlanService")
 public class CompanyPlanServiceIm implements CompanyPlanService{
 	@Autowired
 	CompanyPlanMapper cd;

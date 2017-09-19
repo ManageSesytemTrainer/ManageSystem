@@ -7,9 +7,9 @@
 	<insert id="addCompanyPlan" parameterType="cn.MS.bean.CompanyPlan">
 		insert into
 		company_plan
-		(plan_name,plan_date_start,plan_data_end,design_date,designer,web_type,season,total_times,person_collettions,remark,user_id,user_department_id,user_role_id)
+		(plan_name,plan_date_start,plan_data_end,design_date,designer,web_type,season,total_times,person_collettions,remark,user_id,state)
 		values
-		(#{planName},#{planDateStart},#{planDateEnd},#{designDate},#{designer},#{webType},#{season},#{personTimes},#{totalTimes},#{personCollections},#{remark},#{user.id},#{department.id},#{role.id})
+		(#{planName},#{planDateStart},#{planDateEnd},#{designDate},#{designer},#{webType},#{season},#{personTimes},#{totalTimes},#{personCollections},#{remark},#{user.id},#{state})
 	</insert>
 	<select id="select" parameterType="cn.MS.bean.CompanyPlan">
 		select * from company_plan
