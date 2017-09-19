@@ -12,17 +12,34 @@ import cn.MS.service.DepartmentService;
 public class DepartmentController {
 	@Autowired
 	DepartmentService ds;
-	
-	@RequestMapping(value="/departments",produces="text/html;charset=UTF-8")
+
+	@RequestMapping(value = "/departments", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String getDepatments(){
+	public String getDepatments() {
 		return ds.selectAll();
 	}
-	@RequestMapping("/update")
+
+	@RequestMapping("/updateDe")
 	@ResponseBody
-	public String updateDepartment(Department de){
-		ds.updateDepartment(de);
-		return "success";
+	public String updateDepartment(Department de) {
+		int flag = 0;
+		if (de.getId() == -1) {
+			flag = ds.addDepartment(de);
+		} else {
+			flag = ds.updateDepartment(de);
+		}
+		if (flag > 0)
+			return "success";
+		return "wrong";
 	}
-	
+
+	@RequestMapping("/deleteDe")
+	@ResponseBody
+	public String deleteDepartment(int id) {
+		int flag = ds.delete(id);
+		if (flag > 0)
+			return "success";
+		else
+			return "wrong";
+	}
 }

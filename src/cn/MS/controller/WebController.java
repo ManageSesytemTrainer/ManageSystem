@@ -24,4 +24,5 @@ public class WebController {
    public String departmentmodify(){
 	   return "departmentmodify";
    }
+   
 }
