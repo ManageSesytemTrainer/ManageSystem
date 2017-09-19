@@ -457,6 +457,17 @@
 														},
 														'-',
 														{
+															text : '修改',
+															iconCls : 'icon-cut',
+															handler : function() {
+																var articleId=-2;
+																window.location
+																.assign('${path}/departmentAdd?id='
+																		+ articleId);
+															}
+														},
+														'-',
+														{
 															text : '删除',
 															iconCls : 'icon-cut',
 															handler : function() {
