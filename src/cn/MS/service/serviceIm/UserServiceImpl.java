@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService{
 		return objectToJson(um.getUserById(id), User.class);
 	}
 	@Override
+	public User getUserObject(String name) {
+		return um.getUserByName(name);
+	}
+	@Override
 	public String getUser(String loginname) {
 		return objectToJson(um.getUserByLoginname(loginname), User.class);
 	}
@@ -124,4 +128,5 @@ public class UserServiceImpl implements UserService{
 		}
 		return ob;
 	}
+
 }
