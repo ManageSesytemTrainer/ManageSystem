@@ -6,11 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.Role;
 import cn.MS.dao.RoleMapper;
 import cn.MS.service.RoleService;
 
+@Transactional
 @Service("roleService")
 public class RoleServiceImpl implements RoleService {
 	@Autowired

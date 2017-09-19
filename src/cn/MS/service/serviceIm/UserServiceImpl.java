@@ -8,12 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.Department;
 import cn.MS.bean.Role;
 import cn.MS.bean.User;
 import cn.MS.dao.UserMapper;
 import cn.MS.service.UserService;
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService{
 	@Autowired

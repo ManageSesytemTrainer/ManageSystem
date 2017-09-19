@@ -6,11 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.MS.bean.Department;
 import cn.MS.dao.DepartmentMapper;
 import cn.MS.service.DepartmentService;
 
+@Transactional
 @Service("DepartmentService")
 public class DepartmentServiceIm implements DepartmentService {
 	@Autowired
