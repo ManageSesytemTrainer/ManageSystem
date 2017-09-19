@@ -25,8 +25,8 @@ public interface UserMapper {
 	 * 查询所有用户，可按需查询相关角色、部门
 	 * @return
 	 */
-	User getUserByName(String name);
 	List<User> getAllUser();
+	User getUserByName(String name);
 	/**
 	 * 查询所有已激活用户，可按需查询相关角色、部门
 	 * @return
