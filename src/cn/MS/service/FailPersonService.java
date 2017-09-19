@@ -19,4 +19,5 @@ public interface FailPersonService {
 	 * @return 返回比较结果list集合，具体保存在CompareResults类中
 	 */
 	List<CompareResults> compare();
+	String getCompareResults();
 }
