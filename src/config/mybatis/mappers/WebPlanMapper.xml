@@ -23,19 +23,28 @@
 			<if test="#{user.id} != null">user_id = #{user.id},</if>
 			<if test="#{state} != null">state = #{state},</if>
 		</set>
-		where id = #{id}
+		 where id = #{id}
 	</update>
 	<select id="getWebPlanById" resultMap="webplanMap">
 		select * from web_plan where id = #{id}
+		<if test="state != null">
+			and state = #{state}
+		</if>
 	</select>
 	<select id="getWebPlanByName" resultMap="webplanMap">
 		select * from web_plan where plan_name like CONCAT(CONCAT('%', #{name}), '%')
+		<if test="state != null">
+			and state = #{state}
+		</if>
 	</select>
 	<select id="getAllWebPlan" resultMap="webplanMap">
 		select * from web_plan
 	</select>
 	<select id="getWebPlanByDesigner" resultMap="webplanMap">
 		select * from web_plan where designer = #{designer}
+		<if test="state != null">
+			and state = #{state}
+		</if>
 	</select>
 	<select id="getWebPlanByState" resultMap="webplanMap">
 		select * from web_plan where state = #{state}

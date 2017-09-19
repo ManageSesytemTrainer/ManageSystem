@@ -30,8 +30,8 @@ public class WebPlanDetailController {
 
 	@RequestMapping("/webPlanDetail_add")
 	@ResponseBody
-	public String add(int webPlan_id, WebPlanDetail wpd) throws Exception {
-		WebPlan webPlan = wps.getObjectById(webPlan_id);
+	public String add(int webPlan_id, WebPlanDetail wpd, int state) throws Exception {
+		WebPlan webPlan = wps.getObjectById(webPlan_id, state);
 		if (webPlan == null) {
 			return "所属网点计划不存在！";
 		}
