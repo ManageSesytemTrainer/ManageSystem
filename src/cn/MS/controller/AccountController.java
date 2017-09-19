@@ -26,6 +26,7 @@ public class AccountController {
 			return "wrong";
 		else{
 			HttpSession session=request.getSession();
+			session.setAttribute("user", fuser);
 			session.setAttribute("userid", fuser.getId());
 			session.setAttribute("jobNumber", fuser.getJobNumber());
 			session.setAttribute("name", fuser.getName());
@@ -36,6 +37,7 @@ public class AccountController {
 			session.setAttribute("email", fuser.getEmail());
 			session.setAttribute("role_limit", fuser.getRole().getRoleLimit());
 			session.setAttribute("department", fuser.getDepartmentName());
+			session.setAttribute("role_id", fuser.getRole().getId());
 		}
 		return "success";
 	}

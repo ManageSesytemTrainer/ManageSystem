@@ -51,6 +51,15 @@ public class VisitDataServiceImpl implements VisitDataService {
 		}
 		return result;
 	}
+	
+	@Override
+	public String addVisitData(VisitData visitData) {
+		if(visitDataMapper.addVisitData(visitData) != 0){
+			return "添加成功！";
+		}else{
+			return "添加失败！";
+		}
+	}
 
 	@Override
 	public String getByUsername(String username) {
@@ -102,4 +111,6 @@ public class VisitDataServiceImpl implements VisitDataService {
 		}
 		return ob;
 	}
+
+
 }
