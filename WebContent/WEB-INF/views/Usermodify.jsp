@@ -23,7 +23,7 @@
 </head>
 <body>
 <fieldset style="width: 37%;height: 50%;margin: 0 auto;">
-    <legend>部门信息修改</legend>
+    <legend>用户信息修改</legend>
     <form id="myform" name="myform" method="get" action="${path}/update" enctype="multipart/form-data">
         <table>
             <tr>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td>工号</td>
-                <td><input type="text" id="serial"></td>
+                <td><input type="text" id="serial" ></td>
             </tr>
             <tr>
                 <td>姓名</td>

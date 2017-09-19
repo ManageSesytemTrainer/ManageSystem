@@ -32,8 +32,8 @@
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script type="text/javascript"
 	src="${path}/resource/js/jquery-1.11.3.js"></script>
-<script type="text/javascript"
-	src="${path}/resource/js/departmentAjax.js"></script>
+<%-- <script type="text/javascript"
+	src="${path}/resource/js/departmentAjax.js"></script> --%>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="${path}/resource/js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -71,6 +71,11 @@
 				<h4 style="color: #69a6ff; float: right; margin-right: 20px;">欢迎您...</h4>
 			</div>
 		</div>
+		<div class=" col-md-1" id="tui">
+			<a href="${path}/login" style="text-align: center; color: #69a6ff">
+				退出<span class="glyphicon glyphicon-log-out"></span>
+			</a>
+		</div>
 	</div>
 
 	<!-- 主体-->
@@ -83,11 +88,20 @@
 					<!--标签-->
 					<ul class="nav nav-pills" id="menu">
 						<li role="presentation" class="active"><a href="#">首页</a></li>
-						<li role="presentation"><a href="#">走访计划</a></li>
+						<li role="presentation"><a id="dLabel" href="#"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> 走访计划 <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" aria-labelledby="dLabel">
+								<li><a href="#">县公司计划</a></li>
+								<li><a href="#">网点计划</a></li>
+								<li><a href="#">网点计划明细</a></li>
+							</ul></li>
 						<li role="presentation"><a href="#">走访信息</a></li>
 						<li role="presentation"><a href="#">统计信息</a></li>
 						<li role="presentation"><a href="#">用户信息</a></li>
 						<li role="presentation"><a href="#">部门信息</a></li>
+						<li role="presentation"><a href="#">角色信息</a></li>
 					</ul>
 				</div>
 
@@ -112,48 +126,49 @@
 								class="list-group-item">Vestibulum at eros</a>
 						</div>
 						<div id="tex1">
-							<div style="float: right;">
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#">添加</button>
-							</div>
-							<table class="table table-bordered">
+							<!-- 计划管理-->
+							<table id="tablePlan" style="margin: 0 auto; padding: 0;">
 								<thead>
 									<tr>
-										<td>编号</td>
-										<td>计划名称</td>
-										<td>开始时间</td>
-										<td>结束时间</td>
-										<td>网店类型</td>
-										<td>编制人姓名</td>
-										<td>所属部门</td>
-										<td>职务</td>
-										<td>操作</td>
+										<th data-options="field:'check'"></th>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'jobNumber',width:100">工号</th>
+										<th data-options="field:'name',width:160,align:'right'">姓名</th>
+										<th data-options="field:'sex',width:160,align:'right'">性别</th>
+										<th data-options="field:'birthday',width:160,align:'right'">生日</th>
+										<th data-options="field:'phone',width:160,align:'right'">电话</th>
+										<th data-options="field:'mobilePhone',width:160,align:'right'">手机</th>
+										<th data-options="field:'email',width:160,align:'right'">邮箱</th>
+										<th data-options="field:'state',width:160,align:'right'">状态</th>
+										<th
+											data-options="field:'department.id',width:160,align:'right'">所在部门</th>
+										<th data-options="field:'role.id',width:160,align:'right'">职务</th>
+										<th
+											data-options="field:'departmentName',width:160,align:'center'">所在部门名称</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncPlan">操作</th>
 									</tr>
 								</thead>
-
 							</table>
 						</div>
 						<div id="tex2">
-							<div style="float: right;">
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#">添加</button>
-							</div>
-							<table class="table table-bordered">
+							<!-- 走访数据管理  -->
+
+							<table id="tableVisit"
+								style="margin: 0 auto; min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
-										<td>编号</td>
-										<td>日期</td>
-										<td>时间</td>
-										<td>地点</td>
-										<td>走访人姓名</td>
-										<td>走访人所属部门</td>
-										<td>所属角色</td>
-										<td>销客账号</td>
-										<td>走访内容</td>
-										<td>走访人</td>
-										<td>所属部门</td>
-										<td>职务</td>
-
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'visitDate',width:100">走访日期</th>
+										<th data-options="field:'visitTime',width:100">走访时间</th>
+										<th data-options="field:'address',width:100">走访地点</th>
+										<th data-options="field:'visitPerson',width:100">走访人姓名</th>
+										<th data-options="field:'departmentName',width:100">走访人所属部门</th>
+										<th data-options="field:'roleName',width:100">所属角色</th>
+										<th data-options="field:'countPerson',width:100">销客账号</th>
+										<th data-options="field:'details',width:100">走访内容</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th>
 									</tr>
 								</thead>
 							</table>
@@ -179,29 +194,8 @@
 							</table>
 						</div>
 						<div id="tex4">
-							<div style="float: right;">
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#myModal">添加</button>
-							</div>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<td>工号</td>
-										<td>姓名</td>
-										<td>性别</td>
-										<td>生日</td>
-										<td>电话</td>
-										<td>手机</td>
-										<td>邮箱</td>
-										<td>状态</td>
-										<td>所属部门</td>
-										<td>所属角色</td>
-										<td>部门名称</td>
-									</tr>
-
-								</thead>
-							</table>
-							<table id="tableUser" style="margin: 0 auto;padding:0;">
+							<!-- 用户管理 -->
+							<table id="tableUser" style="margin: 0 auto; padding: 0;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -214,32 +208,21 @@
 										<th data-options="field:'mobilePhone',width:160,align:'right'">手机</th>
 										<th data-options="field:'email',width:160,align:'right'">邮箱</th>
 										<th data-options="field:'state',width:160,align:'right'">状态</th>
-										<th data-options="field:'department.id',width:160,align:'right'">所在部门</th>
-										<th data-options="field:'role.id',width:160,align:'right'">职务</th>
-										<th data-options="field:'departmentName',width:160,align:'center'">所在部门名称</th>
 										<th
-											data-options="field:'do',width:60,align:'center',formatter:formatfunc">操作</th>
+											data-options="field:'department.id',width:160,align:'right'">所在部门</th>
+										<th data-options="field:'role.id',width:160,align:'right'">职务</th>
+										<th
+											data-options="field:'departmentName',width:160,align:'center'">所在部门名称</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th>
 									</tr>
 								</thead>
 							</table>
 						</div>
 						<div id="tex5">
-							<!-- <div style="float: right;">
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal">添加</button>
-							</div>
-							<table class="table table-bordered" id="tab5">
-								<thead>
-									<tr>
-										<td>编号</td>
-										<td>部门名称</td>
-										<td>联系电话</td>
-										<td>部门状态</td>
-										<td>操作</td>
-									</tr>
-								</thead>
-							</table> -->
-							<table id="tableDe" style="margin: 0 auto;min-height: 360px;padding:0;">
+							<!-- 部门管理 -->
+							<table id="tableDe"
+								style="margin: 0 auto; min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -248,7 +231,26 @@
 										<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
 										<th data-options="field:'state',width:160,align:'center'">状态</th>
 										<th
-											data-options="field:'do',width:60,align:'center',formatter:formatfunc">操作</th>
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div id="tex6">
+						<!-- 角色管理 -->
+						   <table id="tableRole"
+								style="margin: 0 auto; min-height: 360px; padding: 0;">
+								<thead>
+									<tr>
+										<th data-options="field:'check'"></th>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'roleName',width:100">角色名称</th>
+										<th data-options="field:'description',width:160,align:'right'">角色描述</th>
+										<th data-options="field:'state',width:160,align:'center'">状态（是否激活）</th>
+										<th data-options="field:'roleLimit',width:160,align:'center'">角色权限</th>
+										<th data-options="field:'listUser',width:160,align:'center'">包含的用户</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncRole">操作</th>
 									</tr>
 								</thead>
 							</table>
@@ -257,11 +259,7 @@
 				</div>
 			</div>
 		</div>
-		<div class=" col-md-1" id="tui">
-			<a href="${path}/login" style="text-align: center; color: #69a6ff">
-				退出<span class="glyphicon glyphicon-log-out"></span>
-			</a>
-		</div>
+		
 	</div>
 
 
@@ -276,7 +274,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">用户信息上传</h4>
+					<h4 class="modal-title" id="myModalLabel">走访数据上传</h4>
 				</div>
 				<div class="modal-body">
 					<form enctype="multipart/form-data" action="" method="post">
@@ -291,126 +289,219 @@
 	<!-- Columns are always 50% wide, on mobile and desktop -->
 
 	<script type="text/javascript">
-		/* $(function() {
-			$("ul li:last-child").click(
-							function() {
-								$.ajax({
-											type : 'POST',
-											url : '${path}/departments',
-											dataType : "json",
-											success : function(data) {
-												var $table = $("#tab5");
-												for (var i = 0; i < data.total; i++) {
-													var $tr = $('<tr></tr>');
-													var $td1 = $('<td>'
-															+ data.rows[i].id
-															+ '</td>');
-													var $td2 = $('<td>'
-															+ data.rows[i].departmentName
-															+ '</td>');
-													var $td3 = $('<td>'
-															+ data.rows[i].phone
-															+ '</td>');
-													var $td4 = $('<td>'
-															+ data.rows[i].state
-															+ '</td>');
-													var $ap = $('<td><input type="button" class="btn btn-success btn-sm" contenteditable="true" onclick="modifyDe('
-															+ data.rows[i]
-															+ ')" value="修改"><input  type="button" class="btn btn-danger btn-sm" contenteditable="true" onclick="removeDe('
-															+ i
-															+ ')" value="删除"></td>');
+		//走访计划管理
+		$("ul li").eq(1).click(
+						function() {
+							$('#tablePlan')
+									.datagrid(
+											{
 
-													$tr.append($td1).append(
-															$td2).append($td3)
-															.append($td4)
-															.append($ap);
-													$table.append($tr);
-												}
-											}
-										});
-							});
-			//部门信息的修改功能
-			function modifyDe(data) {
-				$("#user").append(data.departmentName);
-				$("#phone").append(data.phone);
-				$("#state").append(data.state);
-			}
-			//    部门信息的删除功能
-			function removeDe(i) {
-				$.ajax({
-					url : '${path}/deleteDe',
-					data : {
-						id : i
-					},
-					type : 'post',
-					success : function(data) {
-						if (data == "success") {
-							alert("删除成功！");
-							var $romovetr = $("#tab5>tr")[i];
-							$removetr.romove();
-						} else {
-							alert("该部门中仍存在员工，请将该部分员工处理完毕后再删除！");
-						}
-					},
-					error : function(data) {
-						alert("出错了：" + data);
-					}
-				})
+												fitColumns : true,
+												width : 820,
+												method : 'post',
+												loadMsg : '正在加载数据中......',
+												pagination : true,
+												toolbar : [
+														{
+															text : '增加',
+															iconCls : 'icon-add',
+															handler : function() {
+																var userId = -1;
+																window.location
+																		.assign('${path}/CompanyplanAdd?id='
+																				+ userId);
+															}
+														},
+														'-',
+														{
+															text : '刷新',
+															iconCls : 'icon-reload',
+															handler : function() {
+																$('#tablePlan')
+																		.datagrid(
+																				'reload');
+															}
+														} ],
+												url : '${path}/',
+												singleSelect : true,
 
-			}
-
-		}); */
-		//用户管理
-		$("ul li").eq(4).click(
-			function(){
-				$('#tableUser').datagrid({
-					fitColumns : true,
-					width : 820,
-					method : 'post',
-					loadMsg : '正在加载数据中......',
-					pagination:true,
-					toolbar : [
-							{
-								text : '增加',
-								iconCls : 'icon-add',
-								handler : function() {
-									var userId = -1;
-									window.location.assign('${path}/usermodify?id='+ userId);
-								}
-							},
-							'-',
-							{
-								text : '刷新',
-								iconCls : 'icon-reload',
-								handler : function() {
-									$('#tableUser').datagrid('reload');
-								}
-							} ],
-					url : '${path}/users',
-					singleSelect : true,
-
-				});
-			}
-		);
-		function formatfunc(value, row, index) {
-			var e = '<a href="#"  onclick="modifyDe('
+											});
+						});
+		function formatfuncPlan(value, row, index) {
+			var e = '<a href="#"  onclick="modifyPlan('
 					+ index
 					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-			var d = '<a href="#"  onclick="deleteDe('
+			var d = '<a href="#"  onclick="deletePlan('
 					+ index
 					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
 			return e + d;
 		}
 
-		function modifyDe(index) {
+		function modifyVisit(index) {
+			$('#tablePlan').datagrid('selectRow', index);
+			var row = $('#tablePlan').datagrid('getSelected');
+			window.location = "${path}/usermodify?id=" + row.id;
+		}
+		function deleteVisit(index) {
+			$('#tablePlan').datagrid('selectRow', index);
+			var row = $('#tablePlan').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.title + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deletePlan',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tablePlan').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tablePlan').datagrid('reload');
+									} else {
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
+					});
+		}
+		//走访数据管理
+		$("ul li").eq(2).click(function() {
+			$('#tableVisit').datagrid({
+
+				fitColumns : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : [ {
+					text : '增加',
+					iconCls : 'icon-add',
+					handler : function() {
+						$('#myModal').modal("show");
+					}
+				}, '-', {
+					text : '刷新',
+					iconCls : 'icon-reload',
+					handler : function() {
+						$('#tableVisit').datagrid('reload');
+					}
+				} ],
+				url : '${path}/',
+				singleSelect : true,
+
+			});
+		});
+		function formatfuncVisit(value, row, index) {
+			var e = '<a href="#"  onclick="modifyVisit('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteVisit('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		}
+
+		function modifyVisit(index) {//修改走访数据信息
+			$('#tableVisit').datagrid('selectRow', index);
+			var row = $('#tableUser').datagrid('getSelected');
+			window.location = "${path}/usermodify?id=" + row.id;
+		}
+		function deleteVisit(index) {//删除走访数据信息
+			$('#tableVisit').datagrid('selectRow', index);
+			var row = $('#tableVisit').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.title + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deleteVisit',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tableUser').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tableUser').datagrid('reload');
+									} else {
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
+					});
+		}
+		//用户管理
+		$("ul li")
+				.eq(4)
+				.click(
+						function() {
+							$('#tableUser')
+									.datagrid(
+											{
+												fitColumns : true,
+												width : 820,
+												method : 'post',
+												loadMsg : '正在加载数据中......',
+												pagination : true,
+												toolbar : [
+														{
+															text : '增加',
+															iconCls : 'icon-add',
+															handler : function() {
+																var userId = -1;
+																window.location
+																		.assign('${path}/usermodify?id='
+																				+ userId);
+															}
+														},
+														'-',
+														{
+															text : '刷新',
+															iconCls : 'icon-reload',
+															handler : function() {
+																$('#tableUser')
+																		.datagrid(
+																				'reload');
+															}
+														} ],
+												url : '${path}/users',
+												singleSelect : true,
+
+											});
+						});
+		function formatfuncUser(value, row, index) {
+			var e = '<a href="#"  onclick="modifyUser('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteUser('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		}
+
+		function modifyUser(index) {
 			$('#tableUser').datagrid('selectRow', index);
 			var row = $('#tableUser').datagrid('getSelected');
 			window.location = "${path}/usermodify?id=" + row.id;
 		}
-		function deleteDe(index) {
+		function deleteUser(index) {
 			$('#tableUser').datagrid('selectRow', index);
 			var row = $('#tableUser').datagrid('getSelected');
-			$.messager.confirm('Confirm', '确认删除' + row.title + '?',
+			$.messager.confirm('Confirm', '确认删除' + row.name + '?',
 					function(r) {
 						if (r) {
 							$.ajax({
@@ -425,25 +516,31 @@
 										$.messager.alert('提示', '删除成功', 'info');
 										$('#tableUser').datagrid('reload');
 									} else {
-										$.messager.alert('提示','删除失败,请稍后重试','info')
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
 									}
 								},
 								error : function() {
-									$.messager.alert('提示', 'Something Wrong','error');
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
 								}
 							});
 						}
 					});
 		}
 		//部门管理
-		$("ul li:last-child").click(
+		$("ul li")
+				.eq(5)
+				.click(
 						function() {
-							$('#tableDe').datagrid({
+							$('#tableDe')
+									.datagrid(
+											{
 												fitColumns : true,
 												width : 820,
 												method : 'post',
 												loadMsg : '正在加载数据中......',
-												pagination:true,
+												pagination : true,
 												toolbar : [
 														{
 															text : '增加',
@@ -460,10 +557,10 @@
 															text : '修改',
 															iconCls : 'icon-cut',
 															handler : function() {
-																var articleId=-2;
+																var articleId = -2;
 																window.location
-																.assign('${path}/departmentAdd?id='
-																		+ articleId);
+																		.assign('${path}/departmentAdd?id='
+																				+ articleId);
 															}
 														},
 														'-',
@@ -490,7 +587,7 @@
 											})
 						});
 
-		function formatfunc(value, row, index) {
+		function formatfuncDe(value, row, index) {
 			var e = '<a href="#"  onclick="modifyDe('
 					+ index
 					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
@@ -503,7 +600,7 @@
 		function modifyDe(index) {
 			$('#tableDe').datagrid('selectRow', index);
 			var row = $('#tableDe').datagrid('getSelected');
-			window.location = "${path}/departmentmodify?departmentId=" + row.id;
+			window.location = "${path}/departmentmodify?id=" + row.id;
 		}
 		function deleteDe(index) {
 			$('#tableDe').datagrid('selectRow', index);
@@ -531,6 +628,88 @@
 								error : function() {
 									$.messager.alert('提示', 'Something Wrong',
 											'error');
+								}
+							});
+						}
+					});
+		}
+		//角色管理
+		$("ul li")
+				.eq(6)
+				.click(
+						function() {
+							$('#tableRole')
+									.datagrid(
+											{
+												fitColumns : true,
+												width : 820,
+												method : 'post',
+												loadMsg : '正在加载数据中......',
+												pagination : true,
+												toolbar : [
+														{
+															text : '增加',
+															iconCls : 'icon-add',
+															handler : function() {
+																var roleId = -1;
+																window.location
+																		.assign('${path}/departmentmodify?id='
+																				+ roleId);
+															}
+														},
+														{
+															text : '刷新',
+															iconCls : 'icon-reload',
+															handler : function() {
+																$('#tableRole').datagrid('reload');
+															}
+														} ],
+												url : '${path}/',
+												singleSelect : true,
+
+											})
+						});
+
+		function formatfuncRole(value, row, index) {
+			var e = '<a href="#"  onclick="modifyRole('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteRole('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		}
+
+		function modifyRole(index) {
+			$('#tableRole').datagrid('selectRow', index);
+			var row = $('#tableRole').datagrid('getSelected');
+			window.location = "${path}/departmentmodify?id=" + row.id;
+		}
+		function deleteRole(index) {
+			$('#tableRole').datagrid('selectRow', index);
+			var row = $('#tableRole').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.roleName + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deleteDe',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tableRole').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tableRole').datagrid('reload');
+									} else {
+										$.messager.alert('提示',
+												'删除失败,该角色暂时无法删除！请稍后重试',
+												'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong','error');
 								}
 							});
 						}

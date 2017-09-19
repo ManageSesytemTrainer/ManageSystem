@@ -58,9 +58,9 @@ input {
 	</fieldset>
 </body>
 <script type="text/javascript">
-  var id=getParameterByName("departmentId");
+  var id=getParameterByName("id");
   console.info(id);
-  $('#id').val=id;
+  document.getElementById("id").value=id;
   if(id>-1){
 	  $.ajax({
 		 url:'${path}/departments',

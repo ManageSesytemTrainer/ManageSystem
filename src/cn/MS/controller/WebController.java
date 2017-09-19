@@ -25,11 +25,8 @@ public class WebController {
 	   return "departmentmodify";
    }
 
-   @RequestMapping("/departmentAdd")
-   public String departmentAdd(){
-	   return "departmentAdd";
-   }
-   @RequestMapping("/Usermodify")
+  
+   @RequestMapping("/usermodify")
    public String Usermodify(){
 	   return "Usermodify";
    }

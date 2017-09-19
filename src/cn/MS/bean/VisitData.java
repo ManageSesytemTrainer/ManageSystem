@@ -13,7 +13,7 @@ public class VisitData {
 	String address;  //走访地点
 	String visitPerson;  //走访人姓名
 	String departmentName;  //走访人所属部门名称
-	String releName;  //所属角色（职务）名称
+	String roleName;  //所属角色（职务）名称
 	String countPerson;  //纵享销客账号
 	String details;  //走访内容
 	User user;  //走访人
@@ -54,10 +54,10 @@ public class VisitData {
 		this.departmentName = departmentName;
 	}
 	public String getReleName() {
-		return releName;
+		return roleName;
 	}
 	public void setReleName(String releName) {
-		this.releName = releName;
+		this.roleName = releName;
 	}
 	public String getCountPerson() {
 		return countPerson;
