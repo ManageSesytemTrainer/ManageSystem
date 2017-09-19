@@ -94,6 +94,6 @@ public class UserController {
 		String role = us.getRoleByUserId(id);
 		if(null == role)
 			return "ERROR";
-		return "SUCCESS";
+		return role;
 	}
 }

@@ -12,7 +12,14 @@
 
     <!-- 以下为添加，扫描注解，定义的位置 -->
     <context:component-scan base-package="cn.MS.controller"></context:component-scan>
-
+    <!-- 自定义参数绑定类 -->
+	<bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="cn.MS.util.StringToDateConverter"></bean>
+			</list>
+		</property>
+	</bean>
     <!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*" /> <bean
         class="cn.JBlog.interceptor.VisitInterceptor"></bean> </mvc:interceptor>
         </mvc:interceptors> -->
