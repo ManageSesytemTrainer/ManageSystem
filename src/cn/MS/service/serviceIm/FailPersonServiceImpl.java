@@ -55,7 +55,7 @@ public class FailPersonServiceImpl implements FailPersonService{
 		List<CompareResults> list = compare();
 		FailPerson fp = new FailPerson();
 		for(CompareResults cr : list) {
-			if(cr.getResult() == "不合格") {
+			if(cr.getResult().equals("不合格")) {
 				fp.setFaildate(cr.getDate());
 				fp.setDescription(cr.getName());
 				fp.setUser(um.getUserByName(cr.getName()));
