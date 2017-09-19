@@ -29,43 +29,43 @@
             </tr>
             <tr>
                 <td>员工姓名</td>
-                <td><input type="text" id="serial"></td>
+                <td><input type="text" id="serial" name="name"></td>
             </tr>
             <tr>
                 <td>所属部门名称</td>
-                <td><input type="text" id="name"></td>
+                <td><input type="text" id="name" name="departmentName"></td>
             </tr>
             <tr>
                 <td>职务名称</td>
-                <td><input type="text" id="sex"></td>
+                <td><input type="text" id="sex" name="duty"></td>
             </tr>
             <tr>
                 <td>走访日期</td>
-                <td><input type="text" id="birthday"></td>
+                <td><input type="text" id="birthday" name="visitDate"></td>
             </tr>
             <tr>
                 <td>走访时间</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="visitTime"></td>
             </tr>
             <tr>
                 <td>走访地点</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="visitAddress"></td>
             </tr>
             <tr>
                 <td>搜集信息数</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="collection"></td>
             </tr>
             <tr>
                 <td>备注</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="remark"></td>
             </tr>
             <tr>
                 <td>网点计划</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="webPlan"></td>
             </tr>
             <tr>
                 <td>员工</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="user"></td>
             </tr>
             <tr>
                 <td></td>

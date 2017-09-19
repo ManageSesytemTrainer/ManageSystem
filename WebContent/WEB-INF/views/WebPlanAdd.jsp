@@ -29,23 +29,27 @@
             </tr>
             <tr>
                 <td>计划名称</td>
-                <td><input type="text" id="serial"></td>
+                <td><input type="text" id="serial" name="planName"></td>
             </tr>
             <tr>
                 <td>计划开始时间</td>
-                <td><input type="text" id="name"></td>
+                <td><input type="text" id="name" name="planDateStart"></td>
             </tr>
             <tr>
                 <td>计划结束时间</td>
-                <td><input type="text" id="sex"></td>
+                <td><input type="text" id="sex" name="planDateEnd"></td>
+            </tr>
+            <tr>
+                <td>计划编制日期</td>
+                <td><input type="text" id="sex" name="designDate"></td>
             </tr>
             <tr>
                 <td>网点类型</td>
-                <td><input type="text" id="birthday"></td>
+                <td><input type="text" id="birthday" name="webType"></td>
             </tr>
             <tr>
                 <td>编制人姓名</td>
-                <td><input type="text" id="mobile"></td>
+                <td><input type="text" id="mobile" name="designer"></td>
             </tr>
             <tr>
                 <td></td>

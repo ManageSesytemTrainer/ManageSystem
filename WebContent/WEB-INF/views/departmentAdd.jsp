@@ -26,20 +26,20 @@
     <form id="myform" name="myform" method="get" action="${path}/update" enctype="multipart/form-data">
         <table>
             <tr>
-                <td><input type="hidden" id="id" name="id" value="-2"></td>
+                <td><input type="hidden" id="id" name="id"></td>
             </tr>
             <tr>
             <tr>
                 <td>部门名称</td>
-                <td><input type="text" id="user"></td>
+                <td><input type="text" id="user" name="departmentName"></td>
             </tr>
             <tr>
                 <td>联系电话</td>
-                <td><input type="text" id="phone"></td>
+                <td><input type="text" id="phone" name="phone"></td>
             </tr>
             <tr>
                 <td>部门状态</td>
-                <td><input type="text" id="state"></td>
+                <td><input type="text" id="state" name="state"></td>
             </tr>
             <tr>
                 <td></td>
