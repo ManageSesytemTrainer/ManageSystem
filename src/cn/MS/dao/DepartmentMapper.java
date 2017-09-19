@@ -11,6 +11,6 @@ import cn.MS.bean.Department;
 public interface DepartmentMapper {
 	int addDepartment(Department de);
 	List<Department> selectAll();
-	int deleteDepartment(Department de);
+	int deleteDepartment(int id);
 	int updateDepartment(Department de);
 }

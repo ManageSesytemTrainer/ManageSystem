@@ -4,7 +4,7 @@ import cn.MS.bean.Department;
 
 public interface DepartmentService {
 	int addDepartment(Department de);
-	int delete(Department de);
+	int delete(int id);
 	String selectAll();
 	int updateDepartment(Department de);
 }

@@ -51,6 +51,9 @@ public class WebPlanDetailController {
 	@RequestMapping("/webPlanDetail_update")
 	@ResponseBody
 	public String update(WebPlanDetail wpd) throws Exception {
+		if(wpds.getObjectById(wpd.getId()).getState() == 1){
+			return "计划已经发布！不允许修改！";
+		}
 		int count = 0;
 		if (wpd.getName() == null) {
 			count = wpds.add(wpd);
@@ -82,7 +85,7 @@ public class WebPlanDetailController {
 		return wpds.getAll();
 	}
 
-	@RequestMapping("/webPlanDetail_getAll")
+	@RequestMapping("/webPlanDetail_getByName")
 	@ResponseBody
 	public String getByName(String name) throws Exception {
 		return wpds.getByName(name);
@@ -94,7 +97,7 @@ public class WebPlanDetailController {
 		return wpds.getReleased();
 	}
 
-	@RequestMapping
+	@RequestMapping("/webPlanDetail_getDraft")
 	@ResponseBody
 	public String getDraft() throws Exception {
 		return wpds.getDraft();
