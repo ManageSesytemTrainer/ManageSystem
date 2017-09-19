@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	private UserService us;
 	
-	@RequestMapping("/queryActiveUser")
+	@RequestMapping("/user_queryActiveUser")
 	@ResponseBody
 	public String queryActiveUser() {
 		String users = us.getActiveUser();
@@ -26,7 +26,7 @@ public class UserController {
 		}
 		return users;
 	}
-	@RequestMapping("/queryWriteoffUser")
+	@RequestMapping("/user_queryWriteoffUser")
 	@ResponseBody
 	public String queryWriteoffUser() {
 		String users = us.getWriteoffUser();
@@ -34,7 +34,7 @@ public class UserController {
 			return "ERROR";
 		return users;
 	}
-	@RequestMapping("/queryAllUser")
+	@RequestMapping("/user_queryAllUser")
 	@ResponseBody
 	public String queryAllUser() {
 		String users = us.getAllUser();
@@ -42,7 +42,7 @@ public class UserController {
 			return "ERROR";
 		return users;
 	}
-	@RequestMapping("/queryUser")
+	@RequestMapping("/user_queryUser")
 	@ResponseBody
 	public String queryUser(int id) {
 		String user = us.getUser(id);
@@ -50,21 +50,21 @@ public class UserController {
 			return "ERROR";
 		return user;
 	}
-	@RequestMapping("/updateUser")
+	@RequestMapping("/user_updateUser")
 	@ResponseBody
 	public String updateUser(User u) {
 		if(us.modifyUser(u) <= 0)
 			return "ERROR";
 		return "SUCCESS";
 	}
-	@RequestMapping("/insertUser")
+	@RequestMapping("/user_insertUser")
 	@ResponseBody
 	public String insertUser(User u) {
 		if(0 <= us.addUser(u))
 			return "ERROR";
 		return "SUCCESS";
 	}
-	@RequestMapping("/queryUsersByDepartmentId")
+	@RequestMapping("/user_queryUsersByDepartmentId")
 	@ResponseBody
 	public String queryUsersByDepartmentId(int id) {
 		String users = us.getUsersByDepartmentId(id);
@@ -72,7 +72,7 @@ public class UserController {
 			return "ERROR";
 		return users;
 	}
-	@RequestMapping("/queryUsersByRoleId")
+	@RequestMapping("/user_queryUsersByRoleId")
 	@ResponseBody	
 	public String queryUsersByRoleId(int id) {
 		String users = us.getUsersByRoleId(id);
@@ -80,7 +80,7 @@ public class UserController {
 			return "ERROR";
 		return users;
 	}
-	@RequestMapping("/queryDepartmentByUserId")
+	@RequestMapping("/user_queryDepartmentByUserId")
 	@ResponseBody
 	public String queryDepartmentByUserId(int id) {
 		String dep = us.getDepartmentByUserId(id);
@@ -88,7 +88,7 @@ public class UserController {
 			return "ERROR";
 		return dep;
 	}
-	@RequestMapping("/queryRoleByUserId")
+	@RequestMapping("/user_queryRoleByUserId")
 	@ResponseBody
 	public String queryRoleByUserId(int id) {
 		String role = us.getRoleByUserId(id);

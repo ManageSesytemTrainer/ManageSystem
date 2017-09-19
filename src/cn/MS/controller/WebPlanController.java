@@ -12,13 +12,13 @@ public class WebPlanController {
 	@Autowired
 	private WebPlanService wps;
 	
-	@RequestMapping("/addWebPlan")
+	@RequestMapping("/webPlan_addWebPlan")
 	public String addWebPlan(WebPlan wp) {
 		if(0 >= wps.add(wp))
 			return "ERROR";
 		return "SUCCESS";
 	}
-	@RequestMapping("/updateWebPlan")
+	@RequestMapping("/webPlan_updateWebPlan")
 	public String updateWebPlan(WebPlan wp) {
 		if(0 >= wps.update(wp))
 			return "ERROR";
