@@ -163,7 +163,7 @@ public class ExcelUtil {
 							}
 						} else if (c == 5) { // 职务
 							if (cellType == HSSFCell.CELL_TYPE_STRING) {
-								visitData.setReleName(cell.getStringCellValue().toString());
+								visitData.setRoleName(cell.getStringCellValue().toString());
 							}
 						} else if (c == 6) { // 纵享销客
 							if (cellType == HSSFCell.CELL_TYPE_NUMERIC) {

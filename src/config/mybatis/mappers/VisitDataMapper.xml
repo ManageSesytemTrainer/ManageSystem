@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.MS.dao.VisitDataMapper">
   <insert id="addVisitData" parameterType="cn.MS.bean.VisitData">
-      insert into visit_data (visit_date,visit_time,address,visit_person,department_name,role_name,count_person,details,user_id) values (#{visitDate},#{visitTime},#{address},#{visitPerson},#{departmentName},#{releName},#{countPerson},#{details},#{user.id})
+      insert into visit_data (visit_date,visit_time,address,visit_person,department_name,role_name,count_person,details,user_id) values (#{visitDate},#{visitTime},#{address},#{visitPerson},#{departmentName},#{roleName},#{countPerson},#{details},#{user.id})
   </insert>
   <select id="getVisitDataByVisitPerson" resultMap="vpMap">
   	select *from visit_data where visit_person = #{visitPerson}
@@ -20,7 +20,7 @@
   	<result property="visitTime" column="visit_time"/>
   	<result property="visitPerson" column="visit_person"/>
   	<result property="departmentName" column="department_name"/>
-  	<result property="releName" column="role_name"/>
+  	<result property="roleName" column="role_name"/>
   	<result property="countPerson" column="count_person"/>
   </resultMap>
 </mapper>

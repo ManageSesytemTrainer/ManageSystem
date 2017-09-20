@@ -47,7 +47,7 @@ public class VisitDataController {
 		HttpSession session = request.getSession();
 		visitData.setVisitPerson((String)session.getAttribute("name"));
 		visitData.setDepartmentName((String) session.getAttribute("department"));
-		visitData.setReleName(roleService.selectRoleById((Integer) session.getAttribute("role_id")).getRoleName());
+		visitData.setRoleName(roleService.selectRoleById((Integer) session.getAttribute("role_id")).getRoleName());
 		visitData.setUser((User)session.getAttribute("user"));
 		
 		return visitDataService.addVisitData(visitData);

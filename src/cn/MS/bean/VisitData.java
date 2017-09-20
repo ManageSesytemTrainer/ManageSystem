@@ -53,11 +53,11 @@ public class VisitData {
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
-	public String getReleName() {
+	public String getRoleName() {
 		return roleName;
 	}
-	public void setReleName(String releName) {
-		this.roleName = releName;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 	public String getCountPerson() {
 		return countPerson;
