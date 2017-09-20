@@ -22,7 +22,7 @@ public class RoleController {
 	@Qualifier("userService")
 	private UserService userService;
 
-	@RequestMapping("/role_addRole")
+/*	@RequestMapping("/role_addRole")
 	@ResponseBody
 	public String addRole(Role role) throws Exception {
 		if (roleService.selectRoleByName(role.getRoleName()) != null) {
@@ -31,7 +31,7 @@ public class RoleController {
 			roleService.addRole(role);
 			return "SUCCESS";
 		}
-	}
+	}*/
 
 	@RequestMapping("/role_deleteRole")
 	@ResponseBody
@@ -45,10 +45,31 @@ public class RoleController {
 	@RequestMapping("/role_updateRole")
 	@ResponseBody
 	public String updateRole(Role role) throws Exception {
-		if (roleService.updateRole(role) != 0) {
-			return "SUCCESS";
+		if(role.getId() == -1){
+			if (roleService.selectRoleByName(role.getRoleName()) != null) {
+				return "User is already exists !!!";
+			} else {
+				roleService.addRole(role);
+				return "SUCCESS";
+			}
+		}else{
+			if (roleService.updateRole(role) != 0) {
+				return "SUCCESS";
+			}
+			return "FAIL";
 		}
-		return "FAIL";
+	}
+	
+	@RequestMapping("/role_select")
+	@ResponseBody
+	public String select(Integer state,String roleName) throws Exception {
+		if(state != null){
+			return roleService.selectAllActiveRole();
+		}else if(roleName != null){
+			return roleService.selectRoleByName(roleName);
+		}else{
+			return roleService.selectAll();
+		}
 	}
 
 	@RequestMapping("/role_selectAll")

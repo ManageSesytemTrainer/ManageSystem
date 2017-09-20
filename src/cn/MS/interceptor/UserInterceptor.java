@@ -29,6 +29,9 @@ public class UserInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle) throws Exception {
 		// TODO Auto-generated method stub
+		if(Integer.parseInt(request.getParameter("id")) != -1){
+			return true;
+		}
 		int role_limit =(int) request.getSession().getAttribute("role_limit");
 		if(role_limit != PowerConstants.SYSTEM_MANAGER){
 			response.setContentType("text/html; charset=utf-8");

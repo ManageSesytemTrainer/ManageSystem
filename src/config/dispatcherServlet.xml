@@ -84,7 +84,7 @@
         </mvc:interceptor> 
         
         <mvc:interceptor>    
-            <mvc:mapping path="/user_insertUser"/>
+            <mvc:mapping path="/user_updateUser"/>
             <bean class="cn.MS.interceptor.UserInterceptor"/>      
         </mvc:interceptor> 
         
@@ -94,10 +94,8 @@
         </mvc:interceptor> 
         
         <mvc:interceptor>    
-            <mvc:mapping path="/webPlan_addWebPlan"/>
             <mvc:mapping path="/webPlan_updateWebPlan"/>
             <mvc:mapping path="/webPlanDetail_add"/>
-            <mvc:mapping path="/webPlanDetail_update"/>
             <bean class="cn.MS.interceptor.WebPlanInterceptor"/>      
         </mvc:interceptor> 
     </mvc:interceptors> 

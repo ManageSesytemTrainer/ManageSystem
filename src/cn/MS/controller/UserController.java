@@ -17,6 +17,46 @@ public class UserController {
 	@Autowired
 	private UserService us;
 	
+	@RequestMapping("/user_query")
+	@ResponseBody
+	public String query(Integer state,Integer userId,Integer departmentId,Integer roleId) {
+		if(state != null){
+			if(state == 1){
+				String users = us.getActiveUser();
+				if(users == null) {
+					return "ERROR";
+				}
+				return users;
+			}else if(state == 0){
+				String users = us.getWriteoffUser();
+				if(null == users)
+					return "ERROR";
+				return users;
+			}else{
+				return null;
+			}
+		}else if(userId != null){
+			String user = us.getUser(userId);
+			if(null == user)
+				return "ERROR";
+			return user;
+		}else if(departmentId != null){
+			String users = us.getUsersByDepartmentId(departmentId);
+			if(null == users)
+				return "ERROR";
+			return users;
+		}else if(roleId != null){
+			String users = us.getUsersByRoleId(roleId);
+			if(null == users)
+				return "ERROR";
+			return users;
+		}else{
+			String users = us.getAllUser();
+			if(null == users)
+				return "ERROR";
+			return users;
+		}
+	}
 	@RequestMapping("/user_queryActiveUser")
 	@ResponseBody
 	public String queryActiveUser() {
@@ -53,17 +93,23 @@ public class UserController {
 	@RequestMapping("/user_updateUser")
 	@ResponseBody
 	public String updateUser(User u) {
-		if(us.modifyUser(u) <= 0)
-			return "ERROR";
-		return "SUCCESS";
+		if(u.getId() == -1){
+			if(0 <= us.addUser(u))
+				return "ERROR";
+			return "SUCCESS";
+		}else{
+			if(us.modifyUser(u) <= 0)
+				return "ERROR";
+			return "SUCCESS";
+		}
 	}
-	@RequestMapping("/user_insertUser")
+	/*@RequestMapping("/user_insertUser")
 	@ResponseBody
 	public String insertUser(User u) {
 		if(0 <= us.addUser(u))
 			return "ERROR";
 		return "SUCCESS";
-	}
+	}*/
 	@RequestMapping("/user_queryUsersByDepartmentId")
 	@ResponseBody
 	public String queryUsersByDepartmentId(int id) {
