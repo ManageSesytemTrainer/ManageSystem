@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +24,9 @@ import cn.MS.service.VisitDataService;
 public class VisitDataController {
 	
 	@Autowired
-	@Qualifier("visitDataService")
 	private VisitDataService visitDataService;
 	
 	@Autowired
-	@Qualifier("roleService")
 	private RoleService roleService;
 	
 	@RequestMapping(value="/excel_import",method = RequestMethod.POST)
