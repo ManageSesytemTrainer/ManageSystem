@@ -12,6 +12,9 @@
   <select id="getVisitDataByVisitDate" resultMap="vpMap">
   	select *from visit_data where visit_date = #{date}
   </select>
+  <select id="getAllVisitData" resultMap="vpMap">
+  	select *from visit_data
+  </select>
   <resultMap type="cn.MS.bean.VisitData" id="vpMap">
   	<result property="visitDate" column="visit_date"/>
   	<result property="visitTime" column="visit_time"/>

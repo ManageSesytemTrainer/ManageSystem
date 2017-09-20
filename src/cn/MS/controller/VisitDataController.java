@@ -52,6 +52,27 @@ public class VisitDataController {
 		
 		return visitDataService.addVisitData(visitData);
 	}
+	
+	@RequestMapping("/queryVisitData")
+	@ResponseBody
+	public String queryVisitData(String username,Date date) throws Exception{
+		if(username != null){
+			String vd = visitDataService.getByUsername(username);
+			if(null == vd)
+				return "ERROR";
+			return vd;
+		}else if(date != null){
+			String vd = visitDataService.getByDate(date);
+			if(null == vd)
+				return "ERROR";
+			return vd;
+		}else{
+			String vd = visitDataService.getAll();
+			if(null == vd)
+				return "还没有数据";
+			return vd;
+		}
+	}
 	@RequestMapping("/queryVisitDataByUsername")
 	@ResponseBody
 	public String queryRoleByUsername(String username) {
@@ -66,6 +87,14 @@ public class VisitDataController {
 		String vd = visitDataService.getByDate(date);
 		if(null == vd)
 			return "ERROR";
+		return vd;
+	}
+	@RequestMapping("/queryAllVisitData")
+	@ResponseBody
+	public String queryAllVisitData() {
+		String vd = visitDataService.getAll();
+		if(null == vd)
+			return "还没有数据";
 		return vd;
 	}
 

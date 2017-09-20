@@ -31,25 +31,48 @@ public class WebPlanDetailController {
 	@RequestMapping("/webPlanDetail_add")
 	@ResponseBody
 	public String add(int webPlan_id, WebPlanDetail wpd, int state) throws Exception {
-		WebPlan webPlan = wps.getObjectById(webPlan_id, state);
-		if (webPlan == null) {
-			return "所属网点计划不存在！";
-		}
-		User user = us.getUserObject(wpd.getName());
-		if (user == null) {
-			return "所属用户不存在";
-		}
-		wpd.setWebPlan(webPlan);
-		wpd.setUser(user);
-		wpd.setState(0);
-		if (wpds.add(wpd) != 0) {
-			return "添加成功！";
-		} else {
-			return "添加失败！";
+		if(wpd.getId() == -1){
+			WebPlan webPlan = wps.getObjectById(webPlan_id, state);
+			if (webPlan == null) {
+				return "所属网点计划不存在！";
+			}
+			User user = us.getUserObject(wpd.getName());
+			if (user == null) {
+				return "所属用户不存在";
+			}
+			wpd.setWebPlan(webPlan);
+			wpd.setUser(user);
+			wpd.setState(0);
+			if (wpds.add(wpd) != 0) {
+				return "添加成功！";
+			} else {
+				return "添加失败！";
+			}
+		}else{
+			if(wpds.getObjectById(wpd.getId()).getState() == 1){
+				return "计划已经发布！不允许修改！";
+			}
+			int count = 0;
+			if (wpd.getName() == null) {
+				count = wpds.add(wpd);
+			} else {
+				User user = us.getUserObject(wpd.getName());
+				if (user == null) {
+					return "所属用户不存在！";
+				} else {
+					wpd.setUser(user);
+					count = wpds.add(wpd);
+				}
+			}
+			if (count != 0) {
+				return "更新成功！";
+			} else {
+				return "更新失败！";
+			}
 		}
 	}
 
-	@RequestMapping("/webPlanDetail_update")
+	/*@RequestMapping("/webPlanDetail_update")
 	@ResponseBody
 	public String update(WebPlanDetail wpd) throws Exception {
 		if(wpds.getObjectById(wpd.getId()).getState() == 1){
@@ -72,8 +95,24 @@ public class WebPlanDetailController {
 		} else {
 			return "更新失败！";
 		}
+	}*/
+	
+	@RequestMapping("/webPlanDetail_get")
+	@ResponseBody
+	public String get(Integer id,String name,int state) throws Exception{
+		if(id != null){
+			return wpds.getById(id,state);
+		}else if(name != null){
+			return wpds.getByName(name,state);
+		}else if(state == 1){
+			return wpds.getReleased();
+		}else if(state == 0){
+			return wpds.getDraft();
+		}else{
+			return wpds.getAll(state);
+		}
 	}
-
+	
 	@RequestMapping("/webPlanDetail_getById")
 	@ResponseBody
 	public String getById(int id,int state) throws Exception {
