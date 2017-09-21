@@ -10,6 +10,8 @@ public interface WebPlanDetailMapper {
 	int updateWebPlanDetail(WebPlanDetail wpd);
 
 	WebPlanDetail getWebPlanDetailById(int id,int state);
+	
+	WebPlanDetail getWebPlanDetailByWebPlanId(int webPlan_id,int state);
 
 	List<WebPlanDetail> getAllWebPlanDetail(int state);
 

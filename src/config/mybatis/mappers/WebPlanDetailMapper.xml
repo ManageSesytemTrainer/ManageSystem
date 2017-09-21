@@ -29,6 +29,9 @@
 	<select id="getWebPlanDetailById" resultMap="webplandetailMap">
 		select * from web_plan_detail where id = #{id} <if test="state != null">and state = 1</if>
 	</select>
+	<select id="getWebPlanDetailByWebPlanId" resultMap="webplandetailMap">
+		select * from web_plan_detail where web_plan_id = #{webPlan_id} <if test="state != null">and state = 1</if>
+	</select>
 	<select id="getWebPlanDetailByName" resultMap="webplandetailMap">
 		select * from web_plan_detail where name like CONCAT(CONCAT('%', #{name}), '%') <if test="state != null">and state = 1</if>
 	</select>

@@ -99,14 +99,16 @@ public class WebPlanDetailController {
 	
 	@RequestMapping("/webPlanDetail_get")
 	@ResponseBody
-	public String get(Integer id,String name,Integer state) throws Exception{
-		if(id != null){
+	public String get(Integer id,String name,Integer state,Integer webPlan_id) throws Exception{
+		if(id != null && state != null){
 			return wpds.getById(id,state);
+		}else if( webPlan_id != null && state != null){
+			return wpds.getByWebPlanId(webPlan_id, state);
 		}else if(name != null){
 			return wpds.getByName(name,state);
-		}else if(state == 1){
+		}else if(state != null && state == 1){
 			return wpds.getReleased();
-		}else if(state == 0){
+		}else if(state != null && state == 0){
 			return wpds.getDraft();
 		}else{
 			return wpds.getAll(state);

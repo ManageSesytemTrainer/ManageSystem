@@ -42,6 +42,11 @@ public class WebPlanDetailServiceImpl implements WebPlanDetailService {
 		Integer state = null;
 		return wpdm.getWebPlanDetailById(id,state);
 	}
+	
+	@Override
+	public String getByWebPlanId(int webPlan_id, int state) {
+		return objectToJson(wpdm.getWebPlanDetailByWebPlanId(webPlan_id, state), WebPlanDetail.class);
+	}
 
 	@Override
 	public String getAll(int state) {
@@ -124,5 +129,7 @@ public class WebPlanDetailServiceImpl implements WebPlanDetailService {
 		}
 		return ob;
 	}
+
+
 
 }
