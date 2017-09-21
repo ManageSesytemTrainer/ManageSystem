@@ -35,7 +35,7 @@ public class DepartmentController {
 
 	@RequestMapping("/de_deleteDe")
 	@ResponseBody
-	public String deleteDepartment(int id) {
+	public String deleteDepartment(Integer id) {
 		int flag = ds.delete(id);
 		if (flag > 0)
 			return "success";

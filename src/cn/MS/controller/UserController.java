@@ -84,7 +84,7 @@ public class UserController {
 	}
 	@RequestMapping("/user_queryUser")
 	@ResponseBody
-	public String queryUser(int id) {
+	public String queryUser(Integer id) {
 		String user = us.getUser(id);
 		if(null == user)
 			return "ERROR";
@@ -112,7 +112,7 @@ public class UserController {
 	}*/
 	@RequestMapping("/user_queryUsersByDepartmentId")
 	@ResponseBody
-	public String queryUsersByDepartmentId(int id) {
+	public String queryUsersByDepartmentId(Integer id) {
 		String users = us.getUsersByDepartmentId(id);
 		if(null == users)
 			return "ERROR";
@@ -120,7 +120,7 @@ public class UserController {
 	}
 	@RequestMapping("/user_queryUsersByRoleId")
 	@ResponseBody	
-	public String queryUsersByRoleId(int id) {
+	public String queryUsersByRoleId(Integer id) {
 		String users = us.getUsersByRoleId(id);
 		if(null == users)
 			return "ERROR";
@@ -128,7 +128,7 @@ public class UserController {
 	}
 	@RequestMapping("/user_queryDepartmentByUserId")
 	@ResponseBody
-	public String queryDepartmentByUserId(int id) {
+	public String queryDepartmentByUserId(Integer id) {
 		String dep = us.getDepartmentByUserId(id);
 		if(null == dep)
 			return "ERROR";
@@ -136,7 +136,7 @@ public class UserController {
 	}
 	@RequestMapping("/user_queryRoleByUserId")
 	@ResponseBody
-	public String queryRoleByUserId(int id) {
+	public String queryRoleByUserId(Integer id) {
 		String role = us.getRoleByUserId(id);
 		if(null == role)
 			return "ERROR";

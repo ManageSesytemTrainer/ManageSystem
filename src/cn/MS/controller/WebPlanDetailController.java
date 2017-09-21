@@ -30,7 +30,7 @@ public class WebPlanDetailController {
 
 	@RequestMapping("/webPlanDetail_add")
 	@ResponseBody
-	public String add(int webPlan_id, WebPlanDetail wpd, int state) throws Exception {
+	public String add(Integer webPlan_id, WebPlanDetail wpd, Integer state) throws Exception {
 		if(wpd.getId() == -1){
 			WebPlan webPlan = wps.getObjectById(webPlan_id, state);
 			if (webPlan == null) {
@@ -99,7 +99,7 @@ public class WebPlanDetailController {
 	
 	@RequestMapping("/webPlanDetail_get")
 	@ResponseBody
-	public String get(Integer id,String name,int state) throws Exception{
+	public String get(Integer id,String name,Integer state) throws Exception{
 		if(id != null){
 			return wpds.getById(id,state);
 		}else if(name != null){
@@ -115,19 +115,19 @@ public class WebPlanDetailController {
 	
 	@RequestMapping("/webPlanDetail_getById")
 	@ResponseBody
-	public String getById(int id,int state) throws Exception {
+	public String getById(Integer id,Integer state) throws Exception {
 		return wpds.getById(id,state);
 	}
 
 	@RequestMapping("/webPlanDetail_getAll")
 	@ResponseBody
-	public String getAll(int state) throws Exception {
+	public String getAll(Integer state) throws Exception {
 		return wpds.getAll(state);
 	}
 
 	@RequestMapping("/webPlanDetail_getByName")
 	@ResponseBody
-	public String getByName(String name,int state) throws Exception {
+	public String getByName(String name,Integer state) throws Exception {
 		return wpds.getByName(name,state);
 	}
 

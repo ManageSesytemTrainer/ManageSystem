@@ -110,7 +110,7 @@ public class RoleController {
 	
 	@RequestMapping("/role_addPower")
 	@ResponseBody
-	public String addPower(int id,int roleLimit) {
+	public String addPower(Integer id,Integer roleLimit) {
 		Role role = roleService.selectRoleById(id);
 		if(role == null) {
 			return "FAIL";
@@ -125,7 +125,7 @@ public class RoleController {
 	//为用户设置权限 
 	@RequestMapping("/role_settingPower")
 	@ResponseBody
-	public String settingPower(int roleId,User user) {
+	public String settingPower(Integer roleId,User user) {
 		Role role = roleService.selectRoleById(roleId);
 		user.setRole(role);
 		userService.modifyUser(user);
