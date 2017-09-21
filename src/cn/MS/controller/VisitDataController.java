@@ -69,7 +69,7 @@ public class VisitDataController {
 		}else{
 			String vd = visitDataService.getAll();
 			if(null == vd)
-				return "还没有数据";
+				return "NONE";
 			return vd;
 		}
 	}
@@ -94,7 +94,7 @@ public class VisitDataController {
 	public String queryAllVisitData() {
 		String vd = visitDataService.getAll();
 		if(null == vd)
-			return "还没有数据";
+			return "NONE";
 		return vd;
 	}
 

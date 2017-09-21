@@ -15,14 +15,14 @@ public class FailPersonController {
 	public String queryAllFailPerosn() {
 		String fp = fps.getAll();
 		if(null == fp)
-			return "没有不合格的！";
+			return "ERROR";
 		return fp;
 	}
 	@RequestMapping("/queryCompareResults")
 	public String queryCompareResults() {
 		String cr = fps.compare().toString();
 		if(null == cr)
-			return "还没有数据";
+			return "NONE";
 		return cr;
 	}
 }

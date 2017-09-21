@@ -34,23 +34,23 @@ public class WebPlanDetailController {
 		if(wpd.getId() == -1){
 			WebPlan webPlan = wps.getObjectById(webPlan_id, state);
 			if (webPlan == null) {
-				return "所属网点计划不存在！";
+				return "NONE";
 			}
 			User user = us.getUserObject(wpd.getName());
 			if (user == null) {
-				return "所属用户不存在";
+				return "NONE";
 			}
 			wpd.setWebPlan(webPlan);
 			wpd.setUser(user);
 			wpd.setState(0);
 			if (wpds.add(wpd) != 0) {
-				return "添加成功！";
+				return "SUCCESS";
 			} else {
-				return "添加失败！";
+				return "FAIL";
 			}
 		}else{
 			if(wpds.getObjectById(wpd.getId()).getState() == 1){
-				return "计划已经发布！不允许修改！";
+				return "ERROR";
 			}
 			int count = 0;
 			if (wpd.getName() == null) {
@@ -58,16 +58,16 @@ public class WebPlanDetailController {
 			} else {
 				User user = us.getUserObject(wpd.getName());
 				if (user == null) {
-					return "所属用户不存在！";
+					return "ERROR";
 				} else {
 					wpd.setUser(user);
 					count = wpds.add(wpd);
 				}
 			}
 			if (count != 0) {
-				return "更新成功！";
+				return "SUCCESS";
 			} else {
-				return "更新失败！";
+				return "FAIL";
 			}
 		}
 	}
