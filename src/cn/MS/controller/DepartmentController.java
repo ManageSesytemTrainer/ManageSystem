@@ -29,7 +29,7 @@ public class DepartmentController {
 			flag = ds.updateDepartment(de);
 		}
 		if (flag > 0)
-			return "success";
+			return "SUCCESS";
 		return "wrong";
 	}
 

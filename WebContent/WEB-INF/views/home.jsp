@@ -46,14 +46,33 @@
 		$("#menu li").click(function() {
 			$(this).addClass("active").siblings().removeClass("active");
 			var index = $(this).index();
-			$(".tex-box>div").eq(index).show().siblings().hide();
+			if (index != 1) {
+				for (var i = 0; i < 3; i++) {
+					$("#plan-box>div").eq(i).hide();
+				}
+				$("#text-box>div").eq(index).show().siblings().hide();
+
+			}
 		})
 		$("#list-menu a").click(function() {
 			$(this).addClass("active").siblings().removeClass("active");
 		})
+		$("#dropdown-menu li").click(function() {
+			$(this).addClass("active").siblings().removeClass("active");
+			var index = $(this).index() + 1;
+			for (var i = 0; i < 7; i++) {
+				$("#text-box>div").eq(i).hide();
+			}
+			$("#plan-box>div").eq(index).show().siblings().hide();
+		})
 	})
 </script>
 <style>
+body {
+	margin: 0;
+	padding: 0;
+}
+
 .tex-box>div {
 	display: none;
 }
@@ -61,21 +80,35 @@
 .tex-box>div:first-child {
 	display: block;
 }
+
+th {
+	text-align: right;
+}
+
+td {
+	padding: 4px;
+}
 </style>
 </head>
 <body>
 	<div class="row">
+		<div class=" col-md-1" id="tui" style="width: auto; float: right;">
+
+			<p>
+				<span style="color: #69a6ff; float: right; margin-right: 20px;">欢迎您,<a
+					onclick="">${name}</a></span> <span><a href="${path}/loginout"
+					style="text-align: center; color: #69a6ff"> 退出<span
+						class="glyphicon glyphicon-log-out"></span>
+				</a></span>
+			</p>
+		</div>
 		<div class=" col-md-12 ">
 			<div class="page-header">
 				<h1 style="color: #69a6ff; margin-left: 50px;">邮政分公司外勤管理系统</h1>
-				<h4 style="color: #69a6ff; float: right; margin-right: 20px;">欢迎您...</h4>
+
 			</div>
 		</div>
-		<div class=" col-md-1" id="tui">
-			<a href="${path}/login" style="text-align: center; color: #69a6ff">
-				退出<span class="glyphicon glyphicon-log-out"></span>
-			</a>
-		</div>
+
 	</div>
 
 	<!-- 主体-->
@@ -92,10 +125,11 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false"> 走访计划 <span class="caret"></span>
 						</a>
-							<ul class="dropdown-menu" aria-labelledby="dLabel">
-								<li><a href="#">县公司计划</a></li>
-								<li><a href="#">网点计划</a></li>
-								<li><a href="#">网点计划明细</a></li>
+							<ul id="dropdown-menu" class="dropdown-menu"
+								aria-labelledby="dLabel">
+								<li id="companyPlan"><a href="#">县公司计划</a></li>
+								<li id="webPlan"><a href="#">网点计划</a></li>
+
 							</ul></li>
 						<li role="presentation" id="visitData"><a href="#">走访信息</a></li>
 						<li role="presentation"><a href="#">统计信息</a></li>
@@ -111,7 +145,7 @@
 
 				<div class="col-md-12">
 					<!--标签容器-->
-					<div class="tex-box">
+					<div class="tex-box" id="text-box">
 						<div class="list-group" id="list-menu">
 							<a href="#" class="list-group-item active"> Cras justo odio </a>
 							<a href="#" class="list-group-item">Dapibus ac facilisis in</a> <a
@@ -127,7 +161,7 @@
 						</div>
 						<div id="tex1">
 							<!-- 计划管理-->
-							<table id="tablePlan" style="margin: 0 auto; padding: 0;">
+							<table id="tablePlan" style="min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -154,8 +188,7 @@
 						<div id="tex2">
 							<!-- 走访数据管理  -->
 
-							<table id="tableVisit"
-								style="margin: 0 auto; min-height: 360px; padding: 0;">
+							<table id="tableVisit" style="min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
 										<th data-options="field:'id',width:40">编号</th>
@@ -175,13 +208,15 @@
 							<div id="barVisit" style="padding: 3px">
 								<div style="margin-bottom: 5px">
 									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return updateVisit()">添加</a> <a href="#" class="easyui-linkbutton"
-										iconCls="icon-reload" plain="true" onclick="return reloadVisit()">刷新</a>
+										plain="true" onclick="return goUpdateVisit()">添加</a> <a
+										href="#" class="easyui-linkbutton" iconCls="icon-reload"
+										plain="true" onclick="return reloadVisit()">刷新</a>
 								</div>
 								<div>
-									<span>走访数据录入者：</span> <input id="visitPerson"
+									<span>走访数据录入者：</span> <input class="easyui-textbox"
+										id="s_visitPerson"
 										style="line-height: 26px; border: 1px solid #ccc"> <span>走访日期：</span>
-									<input id="visitDate"
+									<input id="s_visitDate"
 										style="line-height: 26px; border: 1px solid #ccc"
 										class="easyui-datebox"> <a href="#"
 										class="easyui-linkbutton" plain="true" onclick="SearchVisit()">查询</a>
@@ -210,24 +245,22 @@
 						</div>
 						<div id="tex4">
 							<!-- 用户管理 -->
-							<table id="tableUser" style="margin: 0 auto; padding: 0;">
+							<table id="tableUser" style="min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
 										<th data-options="field:'id',width:40">编号</th>
 										<th data-options="field:'jobNumber',width:100">工号</th>
-										<th data-options="field:'name',width:160,align:'right'">姓名</th>
-										<th data-options="field:'sex',width:160,align:'right'">性别</th>
+										<th data-options="field:'name',width:60,align:'right'">姓名</th>
+										<th data-options="field:'sex',width:60,align:'right'">性别</th>
 										<th data-options="field:'birthday',width:160,align:'right'">生日</th>
 										<th data-options="field:'phone',width:160,align:'right'">电话</th>
 										<th data-options="field:'mobilePhone',width:160,align:'right'">手机</th>
 										<th data-options="field:'email',width:160,align:'right'">邮箱</th>
-										<th data-options="field:'state',width:160,align:'right'">状态</th>
+										<th data-options="field:'state',width:60,align:'right'">状态</th>
 										<th
-											data-options="field:'department.id',width:160,align:'right'">所在部门</th>
-										<th data-options="field:'role.id',width:160,align:'right'">职务</th>
-										<th
-											data-options="field:'departmentName',width:160,align:'center'">所在部门名称</th>
+											data-options="field:'department.id',width:100,align:'right'">所在部门</th>
+										<th data-options="field:'role.id',width:100,align:'right'">职务</th>
 										<th
 											data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th>
 									</tr>
@@ -236,502 +269,1075 @@
 							<div id="barUser" style="padding: 3px">
 								<div style="margin-bottom: 5px">
 									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return updateUser()">添加</a> <a href="#" class="easyui-linkbutton"
-										iconCls="icon-reload" plain="true" onclick="return reloadUser()">刷新</a>
+										plain="true" onclick="return goUpdateUser()">添加</a> <a
+										href="#" class="easyui-linkbutton" iconCls="icon-reload"
+										plain="true" onclick="return reloadUser()">刷新</a>
 								</div>
 								<div>
-									<span>部门编号：</span> <input id="user_departmentId"
+									<span>部门编号：</span> <input class="easyui-textbox"
+										id="user_s_departmentId"
 										style="line-height: 26px; border: 1px solid #ccc"> <span>角色编号：</span>
-									<input id="user_roleId"
+									<input id="user_s_roleId" class="easyui-textbox"
 										style="line-height: 26px; border: 1px solid #ccc"> <a
 										href="#" class="easyui-linkbutton" plain="true"
 										onclick="SearchUser()">查询</a>
 								</div>
 							</div>
+						</div>
+						<div id="tex5">
+							<!-- 部门管理 -->
+							<table id="tableDe" style="min-height: 360px; padding: 0;">
+								<thead>
+									<tr>
+										<th data-options="field:'check'"></th>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'departmentName',width:100">部门名称</th>
+										<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
+										<th data-options="field:'state',width:160,align:'center'">状态</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="barDe" style="padding: 3px">
+								<div style="margin-bottom: 5px">
+									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateDe()">添加</a> <a href="#"
+										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
+										onclick="return reloadDe()"> 刷新</a>
+								</div>
+								<div>
+									<span>部门编号：</span> <input class="easyui-textbox" id="de_s_id"
+										style="line-height: 26px; border: 1px solid #ccc"> <span>部门名称：</span>
+									<input id="de_s_departmentName" class="easyui-textbox"
+										style="line-height: 26px; border: 1px solid #ccc"> <a
+										href="#" class="easyui-linkbutton" plain="true"
+										onclick="SearchDe()">查询</a>
+								</div>
 							</div>
-							<div id="tex5">
-								<!-- 部门管理 -->
-								<table id="tableDe"
-									style="margin: 0 auto; min-height: 360px; padding: 0;">
-									<thead>
-										<tr>
-											<th data-options="field:'check'"></th>
-											<th data-options="field:'id',width:40">编号</th>
-											<th data-options="field:'departmentName',width:100">部门名称</th>
-											<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
-											<th data-options="field:'state',width:160,align:'center'">状态</th>
-											<th
-												data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th>
-										</tr>
-									</thead>
-								</table>
-								<div id="barDe" style="padding: 3px">
-									<div style="margin-bottom: 5px">
-										<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-											plain="true" onclick="return updateDe()">添加</a> <a href="#" class="easyui-linkbutton"
-											iconCls="icon-reload" plain="true" onclick="return reloadDe()"> 刷新</a>
-									</div>
-									<div>
-										<span>部门编号：</span> <input id="de_id"
-											style="line-height: 26px; border: 1px solid #ccc"> <span>部门名称：</span>
-										<input id="de_departmentName"
-											style="line-height: 26px; border: 1px solid #ccc"> <a
-											href="#" class="easyui-linkbutton" plain="true"
-											onclick="SearchDe()">查询</a>
-									</div>
+						</div>
+						<div id="tex6">
+							<!-- 角色管理 -->
+							<table id="tableRole" style="min-height: 360px; padding: 0;">
+								<thead>
+									<tr>
+										<th data-options="field:'check'"></th>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'roleName',width:100">角色名称</th>
+										<th data-options="field:'description',width:160,align:'right'">角色描述</th>
+										<th data-options="field:'state',width:160,align:'center'">状态（是否激活）</th>
+										<th data-options="field:'roleLimit',width:160,align:'center'">角色权限</th>
+										<th data-options="field:'listUser',width:160,align:'center'">包含的用户</th>
+										<th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncRole">操作</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="barRole" style="padding: 3px">
+								<div style="margin-bottom: 5px">
+									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateRole()">添加</a> <a
+										href="#" class="easyui-linkbutton" iconCls="icon-reload"
+										plain="true" onclick="return reloadRole()">刷新</a>
 								</div>
-								</div>
-								<div id="tex6">
-									<!-- 角色管理 -->
-									<table id="tableRole"
-										style="margin: 0 auto; min-height: 360px; padding: 0;">
-										<thead>
-											<tr>
-												<th data-options="field:'check'"></th>
-												<th data-options="field:'id',width:40">编号</th>
-												<th data-options="field:'roleName',width:100">角色名称</th>
-												<th
-													data-options="field:'description',width:160,align:'right'">角色描述</th>
-												<th data-options="field:'state',width:160,align:'center'">状态（是否激活）</th>
-												<th
-													data-options="field:'roleLimit',width:160,align:'center'">角色权限</th>
-												<th data-options="field:'listUser',width:160,align:'center'">包含的用户</th>
-												<th
-													data-options="field:'do',width:60,align:'center',formatter:formatfuncRole">操作</th>
-											</tr>
-										</thead>
-									</table>
-									<div id="barRole" style="padding: 3px">
-										<div style="margin-bottom: 5px">
-											<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-												plain="true" onclick="return updateRole()">添加</a> <a href="#" class="easyui-linkbutton"
-												iconCls="icon-reload" plain="true" onclick="return reloadRole()">刷新</a>
-										</div>
-										<div>
-											<span>角色编号：</span> <input id="role_id"
-												style="line-height: 26px; border: 1px solid #ccc"> <span>角色名称：</span>
-											<input id="role_roleId"
-												style="line-height: 26px; border: 1px solid #ccc"
-												class="easyui-datebox"> <a href="#"
-												class="easyui-linkbutton" plain="true"
-												onclick="SearchRole()">查询</a>
-										</div>
-									</div>
+								<div>
+									<span>角色编号：</span> <input class="easyui-textbox" id="role_s_id"
+										style="line-height: 26px; border: 1px solid #ccc"> <span>角色名称：</span>
+									<input class="easyui-textbox" id="role_s_roleName"
+										style="line-height: 26px; border: 1px solid #ccc"> <a
+										href="#" class="easyui-linkbutton" plain="true"
+										onclick="SearchRole()">查询</a>
 								</div>
 							</div>
 						</div>
 					</div>
 
-				</div>
-
-</div>
-				<!-- Modal -->
-				<!--文件上传弹出框-->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title" id="myModalLabel">走访数据上传</h4>
+					<div class="tex-box" id="plan-box">
+						<div></div>
+						<div id="planCom">
+							<table id="tableCP" style="min-height: 360px; padding: 0;">
+								<thead>
+									<tr>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'planName',width:100">计划名</th>
+										<th data-options="field:'planDateStart',width:100">计划开始时间</th>
+										<th data-options="field:'planDateEnd',width:100">计划结束时间</th>
+										<th data-options="field:'designDate',width:100">编制日期</th>
+										<th data-options="field:'designer',width:100">编制人姓名</th>
+										<th data-options="field:'webType',width:100">网点类型</th>
+										<th data-options="field:'season',width:100">季节</th>
+										<th data-options="field:'personTimes',width:100">每人每月最少走访次数</th>
+										<th data-options="field:'totalTimes',width:100">合计最少次数</th>
+										<th data-options="field:'personCollections',width:100">每人每月最少收集的信息数</th>
+										<th data-options="field:'remark',width:100">备注</th>
+										<th data-options="field:'userId',width:100">编制人</th>
+										<th data-options="field:'state',width:100">状态</th>
+										<!-- <th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th> -->
+									</tr>
+								</thead>
+							</table>
+							<div id="barCP" style="padding: 3px">
+								<div style="margin-bottom: 5px">
+									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateCom()">添加</a> <a href="#"
+										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
+										onclick="return reloadCom()">刷新</a>
+								</div>
+								<div>
+									<span>计划名：</span> <input class="easyui-textbox" id="s_planName"
+										style="line-height: 26px; border: 1px solid #ccc"> <span>计划开始日期：</span>
+									<input id="s_planDateStart"
+										style="line-height: 26px; border: 1px solid #ccc"
+										class="easyui-datebox"> <a href="#"
+										class="easyui-linkbutton" plain="true" onclick="SearchVisit()">查询</a>
+								</div>
 							</div>
-							<div class="modal-body">
-								<form enctype="multipart/form-data" action="" method="post">
-									<input type="file" id="choosefile"> <input type="file"
-										id="f" style="display: none;"> <input type="submit"
-										value="上传文件" id="submitBtn" />
-								</form>
+						</div>
+						<div id="planWeb">
+							<table id="tableWeb" style="min-height: 360px; padding: 0;">
+								<thead>
+									<tr>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'planName',width:100">计划名</th>
+										<th data-options="field:'planDateStart',width:100">计划开始时间</th>
+										<th data-options="field:'planDateEnd',width:100">计划结束时间</th>
+										<th data-options="field:'designDate',width:100">编制日期</th>
+										<th data-options="field:'designer',width:100">编制人姓名</th>
+										<th data-options="field:'webType',width:100">网点类型</th>
+										<th data-options="field:'remark',width:100">备注</th>
+										<th data-options="field:'userId',width:100">编制人</th>
+										<th data-options="field:'state',width:100">状态</th>
+										<!-- <th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th> -->
+									</tr>
+								</thead>
+							</table>
+							<div id="barWeb" style="padding: 3px">
+								<div style="margin-bottom: 5px">
+									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateWeb()">添加</a> <a href="#"
+										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
+										onclick="return reloadWeb()">刷新</a>
+								</div>
+								<div>
+									<span>计划名：</span> <input class="easyui-textbox"
+										id="s_web_planName"
+										style="line-height: 26px; border: 1px solid #ccc"> <span>计划开始日期：</span>
+									<input id="s_web_planDateStart"
+										style="line-height: 26px; border: 1px solid #ccc"
+										class="easyui-datebox"> <a href="#"
+										class="easyui-linkbutton" plain="true" onclick="SearchWeb()">查询</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- Columns are always 50% wide, on mobile and desktop -->
+			</div>
+		</div>
 
-				<script type="text/javascript">
-					//走访计划管理
-					$("ul li")
-							.eq(1)
-							.click(
-									function() {
-										$('#tablePlan')
-												.datagrid(
-														{
+	</div>
 
-															fitColumns : true,
-															width : 820,
-															method : 'post',
-															loadMsg : '正在加载数据中......',
-															pagination : true,
-															nowrap:true,
-															autoRowHeigh:false,
-															toolbar : [
-																	{
-																		text : '增加',
-																		iconCls : 'icon-add',
-																		handler : function() {
-																			var userId = -1;
-																			window.location
-																					.assign('${path}/CompanyplanAdd?id='
-																							+ userId);
-																		}
-																	},
-																	'-',
-																	{
-																		text : '刷新',
-																		iconCls : 'icon-reload',
-																		handler : function() {
-																			$(
-																					'#tablePlan')
-																					.datagrid(
-																							'reload');
-																		}
-																	} ],
-															url : '${path}/companyPlan_select',
-															singleSelect : true,
+	<!-- Modal -->
+	<!--文件上传弹出框-->
+	<div class="modal fade" id="visitModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加走访数据</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<input class="easyui-filebox" type="text" id="choosefile">
+						<input type="button" value="确认上传" onclick="return importExcel()">
+					</div>
+					<div>
+						<table>
+							<tr>
+								<th>走访日期：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_visitDate"></td>
+							</tr>
+							<tr>
+								<th>走访时间：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_visitTime"></td>
+							</tr>
+							<tr>
+								<th>走访地点：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_address"></td>
+							</tr>
+							<tr>
+								<th>走访人姓名：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_visitPerson"></td>
+							</tr>
+							<tr>
+								<th>走访人所在部门：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_departmentName"></td>
+							</tr>
+							<tr>
+								<th>走访人职务：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_roleName"></td>
+							</tr>
+							<tr>
+								<th>纵享销客账号：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_countPerson"></td>
+							</tr>
+							<tr>
+								<th>走访内容：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_details"></td>
+							</tr>
+							<tr>
+								<th>走访人编号：</th>
+								<td><input type="text" class="easyui-textbox"
+									id="visit_user"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="button" value="提交"></td>
+							</tr>
+						</table>
 
-														});
-									});
-					function formatfuncPlan(value, row, index) {
-						var e = '<a href="#"  onclick="updatePlan('
-								+ index
-								+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-						var d = '<a href="#"  onclick="deletePlan('
-								+ index
-								+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
-						return e + d;
-					}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 用户数据添加修改 -->
+	<div class="modal fade" id="userModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4>用户信息修改</h4>
+				</div>
+				<div class="modal-body">
+					<fieldset style="margin: 0 auto;">
 
-					function updatePlan(index) {
-						$('#tablePlan').datagrid('selectRow', index);
-						var row = $('#tablePlan').datagrid('getSelected');
-						window.location = "${path}/planmodify?id=" + row.id;
-					}
-					function deletePlan(index) {
-						$('#tablePlan').datagrid('selectRow', index);
-						var row = $('#tablePlan').datagrid('getSelected');
-						$.messager
-								.confirm(
-										'Confirm',
-										'确认删除' + row.title + '?',
-										function(r) {
-											if (r) {
-												$
-														.ajax({
-															url : '${path}/deletePlan',
-															data : 'id='
-																	+ row.id,
-															type : 'post',
-															timeout : 6000,
-															success : function(
-																	data) {
-																if (data == "success") {
-																	$(
-																			'#tablePlan')
-																			.datagrid(
-																					'deleteRow',
-																					index);
-																	$.messager
-																			.alert(
-																					'提示',
-																					'删除成功',
-																					'info');
-																	$(
-																			'#tablePlan')
-																			.datagrid(
-																					'reload');
-																} else {
-																	$.messager
-																			.alert(
-																					'提示',
-																					'删除失败,请稍后重试',
-																					'info')
-																}
-															},
-															error : function() {
-																$.messager
-																		.alert(
-																				'提示',
-																				'Something Wrong',
-																				'error');
-															}
-														});
-											}
-										});
-					}
-					//走访数据管理
-					$('#visitData').click(function() {
-						$('#tableVisit').datagrid({
-							fitColumns : true,
-							width : 820,
-							method : 'post',
-							loadMsg : '正在加载数据中......',
-							pagination : true,
-							toolbar : '#barVisit',
-							url : '${path}/',
-							singleSelect : true,
-							nowrap:true,
-							autoRowHeigh:false
-						});
-					});
-					function SearchVisit() {
-						$('#tableVisit').datagrid('load', {
-							visitPerson : $('#visitPerson').val(),
-							visitDate : $('visitDate')
-						});
-					}
-					function reloadVisit(){
-						$('#tableVisit').datagrid('reload');
-					}
-					/* function formatfuncVisit(value, row, index) {
-						var e = '<a href="#"  onclick="modifyVisit('
-								+ index
-								+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-						var d = '<a href="#"  onclick="deleteVisit('
-								+ index
-								+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
-						return e + d;
-					} */
+						<form>
+							<table>
+								<tr>
+									<td><input class="easyui-textbox" type="hidden"
+										id="user_id" name="id"></td>
+								</tr>
+								<tr>
+									<th>登录名：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="user_loginName" name="loginName"></td>
+									<th>密码：</th>
+									<td><input class="easyui-textbox" type="password"
+										id="user_password" name="password"></td>
+								</tr>
+								<tr>
+									<th>工号:</th>
+									<td><input class="easyui-textbox" type="text"
+										id="user_jobNumber" name="jobNumber"></td>
+									<th>姓名:</th>
+									<td><input class="easyui-textbox" type="text"
+										id="user_name" name="name"></td>
+								</tr>
+								<tr>
+									<th>性别:</th>
+									<td><select id="user_sex" name="sex"
+										class="easyui-combobox"><option selected="selected"
+												value="男">男</option>
+											<option value="女">女</option></select></td>
+									<th>账号状态:</th>
+									<td><select id="user_state" name="user_state"
+										class="easyui-combobox"><option value="1">激活</option>
+											<option value="0">注销</option></select></td>
+								</tr>
 
-					/* 	function modifyVisit(index) {//修改走访数据信息
-							$('#tableVisit').datagrid('selectRow', index);
-							var row = $('#tableUser').datagrid('getSelected');
-							window.location = "${path}/usermodify?id=" + row.id;
-						}
-						function deleteVisit(index) {//删除走访数据信息
-							$('#tableVisit').datagrid('selectRow', index);
-							var row = $('#tableVisit').datagrid('getSelected');
-							$.messager.confirm('Confirm', '确认删除' + row.title + '?',
-									function(r) {
-										if (r) {
-											$.ajax({
-												url : '${path}/deleteVisit',
-												data : 'id=' + row.id,
-												type : 'post',
-												timeout : 6000,
-												success : function(data) {
-													if (data == "success") {
-														$('#tableUser').datagrid('deleteRow',
-																index);
-														$.messager.alert('提示', '删除成功', 'info');
-														$('#tableUser').datagrid('reload');
-													} else {
-														$.messager.alert('提示', '删除失败,请稍后重试',
-																'info')
-													}
-												},
-												error : function() {
-													$.messager.alert('提示', 'Something Wrong',
-															'error');
-												}
-											});
-										}
-									});
-						} */
-					//用户管理
-					$('#userInfo').click(function() {
-						$('#tableUser').datagrid({
-							fitColumns : true,
-							width : 820,
-							method : 'post',
-							loadMsg : '正在加载数据中......',
-							pagination : true,
-							toolbar : '#barUser',
-							url : '${path}/user_queryAllUser',
-							singleSelect : true,
-							nowrap:true,
-							autoRowHeigh:false
-						});
-					});
-					function formatfuncUser(value, row, index) {
-						var e = '<a href="#"  onclick="updateUser('
-								+ index
-								+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-						/* var d = '<a href="#"  onclick="deleteUser('
-								+ index
-								+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
-						return e;
-					}
+								<tr>
+									<th>所属部门:</th>
+									<td><input id="user_department" name="department"
+										class="easyui-combobox"
+										data-options="url:'${path}/de_departments',method:'get',valueField:'departmentname',textField:'text',panelHeight:'auto'"></td>
+									<th>所属角色:</th>
+									<td><input type="text" id="user_role" name="role"
+										class="easyui-combobox"
+										data-options="url:'${path}/role_selectAll',method:'get',valueField:'departmentname',textField:'text',panelHeight:'auto'"></td>
+								</tr>
+								<tr style="text-align: center;">
 
-					function updateUser(index) {
-						$('#tableUser').datagrid('selectRow', index);
-						var row = $('#tableUser').datagrid('getSelected');
-						window.location = "${path}/usermodify?id=" + row.id;
-					}
-					function SearchUser() {
-						$('#tableUser').datagrid('load', {
-							departmentId : $('#user_departmentId'),
-							roleId : $('#user_roleId')
-						});
-					}
-					function reloadUser(){
-						$('#tableUser').datagrid('reload');
-					}
-					/* function deleteUser(index) {
-						$('#tableUser').datagrid('selectRow', index);
-						var row = $('#tableUser').datagrid('getSelected');
-						$.messager.confirm('Confirm', '确认删除' + row.name + '?',
-								function(r) {
-									if (r) {
-										$.ajax({
-											url : '${path}/deleteUser',
-											data : 'id=' + row.id,
-											type : 'post',
-											timeout : 6000,
-											success : function(data) {
-												if (data == "success") {
-													$('#tableUser').datagrid('deleteRow',
-															index);
-													$.messager.alert('提示', '删除成功', 'info');
-													$('#tableUser').datagrid('reload');
-												} else {
-													$.messager.alert('提示', '删除失败,请稍后重试',
-															'info')
-												}
-											},
-											error : function() {
-												$.messager.alert('提示', 'Something Wrong',
-														'error');
-											}
-										});
+									<td colspan="4"><input type="submit" id="affirm"
+										style="margin-top: 12px;" value="确认修改"></td>
+
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Columns are always 50% wide, on mobile and desktop -->
+	<!-- 部门信息添加修改 -->
+	<div class="modal fade" id="deModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<fieldset style="width: 50%; height: 50%; margin: 0 auto;">
+						<legend>部门信息修改</legend>
+						<form>
+							<table>
+								<tr>
+									<td><input type="hidden" id="de_id" name="id"></td>
+								</tr>
+								<tr>
+									<th>部门名称：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="de_departmentName" name="departmentName"></td>
+								</tr>
+								<tr>
+									<th>联系电话：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="de_phone" name="phone"></td>
+								</tr>
+								<tr>
+									<th>部门状态：</th>
+									<td><select class="easyui-combobox" id="de_state"
+										name="state"><option value="1" selected="selected">激活</option>
+											<option value="0">注销</option></select></td>
+								</tr>
+								<tr style="text-align: center;">
+
+									<td colspan="2" style="text-align: center;"><input
+										type="button" id="affirm" value="确认"
+										onclick="return updateDe()"></td>
+
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 角色信息添加修改 -->
+	<div class="modal fade" id="roleModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4>角色修改</h4>
+				</div>
+				<div class="modal-body">
+					<fieldset style="width: 50%; height: 50%; margin: 0 auto;">
+						<form>
+							<table>
+								<tr>
+									<td><input type="hidden" id="role_id" name="id"></td>
+								</tr>
+								<tr>
+									<th>角色名称：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="role_roleName" name="roleName"></td>
+								</tr>
+								<tr>
+									<th>角色描述：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="role_description" name="description"></td>
+								</tr>
+								<tr>
+									<th>角色权限：</th>
+									<td><select class="easyui-combobox" id="roleLimit"
+										name="roleLimit"><option value="1">系统管理员</option>
+											<option value="2">计划编制人员</option>
+											<option value="3">计划编制人员</option>
+											<option value="4">业务主管</option>
+											<option value="5">业务员</option>
+											<option value="6">领导</option></select></td>
+								</tr>
+								<tr>
+									<th>角色状态：</th>
+									<td><select class="easyui-combobox" id="role_state"
+										name="state"><option value="1" selected="selected">激活</option>
+											<option value="0">注销</option></select></td>
+								</tr>
+								<tr style="text-align: center;">
+
+									<td colspan="2" style="text-align: center;"><input
+										type="button" id="affirm" value="确认"
+										onclick="return updateRole()"></td>
+
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="comModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4>角色修改</h4>
+				</div>
+				<div class="modal-body">
+					<fieldset style="width: 50%; height: 50%; margin: 0 auto;">
+						<form>
+							<table>
+								<tr>
+									<td><input type="hidden" id="role_id" name="id"></td>
+								</tr>
+								<tr>
+									<th>角色名称：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="role_roleName" name="roleName"></td>
+								</tr>
+								<tr>
+									<th>角色描述：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="role_description" name="description"></td>
+								</tr>
+								<tr>
+									<th>角色权限：</th>
+									<td><select class="easyui-combobox" id="roleLimit"
+										name="roleLimit"><option value="1">系统管理员</option>
+											<option value="2">计划编制人员</option>
+											<option value="3">计划编制人员</option>
+											<option value="4">业务主管</option>
+											<option value="5">业务员</option>
+											<option value="6">领导</option></select></td>
+								</tr>
+								<tr>
+									<th>角色状态：</th>
+									<td><select class="easyui-combobox" id="role_state"
+										name="state"><option value="1" selected="selected">激活</option>
+											<option value="0">注销</option></select></td>
+								</tr>
+								<tr style="text-align: center;">
+
+									<td colspan="2" style="text-align: center;"><input
+										type="button" id="affirm" value="确认"
+										onclick="return updateRole()"></td>
+
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		//县公司计划管理
+		$("#companyPlan").click(function() {
+			$('#tableCP').datagrid({
+
+				fitColumns : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				nowrap : true,
+				autoRowHeigh : false,
+				toolbar : $('#barCP'),
+				url : '${path}/companyPlan_select',
+				singleSelect : true,
+
+			});
+		});
+		function formatfuncCP(value, row, index) {
+			var e = '<a href="#"  onclick="goUpdateCP('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			/* var d = '<a href="#"  onclick="deleteCP('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
+			return e + d;
+		}
+
+		function goUpdateCom(index) {
+			if (index != null) {
+				$('#tablePlan').datagrid('selectRow', index);
+				var row = $('#tablePlan').datagrid('getSelected');
+			}
+		}
+		function updateCP() {
+
+			window.location = "${path}/planmodify?id=" + row.id;
+		}
+		function SearchCom() {
+			$('#tableCP').datagrid('load', {
+				visitPerson : $('#s_visitPerson').textbox('getValue'),
+				visitDate : $('#s_visitDate').datebox('getValue')
+			});
+		}
+		function reloadCom() {
+			$('#tableCP').datagrid('reload');
+		}
+		/* function deleteCP(index) {
+			$('#tableCP').datagrid('selectRow', index);
+			var row = $('#tableCP').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.planName + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deletePlan',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tablePlan').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tablePlan').datagrid('reload');
+									} else {
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
 									}
-								});
-					} */
-					//部门管理
-					$('#deInfo').click(function() {
-						$('#tableDe').datagrid({
-							fitColumns : true,
-							width : 820,
-							method : 'post',
-							loadMsg : '正在加载数据中......',
-							pagination : true,
-							toolbar : '#barDe',
-							url : '${path}/de_departments',
-							singleSelect : true,
-							nowrap:true,
-							autoRowHeigh:false
-						})
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
 					});
+		} */
+		//网点计划管理
+		$("#webPlan").click(function() {
+			$('#tableWeb').datagrid({
+				fitColumns : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				nowrap : true,
+				autoRowHeigh : false,
+				toolbar : $('#barWeb'),
+				url : '${path}/getWebPlan',
+				singleSelect : true,
 
-					function formatfuncDe(value, row, index) {
-						var e = '<a href="#"  onclick="updateDe('
-								+ index
-								+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-						var d = '<a href="#"  onclick="deleteDe('
-								+ index
-								+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
-						return e + d;
-					}
+			});
+		});
+		function formatfuncWeb(value, row, index) {
+			var e = '<a href="#"  onclick="goUpdateWeb('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			/* var d = '<a href="#"  onclick="deleteCP('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
+			return e;
+		}
 
-					function updateDe(index) {
-						$('#tableDe').datagrid('selectRow', index);
-						var row = $('#tableDe').datagrid('getSelected');
-						window.location = "${path}/departmentmodify?id="
-								+ row.id;
-					}
-					function deleteDe(index) {
-						$('#tableDe').datagrid('selectRow', index);
-						var row = $('#tableDe').datagrid('getSelected');
-						$.messager.confirm('Confirm', '确认删除'
-								+ row.departmentName + '?', function(r) {
+		function goUpdateWeb(index) {
+			if (index != null) {
+				$('#tableWeb').datagrid('selectRow', index);
+				var row = $('#tableWeb').datagrid('getSelected');
+			}
+		}
+		function updateWeb() {
+
+			window.location = "${path}/planmodify?id=" + row.id;
+		}
+		function SearchWeb() {
+			$('#tableWeb').datagrid('load', {
+				visitPerson : $('#s_visitPerson').textbox('getValue'),
+				visitDate : $('#s_visitDate').datebox('getValue')
+			});
+		}
+		function reloadWeb() {
+			$('#tableWeb').datagrid('reload');
+		}
+		/* function deleteCP(index) {
+			$('#tableCP').datagrid('selectRow', index);
+			var row = $('#tableCP').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.planName + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deletePlan',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tablePlan').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tablePlan').datagrid('reload');
+									} else {
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
+					});
+		} */
+		//走访数据管理
+		$('#visitData').click(function() {
+			$('#tableVisit').datagrid({
+				fitColumns : true,
+				rownumbers : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : '#barVisit',
+				url : '${path}/queryVisitData',
+				singleSelect : true,
+				nowrap : true,
+				autoRowHeigh : false
+			});
+		});
+		function goUpdateVisit() {
+
+			$('#visitModal').modal('show');
+		}
+		function SearchVisit() {
+			$('#tableVisit').datagrid('load', {
+				visitPerson : $('#s_visitPerson').textbox('getValue'),
+				visitDate : $('#s_visitDate').datebox('getValue')
+			});
+		}
+		function reloadVisit() {
+			$('#tableVisit').datagrid('reload');
+		}
+		/* function formatfuncVisit(value, row, index) {
+			var e = '<a href="#"  onclick="modifyVisit('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteVisit('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		} */
+
+		/* 	function modifyVisit(index) {//修改走访数据信息
+				$('#tableVisit').datagrid('selectRow', index);
+				var row = $('#tableUser').datagrid('getSelected');
+				window.location = "${path}/usermodify?id=" + row.id;
+			}
+			function deleteVisit(index) {//删除走访数据信息
+				$('#tableVisit').datagrid('selectRow', index);
+				var row = $('#tableVisit').datagrid('getSelected');
+				$.messager.confirm('Confirm', '确认删除' + row.title + '?',
+						function(r) {
 							if (r) {
 								$.ajax({
-									url : '${path}/de_deleteDe',
+									url : '${path}/deleteVisit',
 									data : 'id=' + row.id,
 									type : 'post',
 									timeout : 6000,
 									success : function(data) {
 										if (data == "success") {
-											$('#tableDe').datagrid('deleteRow',
+											$('#tableUser').datagrid('deleteRow',
 													index);
-											$.messager.alert('提示', '删除成功',
-													'info');
-											//$('#tableDe').datagrid('reload');
+											$.messager.alert('提示', '删除成功', 'info');
+											$('#tableUser').datagrid('reload');
 										} else {
-											$.messager.alert('提示',
-													'删除失败,可能该部门中仍存在员工！请稍后重试',
+											$.messager.alert('提示', '删除失败,请稍后重试',
 													'info')
 										}
 									},
 									error : function() {
-										$.messager.alert('提示',
-												'Something Wrong', 'error');
+										$.messager.alert('提示', 'Something Wrong',
+												'error');
 									}
 								});
 							}
 						});
+			} */
+		//用户管理
+		$('#userInfo').click(function() {
+			$('#tableUser').datagrid({
+				fitColumns : true,
+				rownumbers : true,
+				width : 920,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : '#barUser',
+				url : '${path}/user_query',
+				singleSelect : true,
+				nowrap : true,
+				autoRowHeigh : false
+			});
+		});
+		function formatfuncUser(value, row, index) {
+			var e = '<a href="#"  onclick="goUpdateUser('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			/* var d = '<a href="#"  onclick="deleteUser('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
+			return e;
+		}
+
+		function goUpdateUser(index) {
+			if (index != null) {
+				$('#tableUser').datagrid('selectRow', index);
+				var row = $('#tableUser').datagrid('getSelected');
+				$('#user_id').val(row.id);
+				$('#user_loginName').textbox('setValue', row.loginName);
+				$('#user_password').textbox('setValue', row.password);
+				$('#user_jobName').textbox('setValue', row.jobName);
+				$('#user_name').textbox('setValue', row.name);
+				$('#user_sex').combobox('setValue', row.sex);
+				$('#user_state').combobox('setValue', row.state);
+				$('#user_deparment').combobox('setValue', row.department.id);
+				$('#user_role').combobox('setValue', row.role.id);
+			} else {
+				$('#user_loginName').textbox('setValue', "");
+				$('#user_password').textbox('setValue', "");
+				$('#user_jobName').textbox('setValue', "");
+				$('#user_name').textbox('setValue', "");
+				$('#user_sex').textbox('setValue', "");
+				$('#user_state').textbox('setValue', 1);
+				$('#user_deparment').textbox('setValue', "");
+				$('#user_role').textbox('setValue', 5);
+			}
+			$('#userModal').modal('show');
+		}
+		function updateUser() {
+			var uid = $('#user_id').val();
+			var uloginName = $('#user_loginName').textbox('getValue');
+			var pwd = $('#user_password').textbox('getValue');
+			var jn = $('#user_jobName').textbox('getValue');
+			var uname = $('#user_name').textbox('getValue');
+			var usex = $('#user_sex').combobox('getValue');
+			var ustate = $('#user_state').combobox('getValue');
+			var ude = $('#user_deparment').combobox('getValue');
+			var urole = $('#user_role').combotextbox('getValue');
+
+			$.ajax({
+				url : '${path}/user_updateUser',
+				data : {
+					id : uid,
+					loginName : uloginName,
+					password : pwd,
+					jobName : jn,
+					name : uname,
+					sex : usex,
+					state : ustate,
+					departmentId : ude,
+					roleId : urole
+				},
+				type : 'post',
+				success : function(data) {
+					if (data == "SUCCESS") {
+						alert("操作成功");
+						$('#userModal').modal('show');
+						$('#tableUser').datagrid('reload');
+					} else {
+						alert("操作失败！请重试！");
 					}
-					function reloadDe(){
-						$('#tableDe').datagrid('reload');
-					}
-					//角色管理
-					$('#roleInfo').click(function() {
-						$('#tableRole').datagrid({
-							fitColumns : true,
-							width : 820,
-							method : 'post',
-							loadMsg : '正在加载数据中......',
-							pagination : true,
-							toolbar : '#barRole',
-							url : '${path}/role_selectAll',
-							singleSelect : true,
-							nowrap:true,
-							autoRowHeigh:false
-						})
+				},
+				error : function() {
+					alert("好像哪里出错了,请刷新后重试！");
+				}
+			});
+		}
+		function SearchUser() {
+			$('#tableUser').datagrid('load', {
+				departmentId : $('#user_s_departmentId').textbox('getValue'),
+				roleId : $('#user_s_roleId').textbox('getValue')
+			});
+		}
+		function reloadUser() {
+			$('#tableUser').datagrid('reload');
+		}
+		/* function deleteUser(index) {
+			$('#tableUser').datagrid('selectRow', index);
+			var row = $('#tableUser').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.name + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/deleteUser',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tableUser').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										$('#tableUser').datagrid('reload');
+									} else {
+										$.messager.alert('提示', '删除失败,请稍后重试',
+												'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
 					});
+		} */
+		//部门管理
+		$('#deInfo').click(function() {
+			$('#tableDe').datagrid({
+				fitColumns : true,
+				rownumbers : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : '#barDe',
+				url : '${path}/de_departments',
+				singleSelect : true,
+				nowrap : true,
+				autoRowHeigh : false
+			})
+		});
 
-					function formatfuncRole(value, row, index) {
-						var e = '<a href="#"  onclick="updateRole('
-								+ index
-								+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
-						var d = '<a href="#"  onclick="deleteRole('
-								+ index
-								+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
-						return e + d;
-					}
+		function formatfuncDe(value, row, index) {
+			var e = '<a href="#"  onclick="goUpdateDe('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteDe('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		}
 
-					function updateRole(index) {
-						$('#tableRole').datagrid('selectRow', index);
-						var row = $('#tableRole').datagrid('getSelected');
-						window.location = "${path}/rolemodify?id=" + row.id;
+		function goUpdateDe(index) {
+			if (index != null) {
+				$('#tableDe').datagrid('selectRow', index);
+				var row = $('#tableDe').datagrid('getSelected');
+				$('#de_id').val(row.id);
+				$('#de_departmentName').textbox('setValue', row.departmentName);
+				$('#de_phone').textbox('setValue', row.phone);
+				$('#de_state').combobox('setValue', row.state);
+			} else {
+				$('#de_id').val(-1);
+				$('#de_departmentName').textbox('setValue', "");
+				$('#de_phone').textbox('setValue', "");
+				$('#de_state').combobox('setValue', 1);
+			}
+			$('#deModal').modal('show');
+		}
+		function updateDe() {
+			var did = $('#de_id').val();
+			var dname = $('#de_departmentName').textbox('getValue');
+			var dphone = $('#de_phone').textbox('getValue');
+			var dstate = $('#de_state').combobox('getValue');
+			$.ajax({
+				url : '${path}/de_updateDe',
+				data : {
+					id : did,
+					depattmentName : dname,
+					phone : dphone,
+					state : dstate
+				},
+				type : 'post',
+				success : function(data) {
+					if (data == "SUCCESS") {
+						alert("操作成功！");
+						$('#deModal').modal('hide');
+						$('#tableDe').datagrid('reload');
+					} else {
+						alert("操作失败，请重试！");
 					}
-					function deleteRole(index) {
-						$('#tableRole').datagrid('selectRow', index);
-						var row = $('#tableRole').datagrid('getSelected');
-						$.messager.confirm('Confirm', '确认删除' + row.roleName
-								+ '?', function(r) {
-							if (r) {
-								$.ajax({
-									url : '${path}/role_deleteRole',
-									data : 'id=' + row.id,
-									type : 'post',
-									timeout : 6000,
-									success : function(data) {
-										if (data == "SUCCESS") {
-											$('#tableRole').datagrid(
-													'deleteRow', index);
-											$.messager.alert('提示', '删除成功',
-													'info');
-											//$('#tableRole').datagrid('reload');
-										} else {
-											$.messager.alert('提示',
-													'删除失败,该角色暂时无法删除！请稍后重试',
-													'info')
-										}
-									},
-									error : function() {
+				},
+				error : function() {
+					alert("好像哪儿出错了,请刷新后重试！");
+				}
+
+			});
+		}
+		function SearchDe() {
+			$('#tableDe').datagrid('load', {
+				id : $('#de_s_id').textbox('getValue'),
+				departmentName : $('de_s_departmentName').textbox('getValue')
+			});
+		}
+		function deleteDe(index) {
+			$('#tableDe').datagrid('selectRow', index);
+			var row = $('#tableDe').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.departmentName + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/de_deleteDe',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "success") {
+										$('#tableDe').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										//$('#tableDe').datagrid('reload');
+									} else {
 										$.messager.alert('提示',
-												'Something Wrong', 'error');
+												'删除失败,可能该部门中仍存在员工！请稍后重试',
+												'info')
 									}
-								});
-							}
-						});
-					}
-					function reloadRole(){
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
+					});
+		}
+		function reloadDe() {
+			$('#tableDe').datagrid('reload');
+		}
+		//角色管理
+		$('#roleInfo').click(function() {
+			$('#tableRole').datagrid({
+				fitColumns : true,
+				rownumbers : true,
+				width : 820,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : '#barRole',
+				url : '${path}/role_selectAll',
+				singleSelect : true,
+				nowrap : true,
+				autoRowHeigh : false
+			})
+		});
+
+		function formatfuncRole(value, row, index) {
+			var e = '<a href="#"  onclick="goUpdateRole('
+					+ index
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+			var d = '<a href="#"  onclick="deleteRole('
+					+ index
+					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+			return e + d;
+		}
+
+		function goUpdateRole(index) {
+
+			var row;
+			if (index != null) {
+				$('#tableRole').datagrid('selectRow', index);
+				row = $('#tableRole').datagrid('getSelected');
+				document.getElementById("role_id").value = row.id;
+				$("#role_roleName").textbox('setValue', row.roleName);
+				$("#role_description").textbox('setValue', row.description);
+				$("#roleLimit").combobox('setValue', row.roleLimit);
+				$("#role_state").combobox('setValue', row.state);
+			} else {
+
+				document.getElementById("role_id").value = -1;
+				$("#role_roleName").textbox('setValue', "");
+				$("#role_description").textbox('setValue', "");
+				$("#roleLimit").combobox('setValue', "");
+				$("#role_state").combobox('setValue', "");
+			}
+			$('#roleModal').modal('show');
+		}
+		function updateRole() {
+			var rid = $('#role_id').val();
+			var rroleName = $('#role_roleName').textbox('getValue');
+			var rdescription = $('#role_description').textbox('getValue');
+			var rroleLimit = $('#roleLimit').combobox('getValue');
+			var sstate = $('#role_state').combobox('getValue');
+			$.ajax({
+				url : '${path}/role_updateRole',
+				type : 'post',
+				data : {
+					id : rid,
+					roleName : rroleName,
+					description : rdescription,
+					roleLimit : rroleLimit,
+					state : sstate
+				},
+				success : function(data) {
+					if (data == "SUCCESS") {
+						alert("操作成功!");
+						$('#roleModal').modal('hide');
 						$('#tableRole').datagrid('reload');
+					} else {
+						alert("操作失败，请重试！");
 					}
-				</script>
+				},
+				error : function() {
+					alert("好像哪里出错了，请刷新后重试！");
+				}
+
+			});
+		}
+		function SearchRole() {
+			$('#tableRole').datagrid('load', {
+				id : $('#role_s_id').textbox('getValue'),
+				roleName : $('#role_s_roleName').textbox('getValue')
+			})
+		}
+		function deleteRole(index) {
+			$('#tableRole').datagrid('selectRow', index);
+			var row = $('#tableRole').datagrid('getSelected');
+			$.messager.confirm('Confirm', '确认删除' + row.roleName + '?',
+					function(r) {
+						if (r) {
+							$.ajax({
+								url : '${path}/role_deleteRole',
+								data : 'id=' + row.id,
+								type : 'post',
+								timeout : 6000,
+								success : function(data) {
+									if (data == "SUCCESS") {
+										$('#tableRole').datagrid('deleteRow',
+												index);
+										$.messager.alert('提示', '删除成功', 'info');
+										//$('#tableRole').datagrid('reload');
+									} else {
+										$.messager.alert('提示',
+												'删除失败,该角色暂时无法删除！请稍后重试', 'info')
+									}
+								},
+								error : function() {
+									$.messager.alert('提示', 'Something Wrong',
+											'error');
+								}
+							});
+						}
+					});
+		}
+		function reloadRole() {
+			$('#tableRole').datagrid('reload');
+		}
+	</script>
 </body>
 </html>
