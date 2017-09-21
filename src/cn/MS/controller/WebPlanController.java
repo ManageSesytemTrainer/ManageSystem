@@ -32,7 +32,7 @@ public class WebPlanController {
 	}
 	
 	@RequestMapping("/getWebPlan")
-	public String getWebPlan(Integer id,int state,String name,String designer){
+	public String getWebPlan(Integer id,Integer state,String name,String designer){
 		if(id != null){
 			String wp = wps.getById(id, state);
 			if(null == wp)
@@ -53,7 +53,7 @@ public class WebPlanController {
 			if(null == wp)
 				return "ERROR";
 			return wp;
-		}else if(designer != null && (Integer)state != null){
+		}else if(designer != null && state != null){
 			String wp = wps.getByDesigner(designer, state);
 			if(null == wp)
 				return "ERROR";
@@ -64,7 +64,7 @@ public class WebPlanController {
 	}
 	
 	@RequestMapping("/getWebPlanById")
-	public String getWebPlanById(int id, int state) {
+	public String getWebPlanById(Integer id, Integer state) {
 		String wp = wps.getById(id, state);
 		if(null == wp)
 			return "ERROR";
@@ -89,14 +89,14 @@ public class WebPlanController {
 		return wp;
 	}
 	@RequestMapping("/getWebPlanByName")
-	public String getWebPlanByName(String name, int state) {
+	public String getWebPlanByName(String name, Integer state) {
 		String wp = wps.getByName(name, state);
 		if(null == wp)
 			return "ERROR";
 		return wp;
 	}
 	@RequestMapping("/getWebPlanByDesigner")
-	public String getWebPlanByDesigner(String designer, int state) {
+	public String getWebPlanByDesigner(String designer, Integer state) {
 		String wp = wps.getByDesigner(designer, state);
 		if(null == wp)
 			return "ERROR";
