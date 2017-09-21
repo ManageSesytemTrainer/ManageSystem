@@ -43,18 +43,18 @@ public class WebPlanController {
 			if(null == wp)
 				return "ERROR";
 			return wp;
-		}else if(state == 1){
+		}else if(designer != null && state != null){
+			String wp = wps.getByDesigner(designer, state);
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else if(state !=null && state == 1){
 			String wp = wps.getReleased();
 			if(null == wp)
 				return "ERROR";
 			return wp;
-		}else if(state == 0){
+		}else if(state != null && state == 0){
 			String wp = wps.getDraft();
-			if(null == wp)
-				return "ERROR";
-			return wp;
-		}else if(designer != null && state != null){
-			String wp = wps.getByDesigner(designer, state);
 			if(null == wp)
 				return "ERROR";
 			return wp;
