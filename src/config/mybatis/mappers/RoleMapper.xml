@@ -17,7 +17,7 @@
   </select>
 
    <select id="selectRoleByName" resultType="cn.MS.bean.Role" parameterType="String">
-     select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where roleName=#{roleName}
+     select r.id,r.role_name roleName,r.description,r.state,r.role_limit roleLimit from role r where role_name=#{roleName}
   </select>
   
   <select id="selectRoleById" resultType="cn.MS.bean.Role" parameterType="_int">

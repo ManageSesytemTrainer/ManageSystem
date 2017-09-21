@@ -16,11 +16,9 @@ import cn.MS.service.UserService;
 @Controller
 public class CompanyPlanController {
 	@Autowired
-	@Qualifier("companyPlanService")
 	private CompanyPlanService companyPlanService;
 	
 	@Autowired
-	@Qualifier("userService")
 	private UserService us;
 	
 	@RequestMapping("/companyPlan_insert")
@@ -28,7 +26,7 @@ public class CompanyPlanController {
 	public String insert (CompanyPlan companyPlan,String planDateStart,String planDateEnd,String designDate) throws Exception {
 		User user = us.getUserObject(companyPlan.getDesigner());
 		if(user == null) {
-			return "所属用户不存在！";
+			return "wrong";
 		}
 		companyPlan.setUser(user);
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -37,15 +35,15 @@ public class CompanyPlanController {
 		companyPlan.setDesignDate(formatDate.parse(designDate));
 		companyPlan.setState(1);
 		if(companyPlanService.insert(companyPlan) != 0){
-			return "插入成功！";
+			return "success";
 		}else{
-			return "插入失败！";
+			return "fail";
 		}
 	}
 	
 	@RequestMapping("/companyPlan_select")
 	@ResponseBody
-	public String select (CompanyPlan companyPlan) throws Exception {
-		return companyPlanService.select(companyPlan);
+	public String select () throws Exception {
+		return companyPlanService.select();
 	}
 }

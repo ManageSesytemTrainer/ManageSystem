@@ -12,18 +12,57 @@ public class WebPlanController {
 	@Autowired
 	private WebPlanService wps;
 	
-	@RequestMapping("/webPlan_addWebPlan")
+/*	@RequestMapping("/webPlan_addWebPlan")
 	public String addWebPlan(WebPlan wp) {
 		if(0 >= wps.add(wp))
 			return "ERROR";
 		return "SUCCESS";
-	}
+	}*/
 	@RequestMapping("/webPlan_updateWebPlan")
 	public String updateWebPlan(WebPlan wp) {
-		if(0 >= wps.update(wp))
-			return "ERROR";
-		return "SUCCESS";
+		if(wp.getId() == -1){
+			if(0 >= wps.add(wp))
+				return "ERROR";
+			return "SUCCESS";
+		}else{
+			if(0 >= wps.update(wp))
+				return "ERROR";
+			return "SUCCESS";
+		}
 	}
+	
+	@RequestMapping("/getWebPlan")
+	public String getWebPlan(Integer id,int state,String name,String designer){
+		if(id != null){
+			String wp = wps.getById(id, state);
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else if(name != null){
+			String wp = wps.getByName(name, state);
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else if(state == 1){
+			String wp = wps.getReleased();
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else if(state == 0){
+			String wp = wps.getDraft();
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else if(designer != null){
+			String wp = wps.getByDesigner(designer, state);
+			if(null == wp)
+				return "ERROR";
+			return wp;
+		}else{
+			return wps.getAll();
+		}
+	}
+	
 	@RequestMapping("/getWebPlanById")
 	public String getWebPlanById(int id, int state) {
 		String wp = wps.getById(id, state);

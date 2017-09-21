@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +24,9 @@ import cn.MS.service.VisitDataService;
 public class VisitDataController {
 	
 	@Autowired
-	@Qualifier("visitDataService")
 	private VisitDataService visitDataService;
 	
 	@Autowired
-	@Qualifier("roleService")
 	private RoleService roleService;
 	
 	@RequestMapping(value="/excel_import",method = RequestMethod.POST)
@@ -50,10 +47,31 @@ public class VisitDataController {
 		HttpSession session = request.getSession();
 		visitData.setVisitPerson((String)session.getAttribute("name"));
 		visitData.setDepartmentName((String) session.getAttribute("department"));
-		visitData.setReleName(roleService.selectRoleById((Integer) session.getAttribute("role_id")).getRoleName());
+		visitData.setRoleName(roleService.selectRoleById((Integer) session.getAttribute("role_id")).getRoleName());
 		visitData.setUser((User)session.getAttribute("user"));
 		
 		return visitDataService.addVisitData(visitData);
+	}
+	
+	@RequestMapping("/queryVisitData")
+	@ResponseBody
+	public String queryVisitData(String username,Date date) throws Exception{
+		if(username != null){
+			String vd = visitDataService.getByUsername(username);
+			if(null == vd)
+				return "ERROR";
+			return vd;
+		}else if(date != null){
+			String vd = visitDataService.getByDate(date);
+			if(null == vd)
+				return "ERROR";
+			return vd;
+		}else{
+			String vd = visitDataService.getAll();
+			if(null == vd)
+				return "还没有数据";
+			return vd;
+		}
 	}
 	@RequestMapping("/queryVisitDataByUsername")
 	@ResponseBody

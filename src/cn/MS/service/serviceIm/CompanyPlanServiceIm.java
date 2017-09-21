@@ -18,8 +18,8 @@ public class CompanyPlanServiceIm implements CompanyPlanService{
 	@Autowired
 	CompanyPlanMapper cd;
 	@Override
-	public String select(CompanyPlan cp) {
-		List<CompanyPlan> list= cd.select(cp);
+	public String select() {
+		List<CompanyPlan> list= cd.select();
 		JSONObject jsonObject=new JSONObject();
 		JSONArray array=new JSONArray();
 		int i=0;
