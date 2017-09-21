@@ -53,7 +53,7 @@ public class WebPlanController {
 			if(null == wp)
 				return "ERROR";
 			return wp;
-		}else if(designer != null){
+		}else if(designer != null && (Integer)state != null){
 			String wp = wps.getByDesigner(designer, state);
 			if(null == wp)
 				return "ERROR";
