@@ -32,14 +32,14 @@
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script type="text/javascript"
 	src="${path}/resource/js/jquery-1.11.3.js"></script>
-<%-- <script type="text/javascript"
-	src="${path}/resource/js/departmentAjax.js"></script> --%>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="${path}/resource/js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="${path}/resource/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="${path}/resource/js/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${path}/resource/js/jquery-easyui-1.5.1/datagrid-detailview.js"></script>
 </head>
 <script>
 	$(function() {
@@ -92,7 +92,8 @@ td {
 </head>
 <body>
 	<div class="row">
-		<div class=" col-md-1" id="tui" style="width: auto; float: right;">
+		<div class=" col-md-1" id="tui"
+			style="width: auto; position: fixed; float: right;">
 
 			<p>
 				<span style="color: #69a6ff; float: right; margin-right: 20px;">欢迎您,<a
@@ -504,7 +505,8 @@ td {
 									id="visit_user"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="button" value="提交"></td>
+								<td colspan="2"><input type="button" value="提交"
+									onclick="return updateVisit()"></td>
 							</tr>
 						</table>
 
@@ -574,8 +576,9 @@ td {
 								</tr>
 								<tr style="text-align: center;">
 
-									<td colspan="4"><input type="submit" id="affirm"
-										style="margin-top: 12px;" value="确认修改"></td>
+									<td colspan="4"><input type="button"
+										style="margin-top: 12px;" value="提交"
+										onclick="return updateUser()"></td>
 
 								</tr>
 							</table>
@@ -703,46 +706,79 @@ td {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4>角色修改</h4>
+					<h4>更新县公司计划</h4>
 				</div>
 				<div class="modal-body">
-					<fieldset style="width: 50%; height: 50%; margin: 0 auto;">
+					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
 						<form>
 							<table>
 								<tr>
-									<td><input type="hidden" id="role_id" name="id"></td>
+									<td><input type="hidden" id="com_id" name="id"></td>
 								</tr>
 								<tr>
-									<th>角色名称：</th>
+									<th>计划名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="role_roleName" name="roleName"></td>
+										id="com_planName" name="planName"></td>
 								</tr>
 								<tr>
-									<th>角色描述：</th>
+									<th>计划开始时间：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="com_planDateStart" name="planDateStart"></td>
+									<th>计划结束时间：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="com_planDateEnd" name="planDateEnd"></td>
+								</tr>
+								<tr>
+									<th>编制日期：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="com_designDate" name="designDate"></td>
+
+									<th>编制人姓名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="role_description" name="description"></td>
+										id="com_designer" name="designer"></td>
 								</tr>
 								<tr>
-									<th>角色权限：</th>
-									<td><select class="easyui-combobox" id="roleLimit"
-										name="roleLimit"><option value="1">系统管理员</option>
-											<option value="2">计划编制人员</option>
-											<option value="3">计划编制人员</option>
-											<option value="4">业务主管</option>
-											<option value="5">业务员</option>
-											<option value="6">领导</option></select></td>
+									<th>网点类型：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_webType" name="webType"></td>
+
+									<th>季节：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_season" name="season"></td>
 								</tr>
 								<tr>
-									<th>角色状态：</th>
-									<td><select class="easyui-combobox" id="role_state"
+									<th>每人每月最少走访次数：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_personTimes" name="personTimes"></td>
+
+									<th>合计最少次数：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_totalTimes" name="totalTimes"></td>
+								</tr>
+								<tr>
+									<th>每人每月最少收集的信息数：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_personCollections" name="personCollections"></td>
+
+									<th>备注：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_remark" name="remark"></td>
+								</tr>
+								<tr>
+									<th>编制人：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_userId" name="userId"></td>
+
+									<th>状态：</th>
+									<td><select class="easyui-combobox" id="com_state"
 										name="state"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
 								<tr style="text-align: center;">
 
-									<td colspan="2" style="text-align: center;"><input
+									<td colspan="4" style="text-align: center;"><input
 										type="button" id="affirm" value="确认"
-										onclick="return updateRole()"></td>
+										onclick="return updateCP()"></td>
 
 								</tr>
 							</table>
@@ -783,9 +819,10 @@ td {
 
 		function goUpdateCom(index) {
 			if (index != null) {
-				$('#tablePlan').datagrid('selectRow', index);
-				var row = $('#tablePlan').datagrid('getSelected');
+				$('#tableCP').datagrid('selectRow', index);
+				var row = $('#tableCP').datagrid('getSelected');
 			}
+			$('#comModal').modal('show');
 		}
 		function updateCP() {
 
@@ -793,8 +830,8 @@ td {
 		}
 		function SearchCom() {
 			$('#tableCP').datagrid('load', {
-				visitPerson : $('#s_visitPerson').textbox('getValue'),
-				visitDate : $('#s_visitDate').datebox('getValue')
+			//visitPerson : $('#s_visitPerson').textbox('getValue'),
+			//visitDate : $('#s_visitDate').datebox('getValue')
 			});
 		}
 		function reloadCom() {
@@ -830,22 +867,84 @@ td {
 						}
 					});
 		} */
-		//网点计划管理
-		$("#webPlan").click(function() {
-			$('#tableWeb').datagrid({
-				fitColumns : true,
-				width : 820,
-				method : 'post',
-				loadMsg : '正在加载数据中......',
-				pagination : true,
-				nowrap : true,
-				autoRowHeigh : false,
-				toolbar : $('#barWeb'),
-				url : '${path}/getWebPlan',
-				singleSelect : true,
-
-			});
-		});
+		//网点计划管理(含网点计划明细)
+		$("#webPlan")
+				.click(
+						function() {
+							$('#tableWeb')
+									.datagrid(
+											{
+												fitColumns : true,
+												width : 820,
+												method : 'post',
+												loadMsg : '正在加载数据中......',
+												pagination : true,
+												nowrap : true,
+												autoRowHeigh : false,
+												toolbar : $('#barWeb'),
+												url : '${path}/getWebPlan',
+												singleSelect : true,
+												view : detailview,
+												detailFormatter : function(
+														index, row) {
+													return '<div style="padding:2px"><table class="ddv"></table></div>';
+												},
+												onExpandRow : function(index,
+														row) {
+													var ddv = $(this).datagrid(
+															'getRowDetail',
+															index).find(
+															'table.ddv');
+													ddv
+															.datagrid({
+																url : 'webPlanDetail_get?itemid='
+																		+ row.itemid,
+																fitColumns : true,
+																singleSelect : true,
+																rownumbers : true,
+																loadMsg : '',
+																height : 'auto',
+																columns : [ [
+																		{
+																			field : 'orderid',
+																			title : 'Order ID',
+																			width : 100
+																		},
+																		{
+																			field : 'quantity',
+																			title : 'Quantity',
+																			width : 100
+																		},
+																		{
+																			field : 'unitprice',
+																			title : 'Unit Price',
+																			width : 100
+																		} ] ],
+																onResize : function() {
+																	$('#dg')
+																			.datagrid(
+																					'fixDetailRowHeight',
+																					index);
+																},
+																onLoadSuccess : function() {
+																	setTimeout(
+																			function() {
+																				$(
+																						'#dg')
+																						.datagrid(
+																								'fixDetailRowHeight',
+																								index);
+																			},
+																			0);
+																}
+															});
+													$('#dg')
+															.datagrid(
+																	'fixDetailRowHeight',
+																	index);
+												}
+											});
+						});
 		function formatfuncWeb(value, row, index) {
 			var e = '<a href="#"  onclick="goUpdateWeb('
 					+ index
@@ -1039,7 +1138,7 @@ td {
 			var usex = $('#user_sex').combobox('getValue');
 			var ustate = $('#user_state').combobox('getValue');
 			var ude = $('#user_deparment').combobox('getValue');
-			var urole = $('#user_role').combotextbox('getValue');
+			var urole = $('#user_role').combobox('getValue');
 
 			$.ajax({
 				url : '${path}/user_updateUser',
@@ -1058,7 +1157,7 @@ td {
 				success : function(data) {
 					if (data == "SUCCESS") {
 						alert("操作成功");
-						$('#userModal').modal('show');
+						$('#userModal').modal('hide');
 						$('#tableUser').datagrid('reload');
 					} else {
 						alert("操作失败！请重试！");
