@@ -31,12 +31,11 @@ public class CompanyPlanController {
 			return "wrong";
 		}
 		companyPlan.setUser(user);
-		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-		/*
-		 * companyPlan.setPlanDateStart(formatDate.parse(planDateStart));
-		 * companyPlan.setPlanDateEnd(formatDate.parse(planDateEnd));
-		 * companyPlan.setDesignDate(formatDate.parse(designDate));
-		 */
+		SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
+
+		companyPlan.setPlanDateStart(formatDate.parse(planDateStart));
+		companyPlan.setPlanDateEnd(formatDate.parse(planDateEnd));
+		companyPlan.setDesignDate(formatDate.parse(designDate));
 		companyPlan.setState(1);
 		if (companyPlanService.insert(companyPlan) != 0) {
 			return "success";

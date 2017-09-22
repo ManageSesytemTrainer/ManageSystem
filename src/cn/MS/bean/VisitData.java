@@ -7,7 +7,7 @@ import java.util.*;
  *
  */
 public class VisitData {
-	int id;  //id
+	Integer id;  //id
 	Date visitDate;  //走访日期
 	Date visitTime;  //走访时间
 	String address;  //走访地点
@@ -17,10 +17,10 @@ public class VisitData {
 	String countPerson;  //纵享销客账号
 	String details;  //走访内容
 	User user;  //走访人
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getVisitDate() {

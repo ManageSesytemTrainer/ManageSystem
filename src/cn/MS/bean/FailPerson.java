@@ -8,14 +8,14 @@ import java.util.Date;
  *
  */
 public class FailPerson {
-	int id;  //id
+	Integer id;  //id
 	Date faildate; //通报日期
 	String description;  //描述
 	User user;  //不合格人员
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getFaildate() {

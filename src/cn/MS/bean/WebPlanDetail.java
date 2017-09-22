@@ -7,7 +7,7 @@ import java.util.*;
  *
  */
 public class WebPlanDetail {
-	int id;  //id
+	Integer id;  //id
 	String name;  //员工姓名
 	String departmentName;  //所属部门名称
 	String duty;  //职务（角色）名称
@@ -19,10 +19,10 @@ public class WebPlanDetail {
 	WebPlan webPlan;  //网点计划  
 	User user;  //员工
 	int state; //状态
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
