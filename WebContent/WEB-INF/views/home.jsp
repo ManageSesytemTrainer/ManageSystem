@@ -114,11 +114,11 @@ td {
 
 	<!-- 主体-->
 	<div class="row" style="height: 763px">
-		<div class=" col-md-1"
+		<div class=" col-md-1 col-sm-1"
 			style="background-color: #69a6ff; height: inherit"></div>
 		<div class=" col-md-10">
 			<div class="row">
-				<div class=" col-md-12" style="padding: 0">
+				<div class=" col-md-12 col-sm-10" style="padding: 0">
 					<!--标签-->
 					<ul class="nav nav-pills" id="menu">
 						<li role="presentation" class="active"><a href="#">首页</a></li>
@@ -144,7 +144,7 @@ td {
 
 			<div class="row">
 
-				<div class="col-md-12">
+				<div class="col-md-12 ">
 					<!--标签容器-->
 					<div class="tex-box" id="text-box">
 						<div class="list-group" id="list-menu">
@@ -454,62 +454,63 @@ td {
 				</div>
 				<div class="modal-body">
 					<div>
+					   <form action="${path}/excel_import">
 						<input class="easyui-filebox" type="text" id="choosefile">
-						<input type="button" value="确认上传" onclick="return importExcel()">
-					</div>
+						<input type="submit" value="确认上传">
+					</form></div>
 					<div>
+						<form id="visitForm" action="${path}/visitData_add" method ="post">
 						<table>
 							<tr>
 								<th>走访日期：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_visitDate"></td>
+								<td><input type="text" class="easyui-datebox"
+									id="visit_visitDate" name="visitDate"></td>
 							</tr>
 							<tr>
 								<th>走访时间：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_visitTime"></td>
+								<td><input type="text" class="easyui-timebox"
+									id="visit_visitTime" name="visitTime"></td>
 							</tr>
 							<tr>
 								<th>走访地点：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_address"></td>
+									id="visit_address" name="address"></td>
 							</tr>
 							<tr>
 								<th>走访人姓名：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_visitPerson"></td>
+									id="visit_visitPerson" name="visitPerson"></td>
 							</tr>
 							<tr>
 								<th>走访人所在部门：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_departmentName"></td>
+									id="visit_departmentName" name="departmentName"></td>
 							</tr>
 							<tr>
 								<th>走访人职务：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_roleName"></td>
+									id="visit_roleName" name="roleName"></td>
 							</tr>
 							<tr>
 								<th>纵享销客账号：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_countPerson"></td>
+									id="visit_countPerson" name="countPerson"></td>
 							</tr>
 							<tr>
 								<th>走访内容：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_details"></td>
+									id="visit_details" name="details"></td>
 							</tr>
 							<tr>
 								<th>走访人编号：</th>
 								<td><input type="text" class="easyui-textbox"
-									id="visit_user"></td>
+									id="visit_user" name="userId"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="button" value="提交"
-									onclick="return updateVisit()"></td>
+								<td colspan="2"><input type="submit" value="提交"></td>
 							</tr>
 						</table>
-
+						</form>
 					</div>
 				</div>
 			</div>
@@ -568,11 +569,11 @@ td {
 									<th>所属部门:</th>
 									<td><input id="user_department" name="department"
 										class="easyui-combobox"
-										data-options="url:'${path}/de_departments',method:'get',valueField:'departmentname',textField:'text',panelHeight:'auto'"></td>
+										data-options="url:'${path}/de_departments',method:'post',valueField:'id',textField:'deparmentName',panelHeight:'auto',editable:false,data:'json.rows'"></td>
 									<th>所属角色:</th>
-									<td><input type="text" id="user_role" name="role"
+									<td><input id="user_role" name="role"
 										class="easyui-combobox"
-										data-options="url:'${path}/role_selectAll',method:'get',valueField:'departmentname',textField:'text',panelHeight:'auto'"></td>
+										data-options="url:'${path}/role_selectAll',method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,data:'json.rows'"></td>
 								</tr>
 								<tr style="text-align: center;">
 
@@ -710,7 +711,7 @@ td {
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form>
+						<form id="comFrom" action="${path}/companyPlan_insert" method="post">
 							<table>
 								<tr>
 									<td><input type="hidden" id="com_id" name="id"></td>
@@ -723,15 +724,15 @@ td {
 								<tr>
 									<th>计划开始时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="com_planDateStart" name="planDateStart"></td>
+										id="com_planDateStart" name="p_planDateStart"></td>
 									<th>计划结束时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="com_planDateEnd" name="planDateEnd"></td>
+										id="com_planDateEnd" name="p_planDateEnd"></td>
 								</tr>
 								<tr>
 									<th>编制日期：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="com_designDate" name="designDate"></td>
+										id="com_designDate" name="p_designDate"></td>
 
 									<th>编制人姓名：</th>
 									<td><input class="easyui-textbox" type="text"
@@ -765,21 +766,18 @@ td {
 										id="com_remark" name="remark"></td>
 								</tr>
 								<tr>
-									<th>编制人：</th>
+									<!-- <th>编制人：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="com_userId" name="userId"></td>
-
+										id="com_userId" name="user.id"></td>
+ -->
 									<th>状态：</th>
 									<td><select class="easyui-combobox" id="com_state"
 										name="state"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
 								<tr style="text-align: center;">
-
 									<td colspan="4" style="text-align: center;"><input
-										type="button" id="affirm" value="确认"
-										onclick="return updateCP()"></td>
-
+										type="submit" id="affirm" value="提交"></td>
 								</tr>
 							</table>
 						</form>
@@ -818,16 +816,17 @@ td {
 		}
 
 		function goUpdateCom(index) {
-			if (index != null) {
-				$('#tableCP').datagrid('selectRow', index);
-				var row = $('#tableCP').datagrid('getSelected');
-			}
 			$('#comModal').modal('show');
 		}
-		function updateCP() {
-
-			window.location = "${path}/planmodify?id=" + row.id;
-		}
+		$('#comForm').form({
+			success:function(data){
+				if(data=="success"){
+					alert("添加成功！");
+					$('#comModal').modal('hide');
+					$('#tableCP').datagrid('reload');
+				}
+			}
+		});
 		function SearchCom() {
 			$('#tableCP').datagrid('load', {
 			//visitPerson : $('#s_visitPerson').textbox('getValue'),
@@ -897,8 +896,8 @@ td {
 															'table.ddv');
 													ddv
 															.datagrid({
-																url : 'webPlanDetail_get?itemid='
-																		+ row.itemid,
+																url : '${path}/webPlanDetail_get?webPlan_id='
+																		+ row.id,
 																fitColumns : true,
 																singleSelect : true,
 																rownumbers : true,
@@ -906,20 +905,60 @@ td {
 																height : 'auto',
 																columns : [ [
 																		{
-																			field : 'orderid',
-																			title : 'Order ID',
+																			field : 'id',
+																			title : '明细编号',
+																			width : 60
+																		},
+																		{
+																			field : 'name',
+																			title : '编制人姓名',
 																			width : 100
 																		},
 																		{
-																			field : 'quantity',
-																			title : 'Quantity',
+																			field : '编制人所属部门',
+																			title : 'departmentName',
 																			width : 100
 																		},
 																		{
-																			field : 'unitprice',
-																			title : 'Unit Price',
+																			field : 'duty',
+																			title : '编制人职务',
 																			width : 100
-																		} ] ],
+																		},
+																		{
+																			field : 'visitDate',
+																			title : '走访日期',
+																			width : 100
+																		} ,
+																		{
+																			field : 'visitTime',
+																			title : '走访时间',
+																			width : 100
+																		} ,
+																		{
+																			field : 'visitAddress',
+																			title : '走访地点',
+																			width : 100
+																		} ,
+																		{
+																			field : 'collection',
+																			title : '搜集信息数',
+																			width : 40
+																		} ,
+																		{
+																			field : 'remark',
+																			title : '备注',
+																			width : 100
+																		}  ,
+																		{
+																			field : 'userId',
+																			title : '编制人编号',
+																			width : 100
+																		} ,
+																		{
+																			field : 'state',
+																			title : '状态',
+																			width : 100
+																		}  ] ],
 																onResize : function() {
 																	$('#dg')
 																			.datagrid(
@@ -946,24 +985,30 @@ td {
 											});
 						});
 		function formatfuncWeb(value, row, index) {
-			var e = '<a href="#"  onclick="goUpdateWeb('
+			var e = '<a href="#"  onclick="goAddWebDetail('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="添加明细"/></a> ';
 			/* var d = '<a href="#"  onclick="deleteCP('
 					+ index
 					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
 			return e;
 		}
 
-		function goUpdateWeb(index) {
+		function goAddWeb(index) {
 			if (index != null) {
 				$('#tableWeb').datagrid('selectRow', index);
 				var row = $('#tableWeb').datagrid('getSelected');
 			}
 		}
+		function goAddWebDetail(index){
+			
+		}
 		function updateWeb() {
 
 			window.location = "${path}/planmodify?id=" + row.id;
+		}
+		function updateWebDetail(){
+			
 		}
 		function SearchWeb() {
 			$('#tableWeb').datagrid('load', {
@@ -1024,6 +1069,24 @@ td {
 
 			$('#visitModal').modal('show');
 		}
+		$('#visitFile').form({
+			success:function(data){
+				if(data=="SUCCESS"){
+					 alert("操作成功！");
+					   $('#visitModal').modal('hide');
+					   $('#tableVisit').datagrid('reload');
+				}
+			}
+		});
+		$('#visitForm').form({
+			success:function(data){
+			   if(data=="SUCCESS"){
+				   alert("操作成功！");
+				   $('#visitModal').modal('hide');
+				   $('#tableVisit').datagrid('reload');
+			   }	
+			}
+		});
 		function SearchVisit() {
 			$('#tableVisit').datagrid('load', {
 				visitPerson : $('#s_visitPerson').textbox('getValue'),
@@ -1111,7 +1174,7 @@ td {
 				$('#user_id').val(row.id);
 				$('#user_loginName').textbox('setValue', row.loginName);
 				$('#user_password').textbox('setValue', row.password);
-				$('#user_jobName').textbox('setValue', row.jobName);
+				$('#user_jobNumber').textbox('setValue', row.jobName);
 				$('#user_name').textbox('setValue', row.name);
 				$('#user_sex').combobox('setValue', row.sex);
 				$('#user_state').combobox('setValue', row.state);
@@ -1120,7 +1183,7 @@ td {
 			} else {
 				$('#user_loginName').textbox('setValue', "");
 				$('#user_password').textbox('setValue', "");
-				$('#user_jobName').textbox('setValue', "");
+				$('#user_jobNumber').textbox('setValue', "");
 				$('#user_name').textbox('setValue', "");
 				$('#user_sex').textbox('setValue', "");
 				$('#user_state').textbox('setValue', 1);
@@ -1133,7 +1196,7 @@ td {
 			var uid = $('#user_id').val();
 			var uloginName = $('#user_loginName').textbox('getValue');
 			var pwd = $('#user_password').textbox('getValue');
-			var jn = $('#user_jobName').textbox('getValue');
+			var jn = $('#user_jobNumber').textbox('getValue');
 			var uname = $('#user_name').textbox('getValue');
 			var usex = $('#user_sex').combobox('getValue');
 			var ustate = $('#user_state').combobox('getValue');
