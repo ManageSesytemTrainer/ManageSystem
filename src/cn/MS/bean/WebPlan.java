@@ -8,7 +8,7 @@ import java.util.Date;
  *
  */
 public class WebPlan {
-	int id;  //id
+	Integer id;  //id
 	String planName;  //计划名称
 	Date planDateStart;  //计划开始时间
 	Date planDateEnd;  //计划结束时间

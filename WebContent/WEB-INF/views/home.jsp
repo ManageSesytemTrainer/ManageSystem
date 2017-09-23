@@ -417,7 +417,7 @@ td {
 							<div id="barWeb" style="padding: 3px">
 								<div style="margin-bottom: 5px">
 									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateWeb()">添加</a> <a href="#"
+										plain="true" onclick="return goAddWeb()">添加</a> <a href="#"
 										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
 										onclick="return reloadWeb()">刷新</a>
 								</div>
@@ -711,10 +711,10 @@ td {
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form id="comFrom" action="${path}/companyPlan_insert" method="post">
+						<form id="comForm" action="${path}/companyPlan_insert" method="post">
 							<table>
 								<tr>
-									<td><input type="hidden" id="com_id" name="id"></td>
+									<td><input type="hidden" id="com_id" name="id" value="-1"></td>
 								</tr>
 								<tr>
 									<th>计划名：</th>
@@ -786,12 +786,78 @@ td {
 			</div>
 		</div>
 	</div>
+<div class="modal fade" id="webModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4>添加网点计划</h4>
+				</div>
+				<div class="modal-body">
+					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
+						<form id="webFrom" action="${path}/webPlan_updateWebPlan" method="post">
+							<table>
+								<tr>
+									<td><input type="hidden" id="web_id" name="id"></td>
+								</tr>
+								<tr>
+									<th>计划名：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="web_planName" name="planName"></td>
+								</tr>
+								<tr>
+									<th>计划开始时间：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="web_planDateStart" name="p_planDateStart"></td>
+									<th>计划结束时间：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="web_planDateEnd" name="p_planDateEnd"></td>
+								</tr>
+								<tr>
+									<th>编制日期：</th>
+									<td><input class="easyui-datebox" type="text"
+										id="web_designDate" name="p_designDate"></td>
 
+									<th>编制人姓名：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="web_designer" name="designer"></td>
+								</tr>
+								<tr>
+									<th>网点类型：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="web_webType" name="webType"></td>
+
+								
+
+									
+									<!-- <th>编制人：</th>
+									<td><input class="easyui-textbox" type="text"
+										id="com_userId" name="user.id"></td>-->
+									<th>状态：</th>
+									<td><select class="easyui-combobox" id="web_state"
+										name="state"><option value="1" selected="selected">激活</option>
+											<option value="0">注销</option></select></td>
+								</tr>
+								<tr style="text-align: center;">
+									<td colspan="4" style="text-align: center;"><input
+										type="submit" id="affirm" value="提交"></td>
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		//县公司计划管理
 		$("#companyPlan").click(function() {
 			$('#tableCP').datagrid({
-
+				title:'县公司计划',
 				fitColumns : true,
 				width : 820,
 				method : 'post',
@@ -873,6 +939,7 @@ td {
 							$('#tableWeb')
 									.datagrid(
 											{
+												title:'网点计划',
 												fitColumns : true,
 												width : 820,
 												method : 'post',
@@ -894,8 +961,7 @@ td {
 															'getRowDetail',
 															index).find(
 															'table.ddv');
-													ddv
-															.datagrid({
+													ddv.datagrid({
 																url : '${path}/webPlanDetail_get?webPlan_id='
 																		+ row.id,
 																fitColumns : true,
@@ -960,7 +1026,7 @@ td {
 																			width : 100
 																		}  ] ],
 																onResize : function() {
-																	$('#dg')
+																	$('#tableWeb')
 																			.datagrid(
 																					'fixDetailRowHeight',
 																					index);
@@ -968,8 +1034,7 @@ td {
 																onLoadSuccess : function() {
 																	setTimeout(
 																			function() {
-																				$(
-																						'#dg')
+																				$('#tableWeb')
 																						.datagrid(
 																								'fixDetailRowHeight',
 																								index);
@@ -977,7 +1042,7 @@ td {
 																			0);
 																}
 															});
-													$('#dg')
+													$('#tableWeb')
 															.datagrid(
 																	'fixDetailRowHeight',
 																	index);
@@ -995,18 +1060,20 @@ td {
 		}
 
 		function goAddWeb(index) {
-			if (index != null) {
-				$('#tableWeb').datagrid('selectRow', index);
-				var row = $('#tableWeb').datagrid('getSelected');
-			}
+			$('#webModal').modal('show');
 		}
 		function goAddWebDetail(index){
 			
 		}
-		function updateWeb() {
-
-			window.location = "${path}/planmodify?id=" + row.id;
-		}
+		$('#webForm').form({
+			success:function(data){
+				if(data=="SUCCESS"){
+					alert("添加成功");
+					$('#webModal').modal('hide');
+					$('#tableWeb').datagrid('reload');
+				}
+			}
+		});
 		function updateWebDetail(){
 			
 		}

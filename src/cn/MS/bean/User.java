@@ -7,7 +7,7 @@ import java.util.Date;
  *
  */
 public class User {
-	int id;  //id
+	Integer id;  //id
 	String jobNumber;  //¹¤ºÅ
 	String loginName;  //µÇÂ¼Ãû
 	String password;  //ÃÜÂë
