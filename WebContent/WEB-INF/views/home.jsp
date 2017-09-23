@@ -336,9 +336,12 @@ td {
 										plain="true" onclick="return reloadRole()">刷新</a>
 								</div>
 								<div>
-									<span>角色状态：</span> <select class="easyui-combobox" id="role_s_state"
-										style="line-height: 26px; border: 1px solid #ccc"><option value="1" selected="selected">激活</option><option value="0">注销</option></select> <span>角色名称：</span>
-									<input class="easyui-textbox" id="role_s_roleName"
+									<span>角色状态：</span> <select class="easyui-combobox"
+										id="role_s_state"
+										style="line-height: 26px; border: 1px solid #ccc"><option
+											value="1">激活</option>
+										<option value="0">注销</option></select> <span>角色名称：</span> <input
+										class="easyui-textbox" id="role_s_roleName"
 										style="line-height: 26px; border: 1px solid #ccc"> <a
 										href="#" class="easyui-linkbutton" plain="true"
 										onclick="SearchRole()">查询</a>
@@ -448,15 +451,19 @@ td {
 				</div>
 				<div class="modal-body">
 					<div>
-						<form id="visitImport" action="${path}/excel_import" method="post" enctype="multipart/form-data">
-							<input class="easyui-filebox" type="text" id="choosefile" name="file">
-							<input type="submit" class="btn btn-info" value="确认上传">
+						<form id="visitImport" action="${path}/excel_import" method="post"
+							enctype="multipart/form-data">
+							<input class="easyui-filebox" type="text" id="choosefile"
+								name="file"> <input type="submit" class="btn btn-info"
+								value="确认上传">
 						</form>
 					</div>
 					<div>
 						<form id="visitForm" action="${path}/visitData_add" method="post">
 							<table>
-							  <tr><td><input type="hidden" name="id" value="-1"></td></tr>
+								<tr>
+									<td><input type="hidden" name="id" value="-1"></td>
+								</tr>
 								<tr>
 									<th>走访日期：</th>
 									<td><input type="text" class="easyui-datebox"
@@ -478,14 +485,27 @@ td {
 										id="visit_visitPerson" name="visitPerson"></td>
 								</tr>
 								<tr>
-									<th>走访人所在部门：</th>
-									<td><input type="text" class="easyui-textbox"
-										id="visit_departmentName" name="departmentName"></td>
+									<th>所属部门:</th>
+									<td><input id="visit_department" name="department.id"
+										class="easyui-combobox"
+										data-options="valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
+										onShowPanel : function(){
+                                               var s=$(this).combobox('getData');
+                                                if(s.length==0){
+                                                    $(this).combobox('options').url='${path}/de_idAndName';
+                                                    $(this).combobox('reload');
+                                                  } }"></td>
 								</tr>
 								<tr>
-									<th>走访人职务：</th>
-									<td><input type="text" class="easyui-textbox"
-										id="visit_roleName" name="roleName"></td>
+									<th>所属角色:</th>
+									<td><input id="user_role" name="role.id"
+										class="easyui-combobox"
+										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
+                                                var s=$(this).combobox('getData');
+                                                if(s.length==0){
+                                                    $(this).combobox('options').url='${path}/role_selectIdandName';
+                                                    $(this).combobox('reload');
+                                                              } }"></td>
 								</tr>
 								<tr>
 									<th>纵享销客账号：</th>
@@ -503,7 +523,8 @@ td {
 										id="visit_user" name="userId"></td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="submit" class="btn btn-info" value="提交"></td>
+									<td colspan="2"><input type="submit" class="btn btn-info"
+										value="提交"></td>
 								</tr>
 							</table>
 						</form>
@@ -565,11 +586,22 @@ td {
 									<th>所属部门:</th>
 									<td><input id="user_department" name="department"
 										class="easyui-combobox"
-										data-options="url:'${path}/de_departments',method:'post',valueField:'id',textField:'deparmentName',panelHeight:'auto',editable:false,data:'json.rows'"></td>
+										data-options="valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
+										onShowPanel : function(){
+                                               var s=$(this).combobox('getData');
+                                                if(s.length==0){
+                                                    $(this).combobox('options').url='${path}/de_idAndName';
+                                                    $(this).combobox('reload');
+                                                  } }"></td>
 									<th>所属角色:</th>
 									<td><input id="user_role" name="role"
 										class="easyui-combobox"
-										data-options="url:'${path}/role_selectAll',method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,data:'json.rows'"></td>
+										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
+                                                var s=$(this).combobox('getData');
+                                                if(s.length==0){
+                                                    $(this).combobox('options').url='${path}/role_selectIdandName';
+                                                    $(this).combobox('reload');
+                                                              } }"></td>
 								</tr>
 								<tr style="text-align: center;">
 
@@ -845,7 +877,7 @@ td {
 						</form>
 					</fieldset>
 				</div>
-			</div> 
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -1270,6 +1302,7 @@ td {
 				$('#user_deparment').combobox('setValue', row.department.id);
 				$('#user_role').combobox('setValue', row.role.id);
 			} else {
+				$('#user_id').val(-1);
 				$('#user_loginName').textbox('setValue', "");
 				$('#user_password').textbox('setValue', "");
 				$('#user_jobNumber').textbox('setValue', "");
@@ -1289,9 +1322,9 @@ td {
 			var uname = $('#user_name').textbox('getValue');
 			var usex = $('#user_sex').combobox('getValue');
 			var ustate = $('#user_state').combobox('getValue');
-			var ude = $('#user_deparment').combobox('getValue');
+			var ude = $('#user_department').combobox('getValue');
 			var urole = $('#user_role').combobox('getValue');
-			pwd=hex_md5(uloginName+hex_md5(pwd));
+			pwd = hex_md5(uloginName + hex_md5(pwd));
 			$.ajax({
 				url : '${path}/user_updateUser',
 				data : {

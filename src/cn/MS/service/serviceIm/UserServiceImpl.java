@@ -126,5 +126,20 @@ public class UserServiceImpl implements UserService{
 		}
 		return ob;
 	}
+	/* (non-Javadoc)
+	 * @see cn.MS.service.UserService#getIdAndName()
+	 */
+	@Override
+	public String getIdAndName() {
+		List<User> list=um.getAllUser();
+		JSONArray array=new JSONArray();
+		for(User u:list){
+			JSONObject object=new JSONObject();
+			object.put("id", u.getId());
+			object.put("name", u.getName());
+			array.put(object);
+		}
+		return array.toString();
+	}
 
 }

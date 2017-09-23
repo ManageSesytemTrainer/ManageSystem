@@ -131,4 +131,9 @@ public class RoleController {
 		userService.modifyUser(user);
 		return "SUCCESS";
 	}
+	@RequestMapping(value="/role_selectIdandName", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String getALLIdAndName(){
+		return roleService.selectAllIdandName();
+	}
 }

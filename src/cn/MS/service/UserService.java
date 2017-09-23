@@ -15,4 +15,5 @@ public interface UserService {
 	int addUser(User user);
 	String getUsersByDepartmentId(int departmentid);
 	String getUsersByRoleId(int roleId);
+	String getIdAndName();
 }

@@ -7,4 +7,5 @@ public interface DepartmentService {
 	int delete(int id);
 	String selectAll();
 	int updateDepartment(Department de);
+	String getAllIdandName();
 }

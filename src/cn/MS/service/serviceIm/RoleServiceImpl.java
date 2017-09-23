@@ -119,4 +119,20 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.selectRoleById(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.MS.service.RoleService#selectAllIdandName()
+	 */
+	@Override
+	public String selectAllIdandName() {
+		List<Role> list=roleMapper.selectAll();
+		JSONArray array=new JSONArray();
+		for(Role r:list){
+			JSONObject object=new JSONObject();
+			object.put("id", r.getId());
+			object.put("roleName", r.getRoleName());
+			array.put(object);
+		}
+		return array.toString();
+	}
+
 }

@@ -18,7 +18,11 @@ public class DepartmentController {
 	public String getDepatments() {
 		return ds.selectAll();
 	}
-
+	@RequestMapping(value = "/de_idAndName", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+	public String getAllIdandName(){
+    	return ds.getAllIdandName();
+    }
 	@RequestMapping("/de_updateDe")
 	@ResponseBody
 	public String updateDepartment(Department de) {

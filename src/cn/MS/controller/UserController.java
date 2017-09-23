@@ -142,4 +142,9 @@ public class UserController {
 			return "ERROR";
 		return role;
 	}
+	@RequestMapping(value = "/user_idAndName", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String getIdandName(){
+		return us.getIdAndName();
+	}
 }

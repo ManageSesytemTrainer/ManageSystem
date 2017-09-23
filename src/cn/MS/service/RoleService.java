@@ -14,7 +14,8 @@ public interface RoleService {
 	String selectAllActiveRole();
 
 	String selectRoleByName(String roleName);
-
+    
+	String selectAllIdandName();
 	Role selectRoleById(int id);
 
 	int cancelRole(Role role);

@@ -53,7 +53,26 @@ public class DepartmentServiceIm implements DepartmentService {
 
 	@Override
 	public int updateDepartment(Department de) {
-		// TODO Auto-generated method stub
 		return dm.updateDepartment(de);
+	}
+
+	/* 
+	 * @see cn.MS.service.DepartmentService#getAllIdandName()
+	 */
+	@Override
+	public String getAllIdandName() {
+		List<Department> list = dm.selectAll();
+		JSONArray array = new JSONArray();
+
+		if (list != null) {
+			for (Department d : list) {
+				JSONObject ob = new JSONObject();
+				ob.put("id", d.getId());
+				ob.put("departmentName", d.getDepartmentName());
+				array.put(ob);
+			}
+		}
+	
+		return array.toString();
 	}
 }
