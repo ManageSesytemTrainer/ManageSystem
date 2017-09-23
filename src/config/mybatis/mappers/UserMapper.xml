@@ -51,7 +51,7 @@
 	</update>
 	<insert id="addUser">
 		insert user(job_number,loginname,password,name,sex,birthday,
-			phone,mobile_phone,email,state,department_name,dep_id,role_id)
+			phone,mobile_phone,email,state,department_name,department_id,role_id)
 		values(#{jobNumber},#{loginName},#{password},#{name},#{sex},#{birthday},
 			#{phone},#{mobilePhone},#{email},#{state},#{departmentName},#{department.id},#{role.id})
 	</insert>
