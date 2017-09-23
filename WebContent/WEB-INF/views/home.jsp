@@ -133,7 +133,7 @@ td {
 
 							</ul></li>
 						<li role="presentation" id="visitData"><a href="#">走访信息</a></li>
-						<li role="presentation"><a href="#">统计信息</a></li>
+						<li role="presentation" id="failInfo"><a href="#">统计信息</a></li>
 						<li role="presentation" id="userInfo"><a href="#">用户信息</a></li>
 						<li role="presentation" id="deInfo"><a href="#">部门信息</a></li>
 						<li role="presentation" id="roleInfo"><a href="#">角色信息</a></li>
@@ -225,23 +225,16 @@ td {
 							</div>
 						</div>
 						<div id="tex3">
-							<div style="float: right;">
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#">添加</button>
-							</div>
-							<table class="table table-striped">
+							<table id="tableFail" style="min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
+										<th data-options="field:'check'"></th>
+										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'user.jobNumber',width:100">工号</th>
+										<th data-options="field:'user.name',width:60,align:'right'">姓名</th>
+										<th data-options="field:'description',width:60,align:'right'">描述</th>
 									</tr>
 								</thead>
-
 							</table>
 						</div>
 						<div id="tex4">
@@ -802,7 +795,7 @@ td {
 						<form id="webFrom" action="${path}/webPlan_updateWebPlan" method="post">
 							<table>
 								<tr>
-									<td><input type="hidden" id="web_id" name="id"></td>
+									<td><input type="hidden" id="web_id" name="id" value="-1"></td>
 								</tr>
 								<tr>
 									<th>计划名：</th>
@@ -815,16 +808,16 @@ td {
 										id="web_planDateStart" name="p_planDateStart"></td>
 									<th>计划结束时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="web_planDateEnd" name="p_planDateEnd"></td>
+										id="web_planDateEnd" name="p_planDateEnd" ></td>
 								</tr>
 								<tr>
 									<th>编制日期：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="web_designDate" name="p_designDate"></td>
+										id="web_designDate" name="p_designDate" editable="false"></td>
 
 									<th>编制人姓名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="web_designer" name="designer"></td>
+										id="web_designer" name="designer" editable="false" value="${name}"></td>
 								</tr>
 								<tr>
 									<th>网点类型：</th>
@@ -834,9 +827,9 @@ td {
 								
 
 									
-									<!-- <th>编制人：</th>
+									 <th>编制人：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="com_userId" name="user.id"></td>-->
+										id="com_userId" name="user.id" hidden="true" editable="true" value="${id}"></td>
 									<th>状态：</th>
 									<td><select class="easyui-combobox" id="web_state"
 										name="state"><option value="1" selected="selected">激活</option>
@@ -1208,6 +1201,28 @@ td {
 							}
 						});
 			} */
+		//不合格人员
+		$('#failInfo').click(function(){
+			$('#tableFail').datagrid({
+				fitColumns : true,
+				rownumbers : true,
+				width : 920,
+				method : 'post',
+				loadMsg : '正在加载数据中......',
+				pagination : true,
+				toolbar : {title:'刷新',
+					iconCls:'icon-reload',
+					handler:function(){
+						$('#tableFail').datagrid('reload');
+					}
+					
+				},
+				url : '${path}/queryAllFailPerosn',
+				singleSelect : true,
+				nowrap : true,
+				autoRowHeigh : false
+			});
+		});
 		//用户管理
 		$('#userInfo').click(function() {
 			$('#tableUser').datagrid({
