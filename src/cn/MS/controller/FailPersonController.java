@@ -15,7 +15,7 @@ public class FailPersonController {
 	public String queryAllFailPerosn() {
 		String fp = fps.getAll();
 		if(null == fp)
-			return "ERROR";
+			return "NONE";
 		return fp;
 	}
 	@RequestMapping("/queryCompareResults")
