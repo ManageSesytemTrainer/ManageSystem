@@ -21,7 +21,11 @@
 		</set>
 		where id = #{id}
 	</update>
-	<select id="getAll">
+	<select id="getAll" resultMap="fpMap">
 		select *from fail_person order by fail_date desc
 	</select>
+	<resultMap type="cn.MS.bean.FailPerson" id="fpMap">
+		<id property="id" column="id"/>
+		<result property="faildate" column="fail_date"/>
+	</resultMap>
 </mapper>
