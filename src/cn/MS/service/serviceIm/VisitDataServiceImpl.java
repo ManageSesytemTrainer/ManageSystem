@@ -47,9 +47,9 @@ public class VisitDataServiceImpl implements VisitDataService {
 			}
 		}
 		if (count != 0) {
-			result = "成功上传"+count+"条数据！";
+			result = "upload "+count+" datas!";
 		} else {
-			result = "上传失败！";
+			result = "FAIL!";
 		}
 		return result;
 	}
@@ -57,9 +57,9 @@ public class VisitDataServiceImpl implements VisitDataService {
 	@Override
 	public String addVisitData(VisitData visitData) {
 		if(visitDataMapper.addVisitData(visitData) != 0){
-			return "添加成功！";
+			return "SUCCESS!";
 		}else{
-			return "添加失败！";
+			return "FAIL!";
 		}
 	}
 
