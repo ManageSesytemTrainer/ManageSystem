@@ -33,7 +33,6 @@ public class VisitDataController {
     @ResponseBody
     public String  upload(@RequestParam(value="file",required = false)MultipartFile file,HttpServletRequest request, HttpServletResponse response) throws Exception{
         String result = visitDataService.readExcelFile(file);
-        System.out.println(result);
         return result;
     }
 	
