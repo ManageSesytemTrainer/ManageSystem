@@ -9,18 +9,18 @@ import java.util.List;
  *
  */
 public class Role {
-	int id; // id
+	Integer id; // id
 	String roleName; // 角色名称
 	String description; // 角色描述
 	int state; // 状态（是否激活）
 	int roleLimit; // 角色权限
 	List<User> listUser; // 包含的用户
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

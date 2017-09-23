@@ -7,22 +7,22 @@ import java.util.Date;
  *
  */
 public class CompareResults {
-	private int webPlanDetailId;
-	private int visitDataId;
+	private Integer webPlanDetailId;
+	private Integer visitDataId;
 	private String name;
 	private String address;
 	private Date date;
 	private String result;
-	public int getWebPlanDetailId() {
+	public Integer getWebPlanDetailId() {
 		return webPlanDetailId;
 	}
-	public void setWebPlanDetailId(int webPlanDetailId) {
+	public void setWebPlanDetailId(Integer webPlanDetailId) {
 		this.webPlanDetailId = webPlanDetailId;
 	}
-	public int getVisitDataId() {
+	public Integer getVisitDataId() {
 		return visitDataId;
 	}
-	public void setVisitDataId(int visitDataId) {
+	public void setVisitDataId(Integer visitDataId) {
 		this.visitDataId = visitDataId;
 	}
 	public String getName() {

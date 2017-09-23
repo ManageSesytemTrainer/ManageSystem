@@ -8,7 +8,7 @@ import java.util.Date;
  *
  */
 public class CompanyPlan {
-	int id;  //id
+	Integer id;  //id
 	String planName;  //计划名
 	Date planDateStart;  //计划开始时间
 	Date planDateEnd;  //计划结束时间
@@ -22,10 +22,10 @@ public class CompanyPlan {
 	String remark;  //备注
 	User user;  //编制人
 	int state; //状态
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getPlanName() {

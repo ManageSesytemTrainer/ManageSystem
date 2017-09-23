@@ -21,10 +21,10 @@ public class User {
 	Department department;  //所属部门
 	Role role;  //所属角色（职务）
 	String departmentName;  //部门名称
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getJobNumber() {

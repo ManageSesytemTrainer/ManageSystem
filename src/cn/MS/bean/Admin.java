@@ -5,14 +5,14 @@ package cn.MS.bean;
  *
  */
 public class Admin {
-	int id;  //id
+	Integer id;  //id
 	String loginName;  //登录名
 	String password;  //密码
 	String name;  //真实姓名
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getLoginName() {
