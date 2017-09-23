@@ -40,6 +40,7 @@
 	src="${path}/resource/js/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
 <script type="text/javascript"
 	src="${path}/resource/js/jquery-easyui-1.5.1/datagrid-detailview.js"></script>
+<script type="text/javascript" src="${path}/resource/js/md5.js"></script>
 </head>
 <script>
 	$(function() {
@@ -335,8 +336,8 @@ td {
 										plain="true" onclick="return reloadRole()">刷新</a>
 								</div>
 								<div>
-									<span>角色编号：</span> <input class="easyui-textbox" id="role_s_id"
-										style="line-height: 26px; border: 1px solid #ccc"> <span>角色名称：</span>
+									<span>角色状态：</span> <select class="easyui-combobox" id="role_s_state"
+										style="line-height: 26px; border: 1px solid #ccc"><option value="1" selected="selected">激活</option><option value="0">注销</option></select> <span>角色名称：</span>
 									<input class="easyui-textbox" id="role_s_roleName"
 										style="line-height: 26px; border: 1px solid #ccc"> <a
 										href="#" class="easyui-linkbutton" plain="true"
@@ -447,62 +448,64 @@ td {
 				</div>
 				<div class="modal-body">
 					<div>
-					   <form action="${path}/excel_import">
-						<input class="easyui-filebox" type="text" id="choosefile">
-						<input type="submit" value="确认上传">
-					</form></div>
+						<form id="visitImport" action="${path}/excel_import" method="post" enctype="multipart/form-data">
+							<input class="easyui-filebox" type="text" id="choosefile" name="file">
+							<input type="submit" class="btn btn-info" value="确认上传">
+						</form>
+					</div>
 					<div>
-						<form id="visitForm" action="${path}/visitData_add" method ="post">
-						<table>
-							<tr>
-								<th>走访日期：</th>
-								<td><input type="text" class="easyui-datebox"
-									id="visit_visitDate" name="visitDate"></td>
-							</tr>
-							<tr>
-								<th>走访时间：</th>
-								<td><input type="text" class="easyui-timebox"
-									id="visit_visitTime" name="visitTime"></td>
-							</tr>
-							<tr>
-								<th>走访地点：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_address" name="address"></td>
-							</tr>
-							<tr>
-								<th>走访人姓名：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_visitPerson" name="visitPerson"></td>
-							</tr>
-							<tr>
-								<th>走访人所在部门：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_departmentName" name="departmentName"></td>
-							</tr>
-							<tr>
-								<th>走访人职务：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_roleName" name="roleName"></td>
-							</tr>
-							<tr>
-								<th>纵享销客账号：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_countPerson" name="countPerson"></td>
-							</tr>
-							<tr>
-								<th>走访内容：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_details" name="details"></td>
-							</tr>
-							<tr>
-								<th>走访人编号：</th>
-								<td><input type="text" class="easyui-textbox"
-									id="visit_user" name="userId"></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" value="提交"></td>
-							</tr>
-						</table>
+						<form id="visitForm" action="${path}/visitData_add" method="post">
+							<table>
+							  <tr><td><input type="hidden" name="id" value="-1"></td></tr>
+								<tr>
+									<th>走访日期：</th>
+									<td><input type="text" class="easyui-datebox"
+										id="visit_visitDate" name="visitDate"></td>
+								</tr>
+								<tr>
+									<th>走访时间：</th>
+									<td><input type="text" class="easyui-timebox"
+										id="visit_visitTime" name="visitTime"></td>
+								</tr>
+								<tr>
+									<th>走访地点：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_address" name="address"></td>
+								</tr>
+								<tr>
+									<th>走访人姓名：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_visitPerson" name="visitPerson"></td>
+								</tr>
+								<tr>
+									<th>走访人所在部门：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_departmentName" name="departmentName"></td>
+								</tr>
+								<tr>
+									<th>走访人职务：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_roleName" name="roleName"></td>
+								</tr>
+								<tr>
+									<th>纵享销客账号：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_countPerson" name="countPerson"></td>
+								</tr>
+								<tr>
+									<th>走访内容：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_details" name="details"></td>
+								</tr>
+								<tr>
+									<th>走访人编号：</th>
+									<td><input type="text" class="easyui-textbox"
+										id="visit_user" name="userId"></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" class="btn btn-info" value="提交"></td>
+								</tr>
+							</table>
 						</form>
 					</div>
 				</div>
@@ -570,7 +573,7 @@ td {
 								</tr>
 								<tr style="text-align: center;">
 
-									<td colspan="4"><input type="button"
+									<td colspan="4"><input type="button" class="btn btn-info"
 										style="margin-top: 12px;" value="提交"
 										onclick="return updateUser()"></td>
 
@@ -622,7 +625,7 @@ td {
 
 									<td colspan="2" style="text-align: center;"><input
 										type="button" id="affirm" value="确认"
-										onclick="return updateDe()"></td>
+										onclick="return updateDe()" class="btn btn-info"></td>
 
 								</tr>
 							</table>
@@ -680,7 +683,7 @@ td {
 								<tr style="text-align: center;">
 
 									<td colspan="2" style="text-align: center;"><input
-										type="button" id="affirm" value="确认"
+										type="button" class="btn btn-info" id="affirm" value="确认"
 										onclick="return updateRole()"></td>
 
 								</tr>
@@ -704,7 +707,8 @@ td {
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form id="comForm" action="${path}/companyPlan_insert" method="post">
+						<form id="comForm" action="${path}/companyPlan_insert"
+							method="post">
 							<table>
 								<tr>
 									<td><input type="hidden" id="com_id" name="id" value="-1"></td>
@@ -770,7 +774,7 @@ td {
 								</tr>
 								<tr style="text-align: center;">
 									<td colspan="4" style="text-align: center;"><input
-										type="submit" id="affirm" value="提交"></td>
+										type="submit" class="btn btn-info" id="affirm" value="提交"></td>
 								</tr>
 							</table>
 						</form>
@@ -779,7 +783,7 @@ td {
 			</div>
 		</div>
 	</div>
-<div class="modal fade" id="webModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="webModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -792,10 +796,13 @@ td {
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form id="webFrom" action="${path}/webPlan_updateWebPlan" method="post">
+						<form id="webFrom" action="${path}/webPlan_updateWebPlan"
+							method="post">
 							<table>
 								<tr>
 									<td><input type="hidden" id="web_id" name="id" value="-1"></td>
+									<td><input type="hidden" id="com_userId" name="user.id"
+										hidden="true" value="${id}"></td>
 								</tr>
 								<tr>
 									<th>计划名：</th>
@@ -808,7 +815,7 @@ td {
 										id="web_planDateStart" name="p_planDateStart"></td>
 									<th>计划结束时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="web_planDateEnd" name="p_planDateEnd" ></td>
+										id="web_planDateEnd" name="p_planDateEnd"></td>
 								</tr>
 								<tr>
 									<th>编制日期：</th>
@@ -817,19 +824,14 @@ td {
 
 									<th>编制人姓名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="web_designer" name="designer" editable="false" value="${name}"></td>
+										id="web_designer" name="designer" editable="false"
+										value="${name}"></td>
 								</tr>
 								<tr>
 									<th>网点类型：</th>
 									<td><input class="easyui-textbox" type="text"
 										id="web_webType" name="webType"></td>
 
-								
-
-									
-									 <th>编制人：</th>
-									<td><input class="easyui-textbox" type="text"
-										id="com_userId" name="user.id" hidden="true" editable="true" value="${id}"></td>
 									<th>状态：</th>
 									<td><select class="easyui-combobox" id="web_state"
 										name="state"><option value="1" selected="selected">激活</option>
@@ -837,20 +839,20 @@ td {
 								</tr>
 								<tr style="text-align: center;">
 									<td colspan="4" style="text-align: center;"><input
-										type="submit" id="affirm" value="提交"></td>
+										type="submit" class="btn btn-info" id="affirm" value="提交"></td>
 								</tr>
 							</table>
 						</form>
 					</fieldset>
 				</div>
-			</div>
+			</div> 
 		</div>
 	</div>
 	<script type="text/javascript">
 		//县公司计划管理
 		$("#companyPlan").click(function() {
 			$('#tableCP').datagrid({
-				title:'县公司计划',
+				title : '县公司计划',
 				fitColumns : true,
 				width : 820,
 				method : 'post',
@@ -878,8 +880,8 @@ td {
 			$('#comModal').modal('show');
 		}
 		$('#comForm').form({
-			success:function(data){
-				if(data=="success"){
+			success : function(data) {
+				if (data == "success") {
 					alert("添加成功！");
 					$('#comModal').modal('hide');
 					$('#tableCP').datagrid('reload');
@@ -932,7 +934,7 @@ td {
 							$('#tableWeb')
 									.datagrid(
 											{
-												title:'网点计划',
+												title : '网点计划',
 												fitColumns : true,
 												width : 820,
 												method : 'post',
@@ -954,7 +956,8 @@ td {
 															'getRowDetail',
 															index).find(
 															'table.ddv');
-													ddv.datagrid({
+													ddv
+															.datagrid({
 																url : '${path}/webPlanDetail_get?webPlan_id='
 																		+ row.id,
 																fitColumns : true,
@@ -987,39 +990,40 @@ td {
 																			field : 'visitDate',
 																			title : '走访日期',
 																			width : 100
-																		} ,
+																		},
 																		{
 																			field : 'visitTime',
 																			title : '走访时间',
 																			width : 100
-																		} ,
+																		},
 																		{
 																			field : 'visitAddress',
 																			title : '走访地点',
 																			width : 100
-																		} ,
+																		},
 																		{
 																			field : 'collection',
 																			title : '搜集信息数',
 																			width : 40
-																		} ,
+																		},
 																		{
 																			field : 'remark',
 																			title : '备注',
 																			width : 100
-																		}  ,
+																		},
 																		{
 																			field : 'userId',
 																			title : '编制人编号',
 																			width : 100
-																		} ,
+																		},
 																		{
 																			field : 'state',
 																			title : '状态',
 																			width : 100
-																		}  ] ],
+																		} ] ],
 																onResize : function() {
-																	$('#tableWeb')
+																	$(
+																			'#tableWeb')
 																			.datagrid(
 																					'fixDetailRowHeight',
 																					index);
@@ -1027,7 +1031,8 @@ td {
 																onLoadSuccess : function() {
 																	setTimeout(
 																			function() {
-																				$('#tableWeb')
+																				$(
+																						'#tableWeb')
 																						.datagrid(
 																								'fixDetailRowHeight',
 																								index);
@@ -1055,20 +1060,20 @@ td {
 		function goAddWeb(index) {
 			$('#webModal').modal('show');
 		}
-		function goAddWebDetail(index){
-			
+		function goAddWebDetail(index) {
+
 		}
 		$('#webForm').form({
-			success:function(data){
-				if(data=="SUCCESS"){
+			success : function(data) {
+				if (data == "SUCCESS") {
 					alert("添加成功");
 					$('#webModal').modal('hide');
 					$('#tableWeb').datagrid('reload');
 				}
 			}
 		});
-		function updateWebDetail(){
-			
+		function updateWebDetail() {
+
 		}
 		function SearchWeb() {
 			$('#tableWeb').datagrid('load', {
@@ -1129,22 +1134,22 @@ td {
 
 			$('#visitModal').modal('show');
 		}
-		$('#visitFile').form({
-			success:function(data){
-				if(data=="SUCCESS"){
-					 alert("操作成功！");
-					   $('#visitModal').modal('hide');
-					   $('#tableVisit').datagrid('reload');
+		$('#visitImport').form({
+			success : function(data) {
+				if (data == "SUCCESS") {
+					alert("操作成功！");
+					$('#visitModal').modal('hide');
+					$('#tableVisit').datagrid('reload');
 				}
 			}
 		});
 		$('#visitForm').form({
-			success:function(data){
-			   if(data=="SUCCESS"){
-				   alert("操作成功！");
-				   $('#visitModal').modal('hide');
-				   $('#tableVisit').datagrid('reload');
-			   }	
+			success : function(data) {
+				if (data == "SUCCESS") {
+					alert("操作成功！");
+					$('#visitModal').modal('hide');
+					$('#tableVisit').datagrid('reload');
+				}
 			}
 		});
 		function SearchVisit() {
@@ -1202,7 +1207,7 @@ td {
 						});
 			} */
 		//不合格人员
-		$('#failInfo').click(function(){
+		$('#failInfo').click(function() {
 			$('#tableFail').datagrid({
 				fitColumns : true,
 				rownumbers : true,
@@ -1210,13 +1215,15 @@ td {
 				method : 'post',
 				loadMsg : '正在加载数据中......',
 				pagination : true,
-				toolbar : {title:'刷新',
-					iconCls:'icon-reload',
-					handler:function(){
+				toolbar : [ {
+					title : '刷新',
+					iconCls : 'icon-reload',
+					handler : function() {
 						$('#tableFail').datagrid('reload');
 					}
-					
-				},
+				} ]
+
+				,
 				url : '${path}/queryAllFailPerosn',
 				singleSelect : true,
 				nowrap : true,
@@ -1284,7 +1291,7 @@ td {
 			var ustate = $('#user_state').combobox('getValue');
 			var ude = $('#user_deparment').combobox('getValue');
 			var urole = $('#user_role').combobox('getValue');
-
+			pwd=hex_md5(uloginName+hex_md5(pwd));
 			$.ajax({
 				url : '${path}/user_updateUser',
 				data : {
@@ -1404,7 +1411,7 @@ td {
 				url : '${path}/de_updateDe',
 				data : {
 					id : did,
-					depattmentName : dname,
+					departmentName : dname,
 					phone : dphone,
 					state : dstate
 				},
@@ -1427,7 +1434,7 @@ td {
 		function SearchDe() {
 			$('#tableDe').datagrid('load', {
 				id : $('#de_s_id').textbox('getValue'),
-				departmentName : $('de_s_departmentName').textbox('getValue')
+				departmentName : $('#de_s_departmentName').textbox('getValue')
 			});
 		}
 		function deleteDe(index) {
@@ -1474,7 +1481,7 @@ td {
 				loadMsg : '正在加载数据中......',
 				pagination : true,
 				toolbar : '#barRole',
-				url : '${path}/role_selectAll',
+				url : '${path}/role_select',
 				singleSelect : true,
 				nowrap : true,
 				autoRowHeigh : false
@@ -1545,7 +1552,7 @@ td {
 		}
 		function SearchRole() {
 			$('#tableRole').datagrid('load', {
-				id : $('#role_s_id').textbox('getValue'),
+				state : $('#role_s_state').combobox('getValue'),
 				roleName : $('#role_s_roleName').textbox('getValue')
 			})
 		}
