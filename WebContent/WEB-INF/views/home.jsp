@@ -137,7 +137,7 @@ td {
 						<li role="presentation" id="failInfo"><a href="#">统计信息</a></li>
 						<li role="presentation" id="userInfo"><a href="#">用户信息</a></li>
 						<li role="presentation" id="deInfo"><a href="#">部门信息</a></li>
-						<li role="presentation" id="roleInfo"><a href="#">角色信息</a></li>
+						<c:if test="${role_limit}==1"><li role="presentation" id="roleInfo"><a href="#">角色信息</a></li></c:if>
 					</ul>
 				</div>
 
@@ -256,15 +256,15 @@ td {
 										<th
 											data-options="field:'department.id',width:100,align:'right'">所在部门</th>
 										<th data-options="field:'role.id',width:100,align:'right'">职务</th>
-										<th
-											data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th>
+										<%-- <c:if test="${role_limit}==1"> --%><th data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th><%-- </c:if> --%>
 									</tr>
 								</thead>
 							</table>
 							<div id="barUser" style="padding: 3px">
 								<div style="margin-bottom: 5px">
-									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateUser()">添加</a> <a
+									<%--  <c:if test="${role_limit}==1">--%><a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateUser()">添加</a> <%-- </c:if> --%>
+										<a
 										href="#" class="easyui-linkbutton" iconCls="icon-reload"
 										plain="true" onclick="return reloadUser()">刷新</a>
 								</div>
@@ -289,15 +289,15 @@ td {
 										<th data-options="field:'departmentName',width:100">部门名称</th>
 										<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
 										<th data-options="field:'state',width:160,align:'center'">状态</th>
-										<th
-											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th>
+										<c:if test="${role_limit}==1"><th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th></c:if>
 									</tr>
 								</thead>
 							</table>
 							<div id="barDe" style="padding: 3px">
 								<div style="margin-bottom: 5px">
-									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateDe()">添加</a> <a href="#"
+									<c:if test="${role_limit}==1"><a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateDe()">添加</a></c:if> <a href="#"
 										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
 										onclick="return reloadDe()"> 刷新</a>
 								</div>
@@ -368,7 +368,7 @@ td {
 										<th data-options="field:'totalTimes',width:100">合计最少次数</th>
 										<th data-options="field:'personCollections',width:100">每人每月最少收集的信息数</th>
 										<th data-options="field:'remark',width:100">备注</th>
-										<th data-options="field:'userId',width:100">编制人</th>
+										<th data-options="field:'user.id',width:100">编制人</th>
 										<th data-options="field:'state',width:100">状态</th>
 										<!-- <th
 											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th> -->
@@ -498,7 +498,7 @@ td {
 								</tr>
 								<tr>
 									<th>所属角色:</th>
-									<td><input id="user_role" name="role.id"
+									<td><input id="visit_role" name="role.id"
 										class="easyui-combobox"
 										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
                                                 var s=$(this).combobox('getData');
@@ -520,7 +520,7 @@ td {
 								<tr>
 									<th>走访人编号：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_user" name="userId"></td>
+										id="visit_user" name="user.id"></td>
 								</tr>
 								<tr>
 									<td colspan="2"><input type="submit" class="btn btn-info"
@@ -564,7 +564,7 @@ td {
 								</tr>
 								<tr>
 									<th>工号:</th>
-									<td><input class="easyui-textbox" type="text"
+									<td><input class="easyui-numberbox" type="text"
 										id="user_jobNumber" name="jobNumber"></td>
 									<th>姓名:</th>
 									<td><input class="easyui-textbox" type="text"
@@ -584,7 +584,7 @@ td {
 
 								<tr>
 									<th>所属部门:</th>
-									<td><input id="user_department" name="department"
+									<td><input id="user_department" name="department.id"
 										class="easyui-combobox"
 										data-options="valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
 										onShowPanel : function(){
@@ -594,7 +594,7 @@ td {
                                                     $(this).combobox('reload');
                                                   } }"></td>
 									<th>所属角色:</th>
-									<td><input id="user_role" name="role"
+									<td><input id="user_role" name="role.id"
 										class="easyui-combobox"
 										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
                                                 var s=$(this).combobox('getData');
@@ -701,7 +701,7 @@ td {
 									<td><select class="easyui-combobox" id="roleLimit"
 										name="roleLimit"><option value="1">系统管理员</option>
 											<option value="2">计划编制人员</option>
-											<option value="3">计划编制人员</option>
+											<option value="3">数据导入员</option>
 											<option value="4">业务主管</option>
 											<option value="5">业务员</option>
 											<option value="6">领导</option></select></td>
@@ -778,16 +778,16 @@ td {
 								</tr>
 								<tr>
 									<th>每人每月最少走访次数：</th>
-									<td><input class="easyui-textbox" type="text"
+									<td><input class="easyui-numberbox" type="text"
 										id="com_personTimes" name="personTimes"></td>
 
 									<th>合计最少次数：</th>
-									<td><input class="easyui-textbox" type="text"
+									<td><input class="easyui-numberbox" type="text"
 										id="com_totalTimes" name="totalTimes"></td>
 								</tr>
 								<tr>
 									<th>每人每月最少收集的信息数：</th>
-									<td><input class="easyui-textbox" type="text"
+									<td><input class="easyui-numberbox" type="text"
 										id="com_personCollections" name="personCollections"></td>
 
 									<th>备注：</th>
@@ -1297,20 +1297,20 @@ td {
 				$('#user_password').textbox('setValue', row.password);
 				$('#user_jobNumber').textbox('setValue', row.jobName);
 				$('#user_name').textbox('setValue', row.name);
-				$('#user_sex').combobox('setValue', row.sex);
-				$('#user_state').combobox('setValue', row.state);
-				$('#user_deparment').combobox('setValue', row.department.id);
-				$('#user_role').combobox('setValue', row.role.id);
+				$('#user_sex').combobox('select', row.sex);
+				$('#user_state').combobox('select', row.state);
+				$('#user_deparment').combobox('select', row.department.id);
+				$('#user_role').combobox('select', row.role.id);
 			} else {
 				$('#user_id').val(-1);
 				$('#user_loginName').textbox('setValue', "");
 				$('#user_password').textbox('setValue', "");
 				$('#user_jobNumber').textbox('setValue', "");
 				$('#user_name').textbox('setValue', "");
-				$('#user_sex').textbox('setValue', "");
-				$('#user_state').textbox('setValue', 1);
-				$('#user_deparment').textbox('setValue', "");
-				$('#user_role').textbox('setValue', 5);
+				$('#user_sex').combobox('setValue', "");
+				$('#user_state').combobox('select', 1);
+				$('#user_deparment').combobox('select', "");
+				$('#user_role').combobox('select', "");
 			}
 			$('#userModal').modal('show');
 		}
@@ -1335,8 +1335,8 @@ td {
 					name : uname,
 					sex : usex,
 					state : ustate,
-					departmentId : ude,
-					roleId : urole
+					'department.id' : ude,
+					'role.id': urole
 				},
 				type : 'post',
 				success : function(data) {
@@ -1355,8 +1355,8 @@ td {
 		}
 		function SearchUser() {
 			$('#tableUser').datagrid('load', {
-				departmentId : $('#user_s_departmentId').textbox('getValue'),
-				roleId : $('#user_s_roleId').textbox('getValue')
+				'department.id' : $('#user_s_departmentId').textbox('getValue'),
+				'roleid' : $('#user_s_roleId').textbox('getValue')
 			});
 		}
 		function reloadUser() {
@@ -1540,15 +1540,15 @@ td {
 				document.getElementById("role_id").value = row.id;
 				$("#role_roleName").textbox('setValue', row.roleName);
 				$("#role_description").textbox('setValue', row.description);
-				$("#roleLimit").combobox('setValue', row.roleLimit);
-				$("#role_state").combobox('setValue', row.state);
+				$("#roleLimit").combobox('select', row.roleLimit);
+				$("#role_state").combobox('select', row.state);
 			} else {
 
 				document.getElementById("role_id").value = -1;
 				$("#role_roleName").textbox('setValue', "");
 				$("#role_description").textbox('setValue', "");
-				$("#roleLimit").combobox('setValue', "");
-				$("#role_state").combobox('setValue', "");
+				$("#roleLimit").combobox('select', "");
+				$("#role_state").combobox('select', "");
 			}
 			$('#roleModal').modal('show');
 		}

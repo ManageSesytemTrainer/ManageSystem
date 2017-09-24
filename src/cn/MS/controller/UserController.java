@@ -94,7 +94,7 @@ public class UserController {
 	@ResponseBody
 	public String updateUser(User u) {
 		if(u.getId() == -1){
-			if(0 <= us.addUser(u))
+			if(0 >= us.addUser(u))
 				return "ERROR";
 			return "SUCCESS";
 		}else{
