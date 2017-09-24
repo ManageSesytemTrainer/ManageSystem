@@ -137,7 +137,7 @@ td {
 						<li role="presentation" id="failInfo"><a href="#">统计信息</a></li>
 						<li role="presentation" id="userInfo"><a href="#">用户信息</a></li>
 						<li role="presentation" id="deInfo"><a href="#">部门信息</a></li>
-						<c:if test="${role_limit}==1"><li role="presentation" id="roleInfo"><a href="#">角色信息</a></li></c:if>
+						<%-- <c:if test="${role_limit}==1"> --%><li role="presentation" id="roleInfo"><a href="#">角色信息</a></li><%-- </c:if> --%>
 					</ul>
 				</div>
 
@@ -289,15 +289,15 @@ td {
 										<th data-options="field:'departmentName',width:100">部门名称</th>
 										<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
 										<th data-options="field:'state',width:160,align:'center'">状态</th>
-										<c:if test="${role_limit}==1"><th
-											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th></c:if>
+										<%-- <c:if test="${role_limit}==1"> --%><th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th><%-- </c:if> --%>
 									</tr>
 								</thead>
 							</table>
 							<div id="barDe" style="padding: 3px">
 								<div style="margin-bottom: 5px">
-									<c:if test="${role_limit}==1"><a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateDe()">添加</a></c:if> <a href="#"
+									<%-- <c:if test="${role_limit}==1"> --%><a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateDe()">添加</a><%-- </c:if> --%> <a href="#"
 										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
 										onclick="return reloadDe()"> 刷新</a>
 								</div>
