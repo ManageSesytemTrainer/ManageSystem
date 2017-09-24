@@ -13,4 +13,5 @@ public interface DepartmentMapper {
 	List<Department> selectAll();
 	int deleteDepartment(int id);
 	int updateDepartment(Department de);
+	Department get(int id);
 }

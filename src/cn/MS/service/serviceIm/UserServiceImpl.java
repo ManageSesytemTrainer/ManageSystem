@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.MS.bean.Department;
 import cn.MS.bean.Role;
 import cn.MS.bean.User;
+import cn.MS.dao.DepartmentMapper;
 import cn.MS.dao.UserMapper;
 import cn.MS.service.UserService;
 @Transactional
@@ -20,6 +21,8 @@ import cn.MS.service.UserService;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper um;
+	@Autowired
+	private DepartmentMapper dm;
 	@Override
 	public String getDepartmentByUserId(int id) {
 		User u = um.getUserById(id);
@@ -56,6 +59,8 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public int addUser(User user) {
+		String dep_name = dm.get(user.getDepartment().getId()).getDepartmentName();
+		user.setDepartmentName(dep_name);
 		return um.addUser(user);
 	}
 	@Override
@@ -118,6 +123,18 @@ public class UserServiceImpl implements UserService{
 					String name = fields[i].getName();
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
 					ob.put(name, method.invoke(o));
+				}else if(fields[i].getType().toString().startsWith("class cn.MS.bean.Department")){
+					fields[i].setAccessible(true);
+					String name = fields[i].getName();
+					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
+					Department dep = (Department) method.invoke(o);
+					ob.put("department_id", dep.getId());
+				}else if(fields[i].getType().toString().startsWith("class cn.MS.bean.Role")){
+					fields[i].setAccessible(true);
+					String name = fields[i].getName();
+					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
+					Role role = (Role) method.invoke(o);
+					ob.put("role_id", role.getId());
 				}
 			}
 		}catch(Exception e){
