@@ -93,7 +93,7 @@ public class UserController {
 	@RequestMapping("/user_updateUser")
 	@ResponseBody
 	public String updateUser(User u) {
-		if(u.getId() == -1){
+		if( u.getId() != null && u.getId() == -1){
 			if(0 >= us.addUser(u))
 				return "ERROR";
 			return "SUCCESS";
