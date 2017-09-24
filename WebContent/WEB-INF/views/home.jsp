@@ -94,14 +94,15 @@ td {
 <body>
 	<div class="row">
 		<div class=" col-md-1" id="tui"
-			style="width: auto; position: fixed; float: right;">
+			style="width: auto;float: right;text-align: right;">
 
 			<p>
-				<span style="color: #69a6ff; float: right; margin-right: 20px;">欢迎您,<a
-					onclick="">${name}</a></span> <span><a href="${path}/loginout"
-					style="text-align: center; color: #69a6ff"> 退出<span
-						class="glyphicon glyphicon-log-out"></span>
+			    <span style="color: #69a6ff; margin-right: 20px;">欢迎您,${name}</span> 
+			    <span><c:choose> <c:when test="${mobilePhone}==null"><a>完善个人信息</a></c:when><c:otherwise><a>修改密码</a></c:otherwise></c:choose></span>
+				<span><a href="${path}/loginout"
+					style="text-align: center; color: #69a6ff" class="glyphicon glyphicon-log-out">退出
 				</a></span>
+				
 			</p>
 		</div>
 		<div class=" col-md-12 ">
@@ -210,7 +211,10 @@ td {
 							<div id="barVisit" style="padding: 3px">
 								<div style="margin-bottom: 5px">
 									<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateVisit()">添加</a> <a
+										plain="true" onclick="return goImportVisit()">导入数据</a>
+										<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateVisit()">添加数据</a>
+										 <a
 										href="#" class="easyui-linkbutton" iconCls="icon-reload"
 										plain="true" onclick="return reloadVisit()">刷新</a>
 								</div>
@@ -336,7 +340,7 @@ td {
 										plain="true" onclick="return reloadRole()">刷新</a>
 								</div>
 								<div>
-									<span>角色状态：</span> <select class="easyui-combobox"
+									<span>角色状态：</span> <select class="easyui-combobox" editable="false"
 										id="role_s_state"
 										style="line-height: 26px; border: 1px solid #ccc"><option
 											value="1">激活</option>
@@ -451,14 +455,6 @@ td {
 				</div>
 				<div class="modal-body">
 					<div>
-						<form id="visitImport" action="${path}/excel_import" method="post"
-							enctype="multipart/form-data">
-							<input class="easyui-filebox" type="text" id="choosefile"
-								name="file"> <input type="submit" class="btn btn-info"
-								value="确认上传">
-						</form>
-					</div>
-					<div>
 						<form id="visitForm" action="${path}/visitData_add" method="post">
 							<table>
 								<tr>
@@ -466,27 +462,27 @@ td {
 								</tr>
 								<tr>
 									<th>走访日期：</th>
-									<td><input type="text" class="easyui-datebox"
-										id="visit_visitDate" name="visitDate"></td>
+									<td><input type="text" class="easyui-datebox "
+										id="visit_visitDate" name="visitDate" required="required"></td>
 								</tr>
 								<tr>
 									<th>走访时间：</th>
 									<td><input type="text" class="easyui-timebox"
-										id="visit_visitTime" name="visitTime"></td>
+										id="visit_visitTime" name="visitTime" required="required"></td>
 								</tr>
 								<tr>
 									<th>走访地点：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_address" name="address"></td>
+										id="visit_address" name="address" required="required"></td>
 								</tr>
 								<tr>
 									<th>走访人姓名：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_visitPerson" name="visitPerson"></td>
+										id="visit_visitPerson" name="visitPerson" required="required"></td>
 								</tr>
 								<tr>
 									<th>所属部门:</th>
-									<td><input id="visit_department" name="department.id"
+									<td><input id="visit_department" name="department.id" required="required"
 										class="easyui-combobox"
 										data-options="valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
 										onShowPanel : function(){
@@ -498,7 +494,7 @@ td {
 								</tr>
 								<tr>
 									<th>所属角色:</th>
-									<td><input id="visit_role" name="role.id"
+									<td><input id="visit_role" name="role.id" required="required"
 										class="easyui-combobox"
 										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
                                                 var s=$(this).combobox('getData');
@@ -510,23 +506,47 @@ td {
 								<tr>
 									<th>纵享销客账号：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_countPerson" name="countPerson"></td>
+										id="visit_countPerson" name="countPerson" required="required"></td>
 								</tr>
 								<tr>
 									<th>走访内容：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_details" name="details"></td>
+										id="visit_details" name="details" required="required"></td>
 								</tr>
 								<tr>
 									<th>走访人编号：</th>
 									<td><input type="text" class="easyui-textbox"
-										id="visit_user" name="user.id"></td>
+										id="visit_user" name="user.id" required="required"></td>
 								</tr>
-								<tr>
+								<tr style="text-align: center;">
 									<td colspan="2"><input type="submit" class="btn btn-info"
 										value="提交"></td>
 								</tr>
 							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">导入走访数据</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form id="visitImport" action="${path}/excel_import" method="post"
+							enctype="multipart/form-data">
+							<input class="easyui-filebox" type="text" id="choosefile"
+								name="file" required="required"> <input type="submit" class="btn btn-info"
+								value="确认上传">
 						</form>
 					</div>
 				</div>
@@ -557,10 +577,10 @@ td {
 								<tr>
 									<th>登录名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="user_loginName" name="loginName"></td>
+										id="user_loginName" name="loginName" required="required"></td>
 									<th>密码：</th>
 									<td><input class="easyui-textbox" type="password"
-										id="user_password" name="password"></td>
+										id="user_password" name="password" required="required"></td>
 								</tr>
 								<tr>
 									<th>工号:</th>
@@ -568,23 +588,23 @@ td {
 										id="user_jobNumber" name="jobNumber"></td>
 									<th>姓名:</th>
 									<td><input class="easyui-textbox" type="text"
-										id="user_name" name="name"></td>
+										id="user_name" name="name" required="required"></td>
 								</tr>
 								<tr>
 									<th>性别:</th>
 									<td><select id="user_sex" name="sex"
-										class="easyui-combobox"><option selected="selected"
+										class="easyui-combobox" editable="false"><option selected="selected"
 												value="男">男</option>
 											<option value="女">女</option></select></td>
 									<th>账号状态:</th>
 									<td><select id="user_state" name="user_state"
-										class="easyui-combobox"><option value="1">激活</option>
+										class="easyui-combobox" editable="false"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
 
 								<tr>
 									<th>所属部门:</th>
-									<td><input id="user_department" name="department.id"
+									<td><input id="user_department" name="department.id" required="required"
 										class="easyui-combobox"
 										data-options="valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
 										onShowPanel : function(){
@@ -594,7 +614,7 @@ td {
                                                     $(this).combobox('reload');
                                                   } }"></td>
 									<th>所属角色:</th>
-									<td><input id="user_role" name="role.id"
+									<td><input id="user_role" name="role.id" required="required"
 										class="easyui-combobox"
 										data-options="method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
                                                 var s=$(this).combobox('getData');
@@ -640,16 +660,16 @@ td {
 								<tr>
 									<th>部门名称：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="de_departmentName" name="departmentName"></td>
+										id="de_departmentName" name="departmentName" required="required"></td>
 								</tr>
 								<tr>
 									<th>联系电话：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="de_phone" name="phone"></td>
+										id="de_phone" name="phone" required="required"></td>
 								</tr>
 								<tr>
 									<th>部门状态：</th>
-									<td><select class="easyui-combobox" id="de_state"
+									<td><select class="easyui-combobox" id="de_state" editable="false"
 										name="state"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
@@ -689,7 +709,7 @@ td {
 								<tr>
 									<th>角色名称：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="role_roleName" name="roleName"></td>
+										id="role_roleName" name="roleName" required="required"></td>
 								</tr>
 								<tr>
 									<th>角色描述：</th>
@@ -698,18 +718,19 @@ td {
 								</tr>
 								<tr>
 									<th>角色权限：</th>
-									<td><select class="easyui-combobox" id="roleLimit"
+									<td><select class="easyui-combobox" editable="false" id="roleLimit"
 										name="roleLimit"><option value="1">系统管理员</option>
-											<option value="2">计划编制人员</option>
-											<option value="3">数据导入员</option>
-											<option value="4">业务主管</option>
-											<option value="5">业务员</option>
-											<option value="6">领导</option></select></td>
+											<option value="2">县公司计划编制人员</option>
+											<option value="3">网点计划编制人员</option>
+											<option value="4">数据导入员</option>
+											<option value="5">业务主管</option>
+											<option value="6" selected="selected">业务员</option>
+											<option value="7">领导</option></select></td>
 								</tr>
 								<tr>
 									<th>角色状态：</th>
 									<td><select class="easyui-combobox" id="role_state"
-										name="state"><option value="1" selected="selected">激活</option>
+										name="state" editable="false"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
 								<tr style="text-align: center;">
@@ -748,47 +769,47 @@ td {
 								<tr>
 									<th>计划名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="com_planName" name="planName"></td>
+										id="com_planName" name="planName" required="required"></td>
 								</tr>
 								<tr>
 									<th>计划开始时间：</th>
-									<td><input class="easyui-datebox" type="text"
-										id="com_planDateStart" name="p_planDateStart"></td>
+									<td><input class="easyui-datebox" type="text" editable="false"
+										id="com_planDateStart" name="p_planDateStart" required="required"></td>
 									<th>计划结束时间：</th>
-									<td><input class="easyui-datebox" type="text"
-										id="com_planDateEnd" name="p_planDateEnd"></td>
+									<td><input class="easyui-datebox" type="text" editable="false"
+										id="com_planDateEnd" name="p_planDateEnd" required="required" ></td>
 								</tr>
 								<tr>
 									<th>编制日期：</th>
-									<td><input class="easyui-datebox" type="text"
+									<td><input class="easyui-datebox" type="text" editable="false"
 										id="com_designDate" name="p_designDate"></td>
 
 									<th>编制人姓名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="com_designer" name="designer"></td>
+										id="com_designer" name="designer" value="${name}" readonly="readonly"></td>
 								</tr>
 								<tr>
 									<th>网点类型：</th>
-									<td><input class="easyui-textbox" type="text"
-										id="com_webType" name="webType"></td>
+									<td><input class="easyui-numberbox" type="text"
+										id="com_webType" name="webType" required="required"></td>
 
 									<th>季节：</th>
-									<td><input class="easyui-textbox" type="text"
-										id="com_season" name="season"></td>
+									<td><select class="easyui-combobox" editable="false" 
+										id="com_season" name="season"><option value="春" selected="selected">春</option><option value="夏">夏</option><option value="秋">秋</option><option value="冬">冬</option></select></td>
 								</tr>
 								<tr>
 									<th>每人每月最少走访次数：</th>
 									<td><input class="easyui-numberbox" type="text"
-										id="com_personTimes" name="personTimes"></td>
+										id="com_personTimes" name="personTimes" required="required"></td>
 
 									<th>合计最少次数：</th>
 									<td><input class="easyui-numberbox" type="text"
-										id="com_totalTimes" name="totalTimes"></td>
+										id="com_totalTimes" name="totalTimes" required="required"></td>
 								</tr>
 								<tr>
 									<th>每人每月最少收集的信息数：</th>
 									<td><input class="easyui-numberbox" type="text"
-										id="com_personCollections" name="personCollections"></td>
+										id="com_personCollections" name="personCollections" required="required"></td>
 
 									<th>备注：</th>
 									<td><input class="easyui-textbox" type="text"
@@ -839,15 +860,15 @@ td {
 								<tr>
 									<th>计划名：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="web_planName" name="planName"></td>
+										id="web_planName" name="planName" required="required"></td>
 								</tr>
 								<tr>
 									<th>计划开始时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="web_planDateStart" name="p_planDateStart"></td>
+										id="web_planDateStart" name="p_planDateStart" required="required" editable="false"></td>
 									<th>计划结束时间：</th>
 									<td><input class="easyui-datebox" type="text"
-										id="web_planDateEnd" name="p_planDateEnd"></td>
+										id="web_planDateEnd" name="p_planDateEnd" required="required" editable="false"></td>
 								</tr>
 								<tr>
 									<th>编制日期：</th>
@@ -862,7 +883,7 @@ td {
 								<tr>
 									<th>网点类型：</th>
 									<td><input class="easyui-textbox" type="text"
-										id="web_webType" name="webType"></td>
+										id="web_webType" name="webType" required="required"></td>
 
 									<th>状态：</th>
 									<td><select class="easyui-combobox" id="web_state"
@@ -881,6 +902,21 @@ td {
 		</div>
 	</div>
 	<script type="text/javascript">
+	    //基础设置 web_planDateStart web_planDateEnd
+	    $('#web_planDateStart').datebox().datebox('calendar').calendar({
+				validator: function(date){
+					var now = new Date();
+					var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());		
+					return d1<=date;
+				}
+			});
+	    $('#web_planDateEnd').datebox().datebox('calendar').calendar({
+			validator: function(date){
+				var now = new Date();
+				var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());		
+				return d1<=date;
+			}
+		});
 		//县公司计划管理
 		$("#companyPlan").click(function() {
 			$('#tableCP').datagrid({
@@ -1162,15 +1198,21 @@ td {
 				autoRowHeigh : false
 			});
 		});
+		function goImportVisit(){
+			$('#importModal').modal('show');
+		}
 		function goUpdateVisit() {
 
 			$('#visitModal').modal('show');
 		}
 		$('#visitImport').form({
 			success : function(data) {
-				if (data == "SUCCESS") {
-					alert("操作成功！");
-					$('#visitModal').modal('hide');
+				if(data=="ERROR"){
+					alert("操作失败，请重试！");
+				}
+				else {
+					alert(data);
+					$('#improtModal').modal('hide');
 					$('#tableVisit').datagrid('reload');
 				}
 			}
@@ -1181,6 +1223,9 @@ td {
 					alert("操作成功！");
 					$('#visitModal').modal('hide');
 					$('#tableVisit').datagrid('reload');
+				}
+				else{
+					alert("操作失败，请重试！");
 				}
 			}
 		});
@@ -1324,14 +1369,14 @@ td {
 			var ustate = $('#user_state').combobox('getValue');
 			var ude = $('#user_department').combobox('getValue');
 			var urole = $('#user_role').combobox('getValue');
-			pwd = hex_md5(uloginName + hex_md5(pwd));
+			pwd = hex_md5(uloginName,hex_md5(pwd));
 			$.ajax({
 				url : '${path}/user_updateUser',
 				data : {
 					id : uid,
 					loginName : uloginName,
 					password : pwd,
-					jobName : jn,
+					jobNumber : jn,
 					name : uname,
 					sex : usex,
 					state : ustate,
