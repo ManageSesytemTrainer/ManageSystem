@@ -52,7 +52,7 @@ public class VisitDataController {
 		return visitDataService.addVisitData(visitData);
 	}
 	
-	@RequestMapping("/queryVisitData")
+	@RequestMapping(value="/queryVisitData", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryVisitData(String username,Date date) throws Exception{
 		if(username != null){

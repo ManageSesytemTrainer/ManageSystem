@@ -31,7 +31,7 @@ public class WebPlanController {
 		}
 	}
 	
-	@RequestMapping("/getWebPlan")
+	@RequestMapping(value="/getWebPlan", produces = "text/html;charset=UTF-8")
 	public String getWebPlan(Integer id,Integer state,String name,String designer){
 		if(id != null){
 			String wp = wps.getById(id, state);

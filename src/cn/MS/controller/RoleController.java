@@ -60,7 +60,7 @@ public class RoleController {
 		}
 	}
 	
-	@RequestMapping("/role_select")
+	@RequestMapping(value="/role_select", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String select(Integer state,String roleName) throws Exception {
 		if(state != null){

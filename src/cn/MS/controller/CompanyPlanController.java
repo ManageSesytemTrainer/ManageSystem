@@ -44,7 +44,7 @@ public class CompanyPlanController {
 		}
 	}
 
-	@RequestMapping("/companyPlan_select")
+	@RequestMapping(value="/companyPlan_select", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String select() throws Exception {
 		return companyPlanService.select();

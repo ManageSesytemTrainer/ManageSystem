@@ -129,12 +129,14 @@ public class UserServiceImpl implements UserService{
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
 					Department dep = (Department) method.invoke(o);
 					ob.put("department_id", dep.getId());
+					ob.put("department_name", dep.getDepartmentName());
 				}else if(fields[i].getType().toString().startsWith("class cn.MS.bean.Role")){
 					fields[i].setAccessible(true);
 					String name = fields[i].getName();
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
 					Role role = (Role) method.invoke(o);
 					ob.put("role_id", role.getId());
+					ob.put("role_name", role.getRoleName());
 				}
 			}
 		}catch(Exception e){

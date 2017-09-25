@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	private UserService us;
 	
-	@RequestMapping("/user_query")
+	@RequestMapping(value="/user_query", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String query(Integer state,Integer userId,Integer departmentId,Integer roleId) {
 		if(state != null){

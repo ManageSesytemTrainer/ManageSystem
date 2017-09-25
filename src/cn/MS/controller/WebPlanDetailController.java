@@ -28,7 +28,7 @@ public class WebPlanDetailController {
 	@Qualifier("userService")
 	private UserService us;
 
-	@RequestMapping("/webPlanDetail_add")
+	@RequestMapping(value="/webPlanDetail_add", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String add(Integer webPlan_id, WebPlanDetail wpd, Integer state) throws Exception {
 		if(wpd.getId() == -1){
