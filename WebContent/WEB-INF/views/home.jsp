@@ -1,14 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
+
+  <!-- Created by IntelliJ IDEA.
   User: lenovo
   Date: 2017/9/13
   Time: 9:28
-  To change this template use File | Settings | File Templates.
---%>
+  To change this template use File | Settings | File Templates. -->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}"
 	scope="request" />
+<c:set var="User" value='<%=session.getAttribute("User")%>' scope="request"></c:set>
 <html>
 
 <head>
@@ -43,6 +44,10 @@
 <script type="text/javascript" src="${path}/resource/js/md5.js"></script>
 </head>
 <script>
+    console.info(${User.id});
+    console.info(${User.role.roleLimit});
+    console.info(${User.mobilePhone});
+
 	$(function() {
 		$("#menu li").click(function() {
 			$(this).addClass("active").siblings().removeClass("active");
@@ -98,7 +103,7 @@ td {
 
 			<p>
 			    <span style="color: #69a6ff; margin-right: 20px;">欢迎您,${name}</span> 
-			    <span><c:choose> <c:when test="${mobilePhone}==null"><a>完善个人信息</a></c:when><c:otherwise><a>修改密码</a></c:otherwise></c:choose></span>
+			    <span><c:choose> <c:when test="${user.mobilePhone==null}"><a>完善个人信息</a></c:when><c:otherwise><a>修改密码</a></c:otherwise></c:choose></span>
 				<span><a href="${path}/loginout"
 					style="text-align: center; color: #69a6ff" class="glyphicon glyphicon-log-out">退出
 				</a></span>
@@ -138,7 +143,7 @@ td {
 						<li role="presentation" id="failInfo"><a href="#">统计信息</a></li>
 						<li role="presentation" id="userInfo"><a href="#">用户信息</a></li>
 						<li role="presentation" id="deInfo"><a href="#">部门信息</a></li>
-						<%-- <c:if test="${role_limit}==1"> --%><li role="presentation" id="roleInfo"><a href="#">角色信息</a></li><%-- </c:if> --%>
+						<c:if test="${User.role.roleLimit==1}"> <li role="presentation" id="roleInfo"><a href="#">角色信息</a></li></c:if>
 					</ul>
 				</div>
 
@@ -224,7 +229,7 @@ td {
 										style="line-height: 26px; border: 1px solid #ccc"> <span>走访日期:</span>
 									<input id="s_visitDate"
 										style="line-height: 26px; border: 1px solid #ccc"
-										class="easyui-datebox"> <a href="#"
+										class="easyui-datebox"  data-options="formatter:myformatter,parser:myparser"> <a href="#"
 										class="easyui-linkbutton" plain="true" onclick="SearchVisit()">查询</a>
 								</div>
 							</div>
@@ -247,7 +252,6 @@ td {
 							<table id="tableUser" style="min-height: 360px; padding: 0;">
 								<thead>
 									<tr>
-										<th data-options="field:'check'"></th>
 										<th data-options="field:'id',width:40">编号</th>
 										<th data-options="field:'jobNumber',width:100">工号</th>
 										<th data-options="field:'name',width:60,align:'right'">姓名</th>
@@ -263,14 +267,14 @@ td {
 											data-options="field:'department_id',width:100,align:'right',hidden:'true'"></th>
 										<th data-options="field:'role_name',width:100,align:'right'">职务</th>
 										<th data-options="field:'role_id',width:100,align:'right',hidden:'true'"></th>
-										<%-- <c:if test="${role_limit}==1"> --%><th data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th><%-- </c:if> --%>
+										<c:if test="${User.role.roleLimit==1}"> <th data-options="field:'do',width:60,align:'center',formatter:formatfuncUser">操作</th> </c:if> 
 									</tr>
 								</thead>
 							</table>
 							<div id="barUser" style="padding: 3px">
 								<div style="margin-bottom: 5px">
-									<%--  <c:if test="${role_limit}==1">--%><a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateUser()">添加</a> <%-- </c:if> --%>
+									  <c:if test="${User.role.roleLimit==1}"><a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateUser()">添加</a>  </c:if> 
 										<a
 										href="#" class="easyui-linkbutton" iconCls="icon-reload"
 										plain="true" onclick="return reloadUser()">刷新</a>
@@ -296,15 +300,15 @@ td {
 										<th data-options="field:'departmentName',width:100">部门名称</th>
 										<th data-options="field:'phone',width:160,align:'right'">联系电话</th>
 										<th data-options="field:'state',width:160,align:'center'">状态</th>
-										<%-- <c:if test="${role_limit}==1"> --%><th
-											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th><%-- </c:if> --%>
+										 <c:if test="${User.role.roleLimit==1}"> <th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncDe">操作</th> </c:if> 
 									</tr>
 								</thead>
 							</table>
 							<div id="barDe" style="padding: 3px">
 								<div style="margin-bottom: 5px">
-									<%-- <c:if test="${role_limit}==1"> --%><a href="#" class="easyui-linkbutton" iconCls="icon-add"
-										plain="true" onclick="return goUpdateDe()">添加</a><%-- </c:if> --%> <a href="#"
+									 <c:if test="${User.role.roleLimit==1}"> <a href="#" class="easyui-linkbutton" iconCls="icon-add"
+										plain="true" onclick="return goUpdateDe()">添加</a> </c:if>  <a href="#"
 										class="easyui-linkbutton" iconCls="icon-reload" plain="true"
 										onclick="return reloadDe()"> 刷新</a>
 								</div>
@@ -394,7 +398,7 @@ td {
 										style="line-height: 26px; border: 1px solid #ccc"> <span>计划开始日期:</span>
 									<input id="s_planDateStart"
 										style="line-height: 26px; border: 1px solid #ccc"
-										class="easyui-datebox"> <a href="#"
+										class="easyui-datebox"  data-options="formatter:myformatter,parser:myparser"> <a href="#"
 										class="easyui-linkbutton" plain="true" onclick="SearchVisit()">查询</a>
 								</div>
 							</div>
@@ -431,7 +435,7 @@ td {
 										style="line-height: 26px; border: 1px solid #ccc"> <span>计划开始日期:</span>
 									<input id="s_web_planDateStart"
 										style="line-height: 26px; border: 1px solid #ccc"
-										class="easyui-datebox"> <a href="#"
+										class="easyui-datebox"  data-options="formatter:myformatter,parser:myparser"> <a href="#"
 										class="easyui-linkbutton" plain="true" onclick="SearchWeb()">查询</a>
 								</div>
 							</div>
@@ -461,16 +465,16 @@ td {
 						<form id="visitForm" action="${path}/visitData_add" method="post">
 							<table style="width: 600px;text-align: center;">
 								<tr>
-									<td><input type="hidden" name="id" value="-1"></td>
+									<td><input type="hidden" name="id" value="-1"><input type="hidden" name="user.department.id" value="${department_id}"><input type="hidden" name="user.role.id" value="${role_id}"></td>
 								</tr>
 								<tr>
-									<td><input type="text" class="easyui-datebox "
-										id="visit_visitDate" name="visitDate" required="required" data-options="labelAlign:'right',label:'走访日期:', labelWidth:'120px', width:'300px'"></td>
+									<td><input type="text" class="easyui-datebox " 
+										id="visit_visitDate" name="s_visitDate" required="required" data-options="formatter:myformatter,parser:myparser,labelAlign:'right',label:'走访日期:', labelWidth:'120px', width:'300px'"></td>
 								</tr>
 								<tr>
 								
 									<td><input type="text" class="easyui-textbox"
-										id="visit_visitTime" name="visitTime" required="required" data-options="labelAlign:'right',label:'走访时间:', labelWidth:'120px', width:'300px'"></td>
+										id="visit_visitTime" name="s_visitTime" required="required" data-options="labelAlign:'right',label:'走访时间:', labelWidth:'120px', width:'300px'"></td>
 								</tr>
 								<tr>
 								
@@ -479,30 +483,20 @@ td {
 								</tr>
 								<tr>
 									<td><input type="text" class="easyui-textbox"  data-options="labelAlign:'right',label:'走访人姓名:', labelWidth:'120px', width:'300px'"
-										id="visit_visitPerson" name="visitPerson" required="required"></td>
+										id="visit_visitPerson" name="visitPerson" required="required" editable="false" value="${name}"></td>
 								</tr>
 								<tr>
 							
-									<td><input id="visit_department" name="department.id" required="required"  
-										class="easyui-combobox" 
-										data-options="labelAlign:'right',label:'所属部门:',labelWidth:'120px', width:'300px',valueField:'id',textField:'departmentName',panelHeight:'auto',editable:false,
-										onShowPanel : function(){
-                                               var s=$(this).combobox('getData');
-                                                if(s.length==0){
-                                                    $(this).combobox('options').url='${path}/de_idAndName';
-                                                    $(this).combobox('reload');
-                                                  } }"></td>
+									<td><input id="visit_department" name="user.department.departmentName" required="required"  
+										class="easyui-textbox"  value="${department_name}"
+										data-options="labelAlign:'right',label:'所属部门:',labelWidth:'120px', width:'300px',editable:false">
+										</td>
 								</tr>
 								<tr>
 								
-									<td><input id="visit_role" name="role.id" required="required"  
-										class="easyui-combobox" 
-										data-options="labelAlign:'right',label:'所属角色:',labelWidth:'120px', width:'300px',method:'post',valueField:'id',textField:'roleName',panelHeight:'auto',editable:false,onShowPanel : function(){
-                                                var s=$(this).combobox('getData');
-                                                if(s.length==0){
-                                                    $(this).combobox('options').url='${path}/role_selectIdandName';
-                                                    $(this).combobox('reload');
-                                                              } }"></td>
+									<td><input id="visit_role" name="user.role.roleName" required="required"  
+										class="easyui-textbox"   value="${role_name}"
+										data-options="labelAlign:'right',label:'所属角色:',labelWidth:'120px', width:'300px',editable:false"></td>
 								</tr>
 								<tr>
 									
@@ -516,11 +510,11 @@ td {
 								</tr>
 								<tr>
 
-									<td><input type="text" class="easyui-textbox"  data-options="labelAlign:'right',label:'走访人编号:', labelWidth:'120px', width:'300px'"
-										id="visit_user" name="user.id" required="required"></td>
+									<td><input type="text" class="easyui-textbox"  data-options="labelAlign:'right',label:'走访人编号:', labelWidth:'120px', width:'300px',hidden:'true'"
+										id="visit_user" name="user.id" required="required" value="${userid}"></td>
 								</tr>
 								<tr style="text-align: center;">
-									<td ><input type="submit" class="btn btn-info" width="260px"
+									<td ><input type="button" class="btn btn-info" width="260px" onclick="updateVisit()"
 										value="提交"></td>
 								</tr>
 							</table>
@@ -757,12 +751,11 @@ td {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4>更新县公司计划</h4>
+					<h4>县公司计划</h4>
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form id="comForm" action="${path}/companyPlan_insert"
-							method="post">
+						<form id="comForm" >
 							<table>
 								<tr>
 									<td><input type="hidden" id="com_id" name="id" value="-1"></td>
@@ -774,15 +767,15 @@ td {
 								</tr>
 								<tr>
 									<th>计划开始时间:</th>
-									<td><input class="easyui-datebox" type="text" editable="false"
+									<td><input class="easyui-datebox" type="text" editable="false"  data-options="formatter:myformatter,parser:myparser"
 										id="com_planDateStart" name="p_planDateStart" required="required"></td>
 									<th>计划结束时间:</th>
-									<td><input class="easyui-datebox" type="text" editable="false"
+									<td><input class="easyui-datebox" type="text" editable="false"  data-options="formatter:myformatter,parser:myparser"
 										id="com_planDateEnd" name="p_planDateEnd" required="required" ></td>
 								</tr>
 								<tr>
 									<th>编制日期:</th>
-									<td><input class="easyui-datebox" type="text" editable="false"
+									<td><input class="easyui-datebox" type="text" editable="false"  data-options="formatter:myformatter,parser:myparser"
 										id="com_designDate" name="p_designDate"></td>
 
 									<th>编制人姓名:</th>
@@ -817,18 +810,17 @@ td {
 										id="com_remark" name="remark"></td>
 								</tr>
 								<tr>
-									<!-- <th>编制人:</th>
+									 <th>编制人:</th>
 									<td><input class="easyui-textbox" type="text"
-										id="com_userId" name="user.id"></td>
- -->
-									<th>状态:</th>
+										id="com_userId" name="user.id" value="${userid}" readonly="readonly"></td>
+ 									<th>状态:</th>
 									<td><select class="easyui-combobox" id="com_state"
 										name="state"><option value="1" selected="selected">激活</option>
 											<option value="0">注销</option></select></td>
 								</tr>
 								<tr style="text-align: center;">
 									<td colspan="4" style="text-align: center;"><input
-										type="submit" class="btn btn-info" id="affirm" value="提交"></td>
+										type="button" class="btn btn-info" id="affirm" value="提交" onclick="updateCP()"></td>
 								</tr>
 							</table>
 						</form>
@@ -850,12 +842,11 @@ td {
 				</div>
 				<div class="modal-body">
 					<fieldset style="width: auto; height: 50%; margin: 0 auto;">
-						<form id="webFrom" action="${path}/webPlan_updateWebPlan"
-							method="post">
+						<form id="webForm">
 							<table>
 								<tr>
 									<td><input type="hidden" id="web_id" name="id" value="-1"></td>
-									<td><input type="hidden" id="com_userId" name="user.id"
+									<td><input type="hidden" id="web_userId" name="user.id"
 										hidden="true" value="${userid}"></td>
 								</tr>
 								<tr>
@@ -865,15 +856,15 @@ td {
 								</tr>
 								<tr>
 									<th>计划开始时间:</th>
-									<td><input class="easyui-datebox" type="text"
+									<td><input class="easyui-datebox" type="text"  data-options="formatter:myformatter,parser:myparser"
 										id="web_planDateStart" name="p_planDateStart" required="required" editable="false"></td>
 									<th>计划结束时间:</th>
-									<td><input class="easyui-datebox" type="text"
+									<td><input class="easyui-datebox" type="text"  data-options="formatter:myformatter,parser:myparser"
 										id="web_planDateEnd" name="p_planDateEnd" required="required" editable="false"></td>
 								</tr>
 								<tr>
 									<th>编制日期:</th>
-									<td><input class="easyui-datebox" type="text"
+									<td><input class="easyui-datebox" type="text"  data-options="formatter:myformatter,parser:myparser"
 										id="web_designDate" name="p_designDate" editable="false"></td>
 
 									<th>编制人姓名:</th>
@@ -893,7 +884,7 @@ td {
 								</tr>
 								<tr style="text-align: center;">
 									<td colspan="4" style="text-align: center;"><input
-										type="submit" class="btn btn-info" id="affirm" value="提交"></td>
+										type="button" class="btn btn-info" id="affirm" value="提交" onclick="updateWeb()"></td>
 								</tr>
 							</table>
 						</form>
@@ -918,6 +909,20 @@ td {
 				return d1<=date;
 			}
 		});
+	    $('#com_planDateStart').datebox().datebox('calendar').calendar({
+			validator: function(date){
+				var now = new Date();
+				var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());		
+				return d1<=date;
+			}
+		});
+    $('#com_planDateEnd').datebox().datebox('calendar').calendar({
+		validator: function(date){
+			var now = new Date();
+			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());		
+			return d1<=date;
+		}
+	});
 		//县公司计划管理
 		$("#companyPlan").click(function() {
 			$('#tableCP').datagrid({
@@ -948,15 +953,29 @@ td {
 		function goUpdateCom(index) {
 			$('#comModal').modal('show');
 		}
-		$('#comForm').form({
-			success : function(data) {
-				if (data == "success") {
-					alert("添加成功！");
-					$('#comModal').modal('hide');
-					$('#tableCP').datagrid('reload');
+		function updateCP(){
+			var from=$('#comForm').serialize();
+			$.ajax({
+				url:'${path}/companyPlan_insert',
+			    type:'post',
+			    data:from,
+			    success:function(data) {
+					if (data == "success") {
+						alert("添加成功！");
+						$('#comModal').modal('hide');
+						$('#tableCP').datagrid('reload');
+					}
+					else{
+						alert("操作失败！");
+					}
+				},
+				error:function(){
+					alert("好像哪儿出错了，请刷新后重试！");
 				}
-			}
-		});
+			});
+			
+		}
+		
 		function SearchCom() {
 			$('#tableCP').datagrid('load', {
 			//visitPerson : $('#s_visitPerson').textbox('getValue'),
@@ -1132,15 +1151,29 @@ td {
 		function goAddWebDetail(index) {
 
 		}
-		$('#webForm').form({
-			success : function(data) {
-				if (data == "SUCCESS") {
-					alert("添加成功");
-					$('#webModal').modal('hide');
-					$('#tableWeb').datagrid('reload');
+		function updateWeb(){
+			var form=$('#webForm').serialize();
+			$.ajax({
+				url:'${path}/webPlan_updateWebPlan',
+				data:form,
+				type:'post',
+				success : function(data) {
+					if (data == "SUCCESS") {
+						alert("添加成功");
+						$('#webModal').modal('hide');
+						$('#tableWeb').datagrid('reload');
+					}
+					else{
+						alert("操作失败，请重试！");
+					}
+				},
+				error:function(){
+					alert("好像哪儿出错了，请刷新后重试！");
 				}
-			}
-		});
+				
+			});
+		}
+		
 		function updateWebDetail() {
 
 		}
@@ -1207,6 +1240,7 @@ td {
 			$('#visitModal').modal('show');
 		}
 		$('#visitImport').form({
+			
 			success : function(data) {
 				if(data=="ERROR"){
 					alert("操作失败，请重试！");
@@ -1218,18 +1252,27 @@ td {
 				}
 			}
 		});
-		$('#visitForm').form({
-			success : function(data) {
-				if (data == "SUCCESS") {
-					alert("操作成功！");
-					$('#visitModal').modal('hide');
-					$('#tableVisit').datagrid('reload');
+		function updateVisit(){
+			var formParam=$('#visitForm').serialize();
+			$.ajax({
+				url:'${path}/visitData_add',
+				type:'post',
+				data:formParam,
+				success:function(data){
+					if (data == "SUCCESS") {
+						alert("操作成功！");
+						$('#visitModal').modal('hide');
+						$('#tableVisit').datagrid('reload');
+					}
+					else{
+						alert("操作失败，请重试！");
+					}
+				},
+				error:function(){
+					alert("好像哪儿出错了，请刷新后重试");
 				}
-				else{
-					alert("操作失败，请重试！");
-				}
-			}
-		});
+			});
+		}
 		function SearchVisit() {
 			$('#tableVisit').datagrid('load', {
 				visitPerson : $('#s_visitPerson').textbox('getValue'),
@@ -1668,6 +1711,25 @@ td {
 		}
 		function reloadRole() {
 			$('#tableRole').datagrid('reload');
+		}
+		//detebox日期显示格式
+		function myformatter(date){
+			var y = date.getFullYear();
+			var m = date.getMonth()+1;
+			var d = date.getDate();
+			return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+		}
+		function myparser(s){
+			if (!s) return new Date();
+			var ss = (s.split('-'));
+			var y = parseInt(ss[0],10);
+			var m = parseInt(ss[1],10);
+			var d = parseInt(ss[2],10);
+			if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+				return new Date(y,m-1,d);
+			} else {
+				return new Date();
+			}
 		}
 	</script>
 </body>

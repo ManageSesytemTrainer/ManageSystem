@@ -26,9 +26,6 @@ public class VisitDataController {
 	@Autowired
 	private VisitDataService visitDataService;
 	
-	@Autowired
-	private RoleService roleService;
-	
 	@RequestMapping(value="/excel_import",method = RequestMethod.POST)
     @ResponseBody
     public String  upload(@RequestParam(value="file",required = false)MultipartFile file,HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -38,21 +35,17 @@ public class VisitDataController {
 	
 	@RequestMapping("/visitData_add")
 	@ResponseBody
-	public String addVisitData(VisitData visitData,String visitDate,String visitTime,HttpServletRequest request)throws Exception{
+	public String addVisitData(VisitData visitData,@RequestParam("s_visitDate")String visitDate,@RequestParam("s_visitTime")String visitTime,HttpServletRequest request)throws Exception{//
 		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:SS");
 		visitData.setVisitDate(formatDate.parse(visitDate));
 		visitData.setVisitTime(formatTime.parse(visitTime));
-		HttpSession session = request.getSession();
-		visitData.setVisitPerson((String)session.getAttribute("name"));
-		visitData.setDepartmentName((String) session.getAttribute("department"));
-		visitData.setRoleName(roleService.selectRoleById((Integer) session.getAttribute("role_id")).getRoleName());
-		visitData.setUser((User)session.getAttribute("user"));
+		request.getSession();
 		
 		return visitDataService.addVisitData(visitData);
 	}
 	
-	@RequestMapping(value="/queryVisitData", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="/queryVisitData")
 	@ResponseBody
 	public String queryVisitData(String username,Date date) throws Exception{
 		if(username != null){

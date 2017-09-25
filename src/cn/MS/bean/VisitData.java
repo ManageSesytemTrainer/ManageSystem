@@ -2,21 +2,21 @@ package cn.MS.bean;
 
 import java.util.*;
 /**
- * ×ß·ÃÊı¾İµ¼Èë£¨ĞèÇóËµµÄÒªÓÃexcelµ¼ÈëÊı¾İ£©
+ * èµ°è®¿æ•°æ®
  * @author Administrator
  *
  */
 public class VisitData {
 	Integer id;  //id
-	Date visitDate;  //×ß·ÃÈÕÆÚ
-	Date visitTime;  //×ß·ÃÊ±¼ä
-	String address;  //×ß·ÃµØµã
-	String visitPerson;  //×ß·ÃÈËĞÕÃû
-	String departmentName;  //×ß·ÃÈËËùÊô²¿ÃÅÃû³Æ
-	String roleName;  //ËùÊô½ÇÉ«£¨Ö°Îñ£©Ãû³Æ
-	String countPerson;  //×İÏíÏú¿ÍÕËºÅ
-	String details;  //×ß·ÃÄÚÈİ
-	User user;  //×ß·ÃÈË
+	Date visitDate;  //èµ°è®¿æ—¥æœŸ
+	Date visitTime;  //èµ°è®¿æ—¶é—´
+	String address;  //åœ°å€
+	String visitPerson;  //èµ°è®¿äºº
+	String departmentName;  //èµ°è®¿äººæ‰€åœ¨éƒ¨é—¨
+	String roleName;  //èµ°è®¿äººè§’è‰²
+	String countPerson;  //æ”¶é›†ä¿¡æ¯æ•°
+	String details;  //æ˜ç»†
+	User user;  //èµ°è®¿äºº
 	public Integer getId() {
 		return id;
 	}

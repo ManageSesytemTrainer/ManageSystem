@@ -31,7 +31,7 @@ public class CompanyPlanController {
 			return "wrong";
 		}
 		companyPlan.setUser(user);
-		SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-mm-dd");
 
 		companyPlan.setPlanDateStart(formatDate.parse(planDateStart));
 		companyPlan.setPlanDateEnd(formatDate.parse(planDateEnd));

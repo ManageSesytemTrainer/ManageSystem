@@ -8,7 +8,7 @@ public interface WebPlanDetailService {
 	String getById(int id,int state);
 	String getByWebPlanId(int webPlan_id,int state);
 	WebPlanDetail getObjectById(int id);
-	String getAll(int state);
+	String getAll(Integer state);
 	String getByName(String name,int state);
 	String getReleased();
 	/**

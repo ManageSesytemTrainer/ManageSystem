@@ -1,7 +1,11 @@
 package cn.MS.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.MS.bean.WebPlan;
@@ -19,7 +23,12 @@ public class WebPlanController {
 		return "SUCCESS";
 	}*/
 	@RequestMapping("/webPlan_updateWebPlan")
-	public String updateWebPlan(WebPlan wp) {
+	public String updateWebPlan(WebPlan wp,@RequestParam("p_planDateStart")String planDateStart,@RequestParam("p_planDateEnd")String planDateEnd,@RequestParam("p_designDate")String designDate) throws ParseException {
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-mm-dd");
+
+		wp.setPlanDateStart(formatDate.parse(planDateStart));
+		wp.setPlanDateEnd(formatDate.parse(planDateEnd));
+		wp.setDesignDate(formatDate.parse(designDate));
 		if(wp.getId() == -1){
 			if(0 >= wps.add(wp))
 				return "ERROR";

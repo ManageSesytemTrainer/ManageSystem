@@ -2,7 +2,7 @@ package cn.MS.bean;
 
 import java.util.Date;
 /**
- * 比对结果展示类，没有对应的表
+ * 瀵规瘮缁撴灉
  * @author wan-ls
  *
  */

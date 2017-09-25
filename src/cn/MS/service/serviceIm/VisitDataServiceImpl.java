@@ -57,9 +57,9 @@ public class VisitDataServiceImpl implements VisitDataService {
 	@Override
 	public String addVisitData(VisitData visitData) {
 		if(visitDataMapper.addVisitData(visitData) != 0){
-			return "SUCCESS!";
+			return "SUCCESS";
 		}else{
-			return "FAIL!";
+			return "FAIL";
 		}
 	}
 
@@ -104,7 +104,27 @@ public class VisitDataServiceImpl implements VisitDataService {
 			o = obj;
 			Field[] fields = c.getDeclaredFields();
 			for(int i = 0; i < fields.length; i++) {
-				if(!fields[i].getType().toString().startsWith("class cn.MS.bean.") ) {
+				if(fields[i].getType().toString().startsWith("class java.util.Date")) {
+					fields[i].setAccessible(true);
+					String name = fields[i].getName();
+					if(name.equals("visitDate")){
+						Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
+						Date date = (Date) method.invoke(o);
+						if(date != null){
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							String sdfDate = sdf.format(date);
+							ob.put(name, sdfDate);
+						}
+					}else{
+						Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
+						Date date = (Date) method.invoke(o);
+						if(date != null){
+							SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+							String sdfDate = sdf.format(date);
+							ob.put(name, sdfDate);
+						}
+					}
+				}else if(!fields[i].getType().toString().startsWith("class cn.MS.bean.") ) {
 					fields[i].setAccessible(true);
 					String name = fields[i].getName();
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));

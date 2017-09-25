@@ -2,23 +2,23 @@ package cn.MS.bean;
 
 import java.util.*;
 /**
- * Íøµã×ß·Ã¼Æ»®Ã÷Ï¸±àÖÆ
+ * ç½‘ç‚¹è®¡åˆ’æ˜ç»†
  * @author Administrator
  *
  */
 public class WebPlanDetail {
 	Integer id;  //id
-	String name;  //Ô±¹¤ĞÕÃû
-	String departmentName;  //ËùÊô²¿ÃÅÃû³Æ
-	String duty;  //Ö°Îñ£¨½ÇÉ«£©Ãû³Æ
-	Date visitDate;  //×ß·ÃÈÕÆÚ
-	Date visitTime;  //×ß·ÃÊ±¼ä
-	String visitAddress;  //×ß·ÃµØµã
-	int collection;  //ËÑ¼¯ĞÅÏ¢Êı
-	String remark;  //±¸×¢
-	WebPlan webPlan;  //Íøµã¼Æ»®  
-	User user;  //Ô±¹¤
-	int state; //×´Ì¬
+	String name;  //è®¡åˆ’åç§°
+	String departmentName;  //ç¼–åˆ¶äººæ‰€åœ¨éƒ¨é—¨
+	String duty;  //ç¼–åˆ¶äººèŒåŠ¡
+	Date visitDate;  //èµ°è®¿æ—¥æœŸ
+	Date visitTime;  //èµ°è®¿æ—¶é—´
+	String visitAddress;  //èµ°è®¿åœ°å€
+	int collection;  //æœé›†ä¿¡æ¯æ•°
+	String remark;  //å¤‡æ³¨
+	WebPlan webPlan;  //æ‰€å±ç½‘ç‚¹è®¡åˆ’  
+	User user;  //ç¼–åˆ¶äºº
+	int state; //çŠ¶æ€×´Ì¬
 	public Integer getId() {
 		return id;
 	}

@@ -3,25 +3,25 @@ package cn.MS.bean;
 import java.util.Date;
 
 /**
- * ÏØ·Ö¹«Ë¾×ß·Ã¼Æ»®
+ * å¿å…¬å¸è®¡åˆ’
  * @author Administrator
  *
  */
 public class CompanyPlan {
 	Integer id;  //id
-	String planName;  //¼Æ»®Ãû
-	Date planDateStart;  //¼Æ»®¿ªÊ¼Ê±¼ä
-	Date planDateEnd;  //¼Æ»®½áÊøÊ±¼ä
-	Date designDate;  //±àÖÆÈÕÆÚ
-	String designer;  //±àÖÆÈËĞÕÃû
-	String webType;  //ÍøµãÀàĞÍ
-	String season;  //¼¾½Ú
-	int personTimes;  //Ã¿ÈËÃ¿ÔÂ×îÉÙ×ß·Ã´ÎÊı
-	int totalTimes;  //ºÏ¼Æ×îÉÙ´ÎÊı
-	int personCollections;  //Ã¿ÈËÃ¿ÔÂ×îÉÙÊÕ¼¯µÄĞÅÏ¢Êı
-	String remark;  //±¸×¢
-	User user;  //±àÖÆÈË
-	int state; //×´Ì¬
+	String planName;  //è®¡åˆ’å
+	Date planDateStart;  //è®¡åˆ’å¼€å§‹æ—¶é—´
+	Date planDateEnd;  //è®¡åˆ’ç»“æŸæ—¶é—´
+	Date designDate;  //ç¼–åˆ¶æ—¶é—´
+	String designer;  //è®¾è®¡è€…
+	String webType;  //ç½‘ç‚¹ç±»å‹
+	String season;  //å­£èŠ‚
+	int personTimes;  //ä¸ªäººèµ°è®¿æ¬¡æ•°
+	int totalTimes;  //æ€»è®¡èµ°è®¿æ¬¡æ•°
+	int personCollections;  //ä¸ªäººè‡³å°‘æ”¶é›†ä¿¡æ¯æ•°
+	String remark;  //å¤‡æ³¨
+	User user;  //ç”¨æˆ·
+	int state;//çŠ¶æ€
 	public Integer getId() {
 		return id;
 	}

@@ -1,5 +1,6 @@
 package cn.MS.service.serviceIm;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -23,14 +24,19 @@ public class CompanyPlanServiceIm implements CompanyPlanService{
 		JSONObject jsonObject=new JSONObject();
 		JSONArray array=new JSONArray();
 		int i=0;
+		
+		
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+		
 		for(CompanyPlan c:list){
 			i++;
 			JSONObject ob=new JSONObject();
 			ob.put("id", c.getId());
 			ob.put("planName", c.getPlanName());
-			ob.put("planDateStart", c.getPlanDateStart());
-			ob.put("planDateEnd", c.getPlanDateEnd());
-			ob.put("designDate", c.getDesignDate());
+			ob.put("planDateStart", sdf.format(c.getPlanDateStart()));
+			ob.put("planDateEnd", sdf.format(c.getPlanDateEnd()));
+			ob.put("designDate", sdf.format(c.getDesignDate()));
 			ob.put("webType", c.getWebType());
 			ob.put("season", c.getSeason());
 			ob.put("personTimes", c.getPersonTimes());

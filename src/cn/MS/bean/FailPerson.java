@@ -3,15 +3,15 @@ package cn.MS.bean;
 import java.util.Date;
 
 /**
- * ²»ºÏ¸ñÈËÔ±
+ * ä¸åˆæ ¼äººå‘˜
  * @author Administrator
  *
  */
 public class FailPerson {
 	Integer id;  //id
-	Date faildate; //Í¨±¨ÈÕÆÚ
-	String description;  //ÃèÊö
-	User user;  //²»ºÏ¸ñÈËÔ±
+	Date faildate; //Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	String description;  //ï¿½ï¿½ï¿½ï¿½
+	User user;  //ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Ô±
 	public Integer getId() {
 		return id;
 	}

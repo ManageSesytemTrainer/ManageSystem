@@ -2,25 +2,25 @@ package cn.MS.bean;
 
 import java.util.Date;
 /**
- * ¸÷ÖÖÓÃ»§
+ * ç”¨æˆ·
  * @author Administrator
  *
  */
 public class User {
 	Integer id;  //id
-	String jobNumber;  //¹¤ºÅ
-	String loginName;  //µÇÂ¼Ãû
-	String password;  //ÃÜÂë
-	String name;  //ÕæÊµĞÕÃû
-	String sex;  //ĞÔ±ğ
-	Date birthday;  //ÉúÈÕ
-	String phone;  //µç»°
-	String mobilePhone;  //ÊÖ»ú
-	String email;  //ÓÊÏä
-	int state;  //×´Ì¬£¨ÓÃ»§ÊÇ·ñ¼¤»î£©
-	Department department;  //ËùÊô²¿ÃÅ
-	Role role;  //ËùÊô½ÇÉ«£¨Ö°Îñ£©
-	String departmentName;  //²¿ÃÅÃû³Æ
+	String jobNumber;  //å·¥å·
+	String loginName;  //ç™»å½•å
+	String password;  //å¯†ç 
+	String name;  //å§“å
+	String sex;  //æ€§åˆ«
+	Date birthday;  //ç”Ÿæ—¥
+	String phone;  //ç”µè¯
+	String mobilePhone;  //æ‰‹æœº
+	String email;  //é‚®ç®±
+	int state;  //çŠ¶æ€
+	Department department;  //éƒ¨é—¨
+	Role role;  //è§’è‰²
+	String departmentName;  //éƒ¨é—¨åç§°
 	public Integer getId() {
 		return id;
 	}

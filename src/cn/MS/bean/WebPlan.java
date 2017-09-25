@@ -3,20 +3,20 @@ package cn.MS.bean;
 import java.util.Date;
 
 /**
- * Íøµã×ß·Ã¼Æ»®±àÖÆ
+ * ç½‘ç‚¹è®¡åˆ’
  * @author Administrator
  *
  */
 public class WebPlan {
 	Integer id;  //id
-	String planName;  //¼Æ»®Ãû³Æ
-	Date planDateStart;  //¼Æ»®¿ªÊ¼Ê±¼ä
-	Date planDateEnd;  //¼Æ»®½áÊøÊ±¼ä
-	Date designDate;  //¼Æ»®±àÖÆÈÕÆÚ
-	String webType;  //ÍøµãÀàĞÍ
-	String designer;  //±àÖÆÈËĞÕÃû
-	User user;  //±àÖÆÈË  
-	int state; //×´Ì¬
+	String planName;  //è®¡åˆ’å
+	Date planDateStart;  //è®¡åˆ’å¼€å§‹æ—¶é—´
+	Date planDateEnd;  //è®¡åˆ’ç»“æŸæ—¶é—´
+	Date designDate;  //è®¡åˆ’ç¼–åˆ¶æ—¶é—´
+	String webType;  //ç½‘ç‚¹ç±»å‹
+	String designer;  //ç¼–åˆ¶äºº
+	User user;  //ç¼–åˆ¶äºº
+	int state; //çŠ¶æ€×´Ì¬
 	public Integer getId() {
 		return id;
 	}

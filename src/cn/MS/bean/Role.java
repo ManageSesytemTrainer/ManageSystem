@@ -3,18 +3,18 @@ package cn.MS.bean;
 import java.util.List;
 
 /**
- * ½ÇÉ«£¨Ö°Îñ£©
+ * è§’è‰²
  * 
  * @author Administrator
  *
  */
 public class Role {
 	Integer id; // id
-	String roleName; // ½ÇÉ«Ãû³Æ
-	String description; // ½ÇÉ«ÃèÊö
-	int state; // ×´Ì¬£¨ÊÇ·ñ¼¤»î£©
-	int roleLimit; // ½ÇÉ«È¨ÏŞ
-	List<User> listUser; // °üº¬µÄÓÃ»§
+	String roleName; // è§’è‰²å
+	String description; // æè¿°
+	int state; // çŠ¶æ€
+	int roleLimit; // æƒé™
+	List<User> listUser; // ç”¨æˆ·
 
 	public Integer getId() {
 		return id;

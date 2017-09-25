@@ -2,7 +2,9 @@ package cn.MS.service.serviceIm;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -128,7 +130,17 @@ public class FailPersonServiceImpl implements FailPersonService{
 			o = obj;
 			Field[] fields = c.getDeclaredFields();
 			for(int i = 0; i < fields.length; i++) {
-				if(!fields[i].getType().toString().startsWith("class cn.MS.bean.") ) {
+				if(fields[i].getType().toString().startsWith("class java.util.Date")) {
+					fields[i].setAccessible(true);
+					String name = fields[i].getName();
+					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
+					Date date = (Date) method.invoke(o);
+					if(date != null){
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						String sdfDate = sdf.format(date);
+						ob.put(name, sdfDate);
+					}
+				}else if(!fields[i].getType().toString().startsWith("class cn.MS.bean.") ) {
 					fields[i].setAccessible(true);
 					String name = fields[i].getName();
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));

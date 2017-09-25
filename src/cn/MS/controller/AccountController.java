@@ -20,13 +20,13 @@ public class AccountController {
 	@ResponseBody
 	public String userlogin(User user,HttpServletRequest request){
 		User fuser=as.getUser(user);
-		if(fuser==null)
+		if(fuser==null||fuser.getState()!=1)
 			return "none";
 		else if(!fuser.getPassword().equals(user.getPassword()))
 			return "wrong";
 		else{
 			HttpSession session=request.getSession();
-			session.setAttribute("user", fuser);
+			session.setAttribute("User", fuser);
 			session.setAttribute("userid", fuser.getId());
 			session.setAttribute("jobNumber", fuser.getJobNumber());
 			session.setAttribute("name", fuser.getName());
@@ -36,8 +36,10 @@ public class AccountController {
 			session.setAttribute("mobilePhone", fuser.getMobilePhone());
 			session.setAttribute("email", fuser.getEmail());
 			session.setAttribute("role_limit", fuser.getRole().getRoleLimit());
-			session.setAttribute("department", fuser.getDepartmentName());
+			session.setAttribute("department_name", fuser.getDepartment().getDepartmentName());
+			session.setAttribute("department_id", fuser.getDepartment().getId());
 			session.setAttribute("role_id", fuser.getRole().getId());
+			session.setAttribute("role_name", fuser.getRole().getRoleName());
 		}
 		return "success";
 	}

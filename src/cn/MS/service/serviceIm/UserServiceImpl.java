@@ -125,9 +125,11 @@ public class UserServiceImpl implements UserService{
 					String name = fields[i].getName();
 					Method method = c.getMethod("get" + name.substring(0,1).toUpperCase() + name.substring(1));
 					Date date = (Date) method.invoke(o);
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					String sdfDate = sdf.format(date);
-					ob.put(name, sdfDate);
+					if(date != null){
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						String sdfDate = sdf.format(date);
+						ob.put(name, sdfDate);
+					}
 				}else if(!fields[i].getType().toString().startsWith("class cn.MS.bean.") ) {
 					fields[i].setAccessible(true);
 					String name = fields[i].getName();

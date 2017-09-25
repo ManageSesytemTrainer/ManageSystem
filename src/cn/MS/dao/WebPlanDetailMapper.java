@@ -13,7 +13,7 @@ public interface WebPlanDetailMapper {
 	
 	WebPlanDetail getWebPlanDetailByWebPlanId(int webPlan_id,int state);
 
-	List<WebPlanDetail> getAllWebPlanDetail(int state);
+	List<WebPlanDetail> getAllWebPlanDetail(Integer state);
 
 	/**
 	 * 根据计划名模糊查询
