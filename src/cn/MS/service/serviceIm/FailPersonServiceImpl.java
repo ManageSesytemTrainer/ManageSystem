@@ -56,17 +56,19 @@ public class FailPersonServiceImpl implements FailPersonService{
 	}
 
 	@Override
-	public void autoAddFailPerson() {
+	public int autoAddFailPerson() {
 		List<CompareResults> list = compare();
 		FailPerson fp = new FailPerson();
+		int i = 0;
 		for(CompareResults cr : list) {
 			if(cr.getResult().equals("²»ºÏ¸ñ")) {
 				fp.setFaildate(cr.getDate());
 				fp.setDescription(cr.getName());
 				fp.setUser(um.getUserByName(cr.getName()));
-				add(fp);
+				i += add(fp);
 			}
 		}
+		return i;
 	}
 	@Override
 	public String getCompareResults() {

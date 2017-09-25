@@ -13,7 +13,7 @@ public interface FailPersonService {
 	/**
 	 * 根据比较结果将不合格的人员自动添加到不合格表中
 	 */
-	void autoAddFailPerson();
+	int autoAddFailPerson();
 	/**
 	 * 进行三方比较
 	 * @return 返回比较结果list集合，具体保存在CompareResults类中
