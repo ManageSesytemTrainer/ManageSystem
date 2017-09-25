@@ -53,7 +53,7 @@
        <!-- <property name="suffix" value=".html"></property>-->
     </bean>
 
-	<mvc:annotation-driven></mvc:annotation-driven>
+<!-- 	<mvc:annotation-driven></mvc:annotation-driven> -->
     <!-- 设置资源文件位置，使dispatcherServlet不拦截资源请求 -->
     <mvc:resources location="/resource/" mapping="/resource/**" />
     
