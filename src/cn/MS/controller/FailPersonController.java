@@ -25,7 +25,7 @@ public class FailPersonController {
 			return "NONE";
 		return cr;
 	}
-	@RequestMapping(value="/queryAllFailPerosn", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="/addToFailPerson", produces = "text/html;charset=UTF-8")
 	public String addToFailPerson() {
 		int res = fps.autoAddFailPerson();
 		if(res == 0)
