@@ -44,9 +44,7 @@
 <script type="text/javascript" src="${path}/resource/js/md5.js"></script>
 </head>
 <script>
-    console.info(${User.id});
-    console.info(${User.role.roleLimit});
-    console.info(${User.mobilePhone});
+
 
 	$(function() {
 		$("#menu li").click(function() {
@@ -169,7 +167,7 @@ td {
 						</div>
 						<div id="tex1">
 							<!-- 计划管理-->
-							<table id="tablePlan" style="min-height: 360px; padding: 0;">
+							<table id="tablePlan" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -196,7 +194,7 @@ td {
 						<div id="tex2">
 							<!-- 走访数据管理  -->
 
-							<table id="tableVisit" style="min-height: 360px; padding: 0;">
+							<table id="tableVisit" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'id',width:40">编号</th>
@@ -235,7 +233,7 @@ td {
 							</div>
 						</div>
 						<div id="tex3">
-							<table id="tableFail" style="min-height: 360px; padding: 0;">
+							<table id="tableFail" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -249,18 +247,18 @@ td {
 						</div>
 						<div id="tex4">
 							<!-- 用户管理 -->
-							<table id="tableUser" style="min-height: 360px; padding: 0;">
+							<table id="tableUser" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'id',width:40">编号</th>
-										<th data-options="field:'jobNumber',width:100">工号</th>
+										<th data-options="field:'jobNumber',width:60">工号</th>
 										<th data-options="field:'name',width:60,align:'right'">姓名</th>
 										<th data-options="field:'sex',width:60,align:'right'">性别</th>
-										<th data-options="field:'birthday',width:160,align:'right'">生日</th>
-										<th data-options="field:'phone',width:160,align:'right'">电话</th>
-										<th data-options="field:'mobilePhone',width:160,align:'right'">手机</th>
+										<th data-options="field:'birthday',width:100,align:'right'">生日</th>
+										<th data-options="field:'phone',width:100,align:'right'">电话</th>
+										<th data-options="field:'mobilePhone',width:100,align:'right'">手机</th>
 										<th data-options="field:'email',width:160,align:'right'">邮箱</th>
-										<th data-options="field:'state',width:60,align:'right'">状态</th>
+										<th data-options="field:'state',width:40,align:'right'">状态</th>
 										<th
 											data-options="field:'department_name',width:100,align:'right'">所在部门</th>
 											<th
@@ -292,7 +290,7 @@ td {
 						</div>
 						<div id="tex5">
 							<!-- 部门管理 -->
-							<table id="tableDe" style="min-height: 360px; padding: 0;">
+							<table id="tableDe" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -324,7 +322,7 @@ td {
 						</div>
 						<div id="tex6">
 							<!-- 角色管理 -->
-							<table id="tableRole" style="min-height: 360px; padding: 0;">
+							<table id="tableRole" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
 										<th data-options="field:'check'"></th>
@@ -364,23 +362,23 @@ td {
 					<div class="tex-box" id="plan-box">
 						<div></div>
 						<div id="planCom">
-							<table id="tableCP" style="min-height: 360px; padding: 0;">
+							<table id="tableCP" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
-										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'id',width:20">编号</th>
 										<th data-options="field:'planName',width:100">计划名</th>
-										<th data-options="field:'planDateStart',width:100">计划开始时间</th>
-										<th data-options="field:'planDateEnd',width:100">计划结束时间</th>
-										<th data-options="field:'designDate',width:100">编制日期</th>
+										<th data-options="field:'planDateStart',width:80">计划开始时间</th>
+										<th data-options="field:'planDateEnd',width:80">计划结束时间</th>
+										<th data-options="field:'designDate',width:80">编制日期</th>
 										<th data-options="field:'designer',width:100">编制人姓名</th>
-										<th data-options="field:'webType',width:100">网点类型</th>
-										<th data-options="field:'season',width:100">季节</th>
+										<th data-options="field:'webType',width:80">网点类型</th>
+										<th data-options="field:'season',width:40">季节</th>
 										<th data-options="field:'personTimes',width:100">每人每月最少走访次数</th>
-										<th data-options="field:'totalTimes',width:100">合计最少次数</th>
-										<th data-options="field:'personCollections',width:100">每人每月最少收集的信息数</th>
+										<th data-options="field:'totalTimes',width:60">合计最少次数</th>
+										<th data-options="field:'personCollections',width:120">每人每月最少收集的信息数</th>
 										<th data-options="field:'remark',width:100">备注</th>
-										<th data-options="field:'user.id',width:100">编制人</th>
-										<th data-options="field:'state',width:100">状态</th>
+										<th data-options="field:'user.id',width:40">编制人</th>
+										<th data-options="field:'state',width:40">状态</th>
 										<!-- <th
 											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th> -->
 									</tr>
@@ -404,21 +402,21 @@ td {
 							</div>
 						</div>
 						<div id="planWeb">
-							<table id="tableWeb" style="min-height: 360px; padding: 0;">
+							<table id="tableWeb" style="min-height: 360px; padding: 0;width: auto;">
 								<thead>
 									<tr>
-										<th data-options="field:'id',width:40">编号</th>
+										<th data-options="field:'id',width:20">编号</th>
 										<th data-options="field:'planName',width:100">计划名</th>
-										<th data-options="field:'planDateStart',width:100">计划开始时间</th>
-										<th data-options="field:'planDateEnd',width:100">计划结束时间</th>
-										<th data-options="field:'designDate',width:100">编制日期</th>
-										<th data-options="field:'designer',width:100">编制人姓名</th>
-										<th data-options="field:'webType',width:100">网点类型</th>
+										<th data-options="field:'planDateStart',width:60">计划开始时间</th>
+										<th data-options="field:'planDateEnd',width:60">计划结束时间</th>
+										<th data-options="field:'designDate',width:60">编制日期</th>
+										<th data-options="field:'designer',width:60">编制人姓名</th>
+										<th data-options="field:'webType',width:20">网点类型</th>
 										<th data-options="field:'remark',width:100">备注</th>
 										<th data-options="field:'userId',width:100">编制人</th>
-										<th data-options="field:'state',width:100">状态</th>
-										<!-- <th
-											data-options="field:'do',width:60,align:'center',formatter:formatfuncVisit">操作</th> -->
+										<th data-options="field:'state',width:20">状态</th>
+										 <th
+											data-options="field:'do',width:60,align:'center',formatter:formatfuncWeb">操作</th>
 									</tr>
 								</thead>
 							</table>
@@ -432,8 +430,8 @@ td {
 								<div>
 									<span>计划名:</span> <input class="easyui-textbox"
 										id="s_web_planName"
-										style="line-height: 26px; border: 1px solid #ccc"> <span>计划开始日期:</span>
-									<input id="s_web_planDateStart"
+										style="line-height: 26px; border: 1px solid #ccc"> <span>计划编制人:</span>
+									<input id="s_web_designer"
 										style="line-height: 26px; border: 1px solid #ccc"
 										class="easyui-datebox"  data-options="formatter:myformatter,parser:myparser"> <a href="#"
 										class="easyui-linkbutton" plain="true" onclick="SearchWeb()">查询</a>
@@ -937,13 +935,21 @@ td {
 				toolbar : $('#barCP'),
 				url : '${path}/companyPlan_select',
 				singleSelect : true,
+				onLoadSuccess:function(data){
+	                if(data.total==0){
+	                    var dc = $(this).data('datagrid').dc;
+	                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+	                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
 
+
+	                }
+	            }
 			});
 		});
 		function formatfuncCP(value, row, index) {
 			var e = '<a href="#"  onclick="goUpdateCP('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+					+ ')">	<label  style="margin-left: 12px;vertical-align:middle;"/>编辑</label></a> ';
 			/* var d = '<a href="#"  onclick="deleteCP('
 					+ index
 					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
@@ -1034,6 +1040,15 @@ td {
 												url : '${path}/getWebPlan',
 												singleSelect : true,
 												view : detailview,
+												  onLoadSuccess:function(data){
+										                if(data.total==0){
+										                    var dc = $(this).data('datagrid').dc;
+										                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+										                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+										                }
+										            },
 												detailFormatter : function(
 														index, row) {
 													return '<div style="padding:2px"><table class="ddv"></table></div>';
@@ -1116,7 +1131,14 @@ td {
 																					'fixDetailRowHeight',
 																					index);
 																},
-																onLoadSuccess : function() {
+																onLoadSuccess : function(data) {
+																	if(data.total==0){
+													                    var dc = $(this).data('datagrid').dc;
+													                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+													                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+													                }
 																	setTimeout(
 																			function() {
 																				$(
@@ -1127,6 +1149,7 @@ td {
 																			},
 																			0);
 																}
+																  
 															});
 													$('#tableWeb')
 															.datagrid(
@@ -1138,7 +1161,7 @@ td {
 		function formatfuncWeb(value, row, index) {
 			var e = '<a href="#"  onclick="goAddWebDetail('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="添加明细"/></a> ';
+					+ ')">	<label  style="margin-left: 12px;vertical-align:middle;"/>添加明细</label></a> ';
 			/* var d = '<a href="#"  onclick="deleteCP('
 					+ index
 					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
@@ -1179,8 +1202,8 @@ td {
 		}
 		function SearchWeb() {
 			$('#tableWeb').datagrid('load', {
-				visitPerson : $('#s_visitPerson').textbox('getValue'),
-				visitDate : $('#s_visitDate').datebox('getValue')
+				name : $('#s_web_planName').textbox('getValue'),
+				designer : $('#s_web_designer').datebox('getValue')
 			});
 		}
 		function reloadWeb() {
@@ -1229,7 +1252,16 @@ td {
 				url : '${path}/queryVisitData',
 				singleSelect : true,
 				nowrap : true,
-				autoRowHeigh : false
+				autoRowHeigh : false,
+				onLoadSuccess:function(data){
+	                if(data.total==0){
+	                    var dc = $(this).data('datagrid').dc;
+	                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+	                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+	                }
+	            }
 			});
 		});
 		function goImportVisit(){
@@ -1342,13 +1374,20 @@ td {
 					handler : function() {
 						$('#tableFail').datagrid('reload');
 					}
-				} ]
-
-				,
+				} ],
 				url : '${path}/queryAllFailPerosn',
 				singleSelect : true,
 				nowrap : true,
-				autoRowHeigh : false
+				autoRowHeigh : false,
+				onLoadSuccess:function(data){
+	                if(data.total==0){
+	                    var dc = $(this).data('datagrid').dc;
+	                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+	                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+	                }
+	            }
 			});
 		});
 		//用户管理
@@ -1364,13 +1403,22 @@ td {
 				url : '${path}/user_query',
 				singleSelect : true,
 				nowrap : true,
-				autoRowHeigh : false
+				autoRowHeigh : false,
+				onLoadSuccess:function(data){
+	                if(data.total==0){
+	                    var dc = $(this).data('datagrid').dc;
+	                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+	                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+	                }
+	            }
 			});
 		});
 		function formatfuncUser(value, row, index) {
 			var e = '<a href="#"  onclick="goUpdateUser('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+					+ ')">	<label  style="margin-left: 12px;vertical-align:middle;"/>编辑</label></a> ';
 			/* var d = '<a href="#"  onclick="deleteUser('
 					+ index
 					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>'; */
@@ -1445,8 +1493,8 @@ td {
 		}
 		function SearchUser() {
 			$('#tableUser').datagrid('load', {
-				'department.id' : $('#user_s_departmentId').textbox('getValue'),
-				'roleid' : $('#user_s_roleId').textbox('getValue')
+				'departmentId' : $('#user_s_departmentId').textbox('getValue'),
+				'roleId' : $('#user_s_roleId').textbox('getValue')
 			});
 		}
 		function reloadUser() {
@@ -1495,17 +1543,26 @@ td {
 				url : '${path}/de_departments',
 				singleSelect : true,
 				nowrap : true,
-				autoRowHeigh : false
+				autoRowHeigh : false,
+				onLoadSuccess:function(data){
+	                if(data.total==0){
+	                    var dc = $(this).data('datagrid').dc;
+	                    var header2Row = dc.header2.find('tr.datagrid-header-row');
+	                    dc.body2.find('table').append(header2Row.clone().css({"visibility":"hidden"}));
+
+
+	                }
+	            }
 			})
 		});
 
 		function formatfuncDe(value, row, index) {
 			var e = '<a href="#"  onclick="goUpdateDe('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+					+ ')"><label style="margin-left: 12px;vertical-align:middle;">编辑</label></a> ';
 			var d = '<a href="#"  onclick="deleteDe('
 					+ index
-					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+					+ ')"><label style="margin-left: 12px;vertical-align:middle;">删除</label></a>';
 			return e + d;
 		}
 
@@ -1614,10 +1671,10 @@ td {
 		function formatfuncRole(value, row, index) {
 			var e = '<a href="#"  onclick="goUpdateRole('
 					+ index
-					+ ')"><img src="${path}/resource/img/pencil.png" style="margin-left: 12px;vertical-align:middle;" title="编辑"/></a> ';
+					+ ')">	<label  style="margin-left: 12px;vertical-align:middle;"/>编辑</label></a> ';
 			var d = '<a href="#"  onclick="deleteRole('
 					+ index
-					+ ')"><img src="${path}/resource/img/edit_remove.png" style="margin-left: 12px;vertical-align:middle;" title="删除"/></a>';
+					+ ')">	<label  style="margin-left: 12px;vertical-align:middle;"/>删除</label></a>';
 			return e + d;
 		}
 

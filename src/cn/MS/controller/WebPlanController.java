@@ -24,7 +24,7 @@ public class WebPlanController {
 	}*/
 	@RequestMapping("/webPlan_updateWebPlan")
 	public String updateWebPlan(WebPlan wp,@RequestParam("p_planDateStart")String planDateStart,@RequestParam("p_planDateEnd")String planDateEnd,@RequestParam("p_designDate")String designDate) throws ParseException {
-		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
 		wp.setPlanDateStart(formatDate.parse(planDateStart));
 		wp.setPlanDateEnd(formatDate.parse(planDateEnd));
@@ -48,6 +48,7 @@ public class WebPlanController {
 				return "ERROR";
 			return wp;
 		}else if(name != null){
+			state=1;
 			String wp = wps.getByName(name, state);
 			if(null == wp)
 				return "ERROR";

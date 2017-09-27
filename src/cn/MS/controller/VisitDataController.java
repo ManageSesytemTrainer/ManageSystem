@@ -40,7 +40,7 @@ public class VisitDataController {
 		SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:SS");
 		visitData.setVisitDate(formatDate.parse(visitDate));
 		visitData.setVisitTime(formatTime.parse(visitTime));
-		request.getSession();
+		//request.getSession();
 		
 		return visitDataService.addVisitData(visitData);
 	}
