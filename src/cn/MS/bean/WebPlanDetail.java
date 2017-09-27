@@ -1,24 +1,20 @@
 package cn.MS.bean;
 
 import java.util.*;
-/**
- * 网点计划明细
- * @author Administrator
- *
- */
+
 public class WebPlanDetail {
 	Integer id;  //id
-	String name;  //计划名称
-	String departmentName;  //编制人所在部门
-	String duty;  //编制人职务
-	Date visitDate;  //走访日期
-	Date visitTime;  //走访时间
-	String visitAddress;  //走访地址
-	int collection;  //搜集信息数
-	String remark;  //备注
-	WebPlan webPlan;  //所属网点计划  
-	User user;  //编制人
-	int state; //状态״̬
+	String name;
+	String departmentName;
+	String duty;
+	Date visitDate;
+	Date visitTime;
+	String visitAddress;
+	int collection;
+	String remark;
+	WebPlan webPlan;
+	User user;
+	int state;
 	public Integer getId() {
 		return id;
 	}
